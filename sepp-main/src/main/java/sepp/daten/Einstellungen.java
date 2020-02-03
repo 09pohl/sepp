@@ -30,7 +30,6 @@ public class Einstellungen {
 		einstellungen.setProperty("projekt", projektPfad);
 		einstellungen.store(output, null);
 		output.close();
-
 	}
 
 	public void laden() throws IOException {
@@ -41,5 +40,4 @@ public class Einstellungen {
 		projektPfad = einstellungen.getProperty("projekt");
 		input.close();
 	}
-
 }

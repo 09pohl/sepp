@@ -11,11 +11,7 @@ public class DateiInformationen {
 	private String erstellungsDatum;
 	private String aenderungsDatum;
 
-	public ArrayList<ToDo> getToDos(String dateiName) {
-		return null;
-	}
-
-	public ArrayList<Kommentar> getKommentare(String dateiName) {
+	public ArrayList<Zeile> Zeilen() {
 		return null;
 	}
 
