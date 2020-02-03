@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public interface DatenSchnittstelle {
 
-	final String DATEINAME = "sepp";
+	final static String DATEINAME = "sepp";
 
 	// Enthält Benutzername und Projektpfad
 	Einstellungen getEinstellungen();
