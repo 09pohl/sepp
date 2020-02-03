@@ -1,1 +1,1 @@
-# SuperEffectiveProjectPlanning
+# **S**uperEffectiveProjectPlanning
