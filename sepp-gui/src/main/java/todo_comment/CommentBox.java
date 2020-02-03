@@ -6,6 +6,9 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
+import sepp.daten.DateiInformationen;
+import sepp.utils.DateiHelfer;
+
 public class CommentBox extends JPanel{
 	
 	private JTable commentsAndUsernames;
@@ -21,7 +24,8 @@ public class CommentBox extends JPanel{
 	
 	private void fillTable() {
 	
-		data.
+		data.getKommentare();
+		Da.
 		
 		String[] columns = {"User", "Kommentar"};
 		
