@@ -9,7 +9,15 @@ repositories {
 }
 
 dependencies {
-
+	compile project(':sepp-main')
+	
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 
+jar {
+  manifest {
+    attributes(
+      'Main-Class': 'de.sepp.main.Application'
+    )
+  }
+}
