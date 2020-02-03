@@ -8,3 +8,5 @@
 *	Der Nutzer kann über die To-Do-Felder und Log/Kommentar-Felder Text eingeben welcher den jeweiligen Dateien Hinzugefügt wird
 *	Die Software sucht regelmäßig nach Änderungen und stellt diese dar
 *	Die verschiedenen Ansichten können minimiert werden und Ordner und/oder Dateien ausgeblendet werden (Speicherung in einer Einstellungsdatei)
+
+## Aufgaben
