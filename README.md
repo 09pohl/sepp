@@ -12,6 +12,6 @@
 ## Aufgaben
 * GUI Desgin
 * GUI Implementierung
-* Struktur der To-Do-, Kommentar-, Einstunnungsdatei(en)
-* Einlesen und Speicherung der To-Do-, Kommentar-, Einstunnungsdatei(en)
+* Struktur der To-Do-, Kommentar-, Einstellungsdatei(en)
+* Einlesen und Speicherung der To-Do-, Kommentar-, Einstellungsdatei(en)
 * Einlesen des Projektordners
