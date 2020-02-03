@@ -13,5 +13,5 @@
 * GUI Desgin
 * GUI Implementierung
 * Struktur der To-Do-, Kommentar-, Einstunnungsdatei(en)
-* Einlesen und Speicherung Struktur der To-Do-, Kommentar-, Einstunnungsdatei(en)
+* Einlesen und Speicherung der To-Do-, Kommentar-, Einstunnungsdatei(en)
 * Einlesen des Projektordners
