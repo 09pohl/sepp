@@ -1,0 +1,3 @@
+rootProject.name = 'sepp'
+include 'sepp-main', 'sepp-gui'
+
