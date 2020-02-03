@@ -1,46 +1,67 @@
 package sepp.daten;
 
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 
 import javax.swing.Icon;
 
 public class DateiInformationen {
 
+	private final String DATEIENDUNG_TODOS = ".sepptodo";
+	private final String DATEIENDUNG_KOMMENTARE = ".seppkomm";
+
 	private Icon icon;
 	private String name;
-	private String erstellungsDatum;
-	private String aenderungsDatum;
-
-	public DateiInformationen(String dateiName) {
-
-	}
-
-	public ArrayList<Zeile> Zeilen() {
-		return null;
-	}
+	private LocalDateTime erstellungsDatum;
+	private LocalDateTime aenderungsDatum;
+	private String toDos;
+	private String kommentare;
 
 	public Icon getIcon() {
 		return icon;
+	}
+
+	public void setIcon(Icon icon) {
+		this.icon = icon;
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public String getErstellungsDatum() {
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public LocalDateTime getErstellungsDatum() {
 		return erstellungsDatum;
 	}
 
-	public String getAenderungsDatum() {
+	public void setErstellungsDatum(LocalDateTime erstellungsDatum) {
+		this.erstellungsDatum = erstellungsDatum;
+	}
+
+	public LocalDateTime getAenderungsDatum() {
 		return aenderungsDatum;
 	}
 
-	public void speichern() {
-
+	public void setAenderungsDatum(LocalDateTime aenderungsDatum) {
+		this.aenderungsDatum = aenderungsDatum;
 	}
 
-	public void laden() {
+	public String getToDos() {
+		return toDos;
+	}
 
+	public void setToDos(String toDos) {
+		this.toDos = toDos;
+	}
+
+	public String getKommentare() {
+		return kommentare;
+	}
+
+	public void setKommentare(String kommentare) {
+		this.kommentare = kommentare;
 	}
 
 }

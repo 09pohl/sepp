@@ -10,7 +10,11 @@ public interface DatenSchnittstelle {
 	// Gibt eine Liste aller Dateien des Projekts zurück, auch aus Unterordnern
 	ArrayList<String> getDateiNamen();
 
-	// Enthält alle Zeilen (mit Benutzername und Text), Icon, Dateiname,
-	// Erstellungsdatum, Änderungsdatum
-	DateiInformationen getDateiInformationen(String dateiName);
+	// Enthält Icon, Dateiname, Erstellungsdatum, Änderungsdatum, To-Dos und
+	// Kommentare
+	DateiInformationen getDateiInformationen(String dateiPfad);
+
+	// speichert die DateiInformationen
+	void speichereDateiInformationen(DateiInformationen dateiInfo);
+
 }
