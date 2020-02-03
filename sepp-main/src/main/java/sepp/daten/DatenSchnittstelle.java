@@ -1,11 +1,14 @@
-package sepp;
+package sepp.daten;
 
 import java.util.ArrayList;
 
 public interface DatenSchnittstelle {
 
 	String getProjektPfad();
+
 	Einstellungen getEinstellungen();
+
 	ArrayList<String> getDateiNamen();
-	DateiInformationen getDateiInformationen(String dateiName);	
+
+	DateiInformationen getDateiInformationen(String dateiName);
 }
