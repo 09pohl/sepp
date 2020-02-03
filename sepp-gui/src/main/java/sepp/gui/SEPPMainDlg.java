@@ -5,6 +5,7 @@ import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
@@ -50,6 +51,16 @@ public class SEPPMainDlg{
 		JMenu settings = new JMenu("Einstellungen");
 		settings.setMnemonic('e');
 		menubar.add(settings);
+		
+		JMenuItem source = new JMenuItem("Quellverzeichnis wechseln...");
+		source.setMnemonic('q');
+		source.addActionListener(e -> showSourceDlg());
+		settings.add(source);
+	}
+
+
+	private void showSourceDlg() {
+		new ChangeSourceController(seppMainFrame);
 	}
 
 
