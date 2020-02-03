@@ -29,6 +29,7 @@ public class Einstellungen {
 		einstellungen.setProperty("benutzer", username);
 		einstellungen.setProperty("projekt", projektPfad);
 		einstellungen.store(output, null);
+		output.close();
 
 	}
 
@@ -38,6 +39,7 @@ public class Einstellungen {
 		einstellungen.load(input);
 		username = einstellungen.getProperty("benutzer");
 		projektPfad = einstellungen.getProperty("projekt");
+		input.close();
 	}
 
 }

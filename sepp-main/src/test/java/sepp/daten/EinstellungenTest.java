@@ -3,6 +3,7 @@ package sepp.daten;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import org.junit.Test;
@@ -61,16 +62,11 @@ public class EinstellungenTest {
 	}
 
 	// 007
-	@Test(expected = Test.None.class)
+	@Test(expected = FileNotFoundException.class)
 	public void testLadenError() throws IOException {
-		String pfad = System.getProperty("user.home") + "\\sepp_config.properties";
-		File f = new File(pfad);
-		if (f.delete()) {
-			System.out.println(f.getName() + " deleted");
-		} else {
-			System.out.println("failed");
-		}
 		Einstellungen test = new Einstellungen();
+		File file = new File(test.pfad);
+		file.delete();
 		test.laden();
 	}
 }
