@@ -1,1 +1,1 @@
-# sepp
+# SuperEffectiveProjectPlanning
