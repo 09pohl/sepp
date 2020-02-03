@@ -18,4 +18,20 @@ public class DateiInformationen {
 	public ArrayList<Kommentar> getKommentare(String dateiName) {
 		return null;
 	}
+
+	public Icon getIcon() {
+		return icon;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getErstellungsDatum() {
+		return erstellungsDatum;
+	}
+
+	public String getAenderungsDatum() {
+		return aenderungsDatum;
+	}
 }
