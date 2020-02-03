@@ -1,6 +1,6 @@
 # SuperEffectiveProjectPlanning
 
-* Die Software verweist auf einen Ordner (z. B. Netzwerkordner oder ein mit einem Cloud Dienst verknüpfter Ordner)
+* Die Software verweist auf einen Ordner (z. B. Netzwerkordner oder einen mit einem Cloud Dienst verknüpfter Ordner)
 * Alle Dateien und Unterordner werden erfasst und nach ihrem Pfad sortiert
 * Das Erstellungs- und Änderungsdatum, sowie das Icon der Dateien werden angezeigt
 *	Es wird eine To-Do-Datei und eine Log/Kommentar-Datei im selben Pfad mit Namen der Referenzdatei erstellt (z. B. Präsentation.tdo)
