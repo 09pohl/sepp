@@ -3,11 +3,14 @@ package sepp.gui;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
@@ -22,23 +25,31 @@ public class DateiGUI extends JFrame implements ActionListener{
 	private JButton bTODO;
 	private JButton bKommentare;
 	private JButton bLoeschen;
-	private JFrame fenster;
 	
 	public DateiGUI() {
 		Container panel = getContentPane();
+		setSize(350, 300);
 		getUserIconImage();
-		setSize(350, 200);
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		setLocationRelativeTo(null);
 		getTitel(); 
 		panel.setLayout(new BorderLayout());
 		JFrame.setDefaultLookAndFeelDecorated(true);
-	    removeMinMaxClose(fenster);
-	    setResizable(false);
+	    setResizable(true);
+	    
+	    panel.addComponentListener(new ComponentAdapter() {
 
+	        @Override
+	        public void componentResized(ComponentEvent e) {
+	        	setSize(new Dimension(350, getHeight()));
+	            super.componentResized(e);
+	        }
+
+	    });
+	    
 	    getContentPane().add(getMitte(), BorderLayout.CENTER);
 	    getContentPane().add(getSueden(), BorderLayout.SOUTH);
-	    
+	    removeMinMaxClose(panel);
 	    setVisible(true);
 	    
 	  }
