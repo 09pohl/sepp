@@ -1,6 +1,6 @@
 package sepp.utils;
 
-public class DateinInfoHelfer {
+public class DateiInfoHelfer {
 
 	public static String[][] getZeilenArray(String text) {
 		String[] zeilen = text.split("\\r?\\n");
@@ -9,6 +9,5 @@ public class DateinInfoHelfer {
 			result[i] = zeilen[i].split(":", 2);
 		}
 		return result;
-
 	}
 }

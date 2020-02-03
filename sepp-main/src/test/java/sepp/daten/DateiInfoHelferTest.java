@@ -6,7 +6,7 @@ import java.io.IOException;
 
 import org.junit.Test;
 
-import sepp.utils.DateinInfoHelfer;
+import sepp.utils.DateiInfoHelfer;
 
 public class DateiInfoHelferTest {
 
@@ -14,7 +14,7 @@ public class DateiInfoHelferTest {
 	@Test(expected = Test.None.class)
 	public void testGetZeilenArray() throws IOException {
 		String test = "user:einszwei:dreivier:fünf\nnocheiner:\nZWEI";
-		String[][] ausgabe = DateinInfoHelfer.getZeilenArray(test);
+		String[][] ausgabe = DateiInfoHelfer.getZeilenArray(test);
 		assertEquals("einszwei:dreivier:fünf", ausgabe[0][1]);
 	}
 
@@ -22,7 +22,7 @@ public class DateiInfoHelferTest {
 	@Test(expected = ArrayIndexOutOfBoundsException.class)
 	public void testGetZeilenArrayBounds() throws IOException {
 		String test = "user:einszwei:dreivier:fünf\nnocheiner:\nZWEI";
-		String[][] ausgabe = DateinInfoHelfer.getZeilenArray(test);
+		String[][] ausgabe = DateiInfoHelfer.getZeilenArray(test);
 		System.out.println(ausgabe[2][1]);
 	}
 }
