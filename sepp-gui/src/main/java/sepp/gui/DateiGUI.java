@@ -34,7 +34,7 @@ public class DateiGUI extends JFrame implements ActionListener{
 		panel.setLayout(new BorderLayout());
 		JFrame.setDefaultLookAndFeelDecorated(true);
 	    removeMinMaxClose(fenster);
-	    setResizable(true);
+	    setResizable(false);
 
 	    getContentPane().add(getMitte(), BorderLayout.CENTER);
 	    getContentPane().add(getSueden(), BorderLayout.SOUTH);
@@ -50,13 +50,13 @@ public class DateiGUI extends JFrame implements ActionListener{
 	}
 
 	private String getTitel() {
-		//TODO - Get Username
+		//TODO - Get Username, Topic & Erstellungsdatum
 		return null;
 	}
 
 	private Component getMitte() {
 		JPanel p = new JPanel();
-		//TODO - GetIssue & Date
+		//TODO - Get Kommentare & Änderungsdatum
 		p.setLayout(new FlowLayout());  
 		return p;
 	}
