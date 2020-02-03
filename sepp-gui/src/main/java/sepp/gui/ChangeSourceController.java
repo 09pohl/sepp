@@ -1,7 +1,6 @@
 package sepp.gui;
 
 import java.awt.EventQueue;
-import java.awt.FileDialog;
 
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
