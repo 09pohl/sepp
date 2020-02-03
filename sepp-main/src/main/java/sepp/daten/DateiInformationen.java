@@ -11,6 +11,10 @@ public class DateiInformationen {
 	private String erstellungsDatum;
 	private String aenderungsDatum;
 
+	public DateiInformationen(String dateiName) {
+
+	}
+
 	public ArrayList<Zeile> Zeilen() {
 		return null;
 	}
