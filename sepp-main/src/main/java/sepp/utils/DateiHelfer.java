@@ -5,18 +5,35 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.attribute.BasicFileAttributes;
+
+import javax.swing.Icon;
+import javax.swing.filechooser.FileSystemView;
 
 public class DateiHelfer {
 	private String dateiName;
 
 	public DateiHelfer(String dateiName) {
 		this.dateiName = dateiName;
-
 	}
 
 	public static boolean dateiExistiert(String pfad) {
 		File datei = new File(pfad);
 		return datei.exists() && !datei.isDirectory();
+	}
+
+	public BasicFileAttributes basisInformationen() throws IOException {
+		Path pfad = Paths.get(dateiName);
+		BasicFileAttributes basic = Files.readAttributes(pfad, BasicFileAttributes.class);
+		return basic;
+	}
+
+	public Icon icon() {
+		Icon icon = FileSystemView.getFileSystemView().getSystemIcon(new File(dateiName));
+		return icon;
 	}
 
 	public boolean existiert() {

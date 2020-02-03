@@ -1,5 +1,6 @@
 package sepp.daten;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public interface DatenSchnittstelle {
@@ -10,7 +11,11 @@ public interface DatenSchnittstelle {
 	// Gibt eine Liste aller Dateien des Projekts zurück, auch aus Unterordnern
 	ArrayList<String> getDateiNamen();
 
-	// Enthält alle Zeilen (mit Benutzername und Text), Icon, Dateiname,
-	// Erstellungsdatum, Änderungsdatum
-	DateiInformationen getDateiInformationen(String dateiName);
+	// Enthält Icon, Dateiname, Erstellungsdatum, Änderungsdatum, To-Dos und
+	// Kommentare
+	DateiInformationen getDateiInformationen(String dateiPfad) throws IOException;
+
+	// speichert die DateiInformationen
+	void speichereDateiInformationen(DateiInformationen dateiInfo);
+
 }
