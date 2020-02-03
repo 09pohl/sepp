@@ -34,7 +34,7 @@ public class SEPPMainDlg{
 		  JPanel toDoPanel = new JPanel();
 		  JPanel commentsPanel = new JPanel();
 		  JSplitPane toDo_comments_sp = new JSplitPane(JSplitPane.VERTICAL_SPLIT, toDoPanel, commentsPanel);
-		  toDo_comments_sp.setDividerLocation(365);
+		  toDo_comments_sp.setDividerLocation(360);
 		  infoPanel.add(toDo_comments_sp, BorderLayout.CENTER);
 		  JSplitPane sp = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, dateiPanel, infoPanel);
 		  sp.setDividerLocation(485);
