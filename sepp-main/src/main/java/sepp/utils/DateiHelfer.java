@@ -26,7 +26,7 @@ public class DateiHelfer {
 	}
 
 	public static String pfadOhneEndung(String pfad) {
-		String result = pfad;
+		String result = pfad.substring(0, pfad.lastIndexOf('.'));
 		return result;
 	}
 
