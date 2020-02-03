@@ -30,4 +30,13 @@ public class DateiInformationen {
 	public String getAenderungsDatum() {
 		return aenderungsDatum;
 	}
+
+	public void speichern() {
+
+	}
+
+	public void laden() {
+
+	}
+
 }

@@ -65,7 +65,7 @@ public class EinstellungenTest {
 	@Test(expected = FileNotFoundException.class)
 	public void testLadenError() throws IOException {
 		Einstellungen test = new Einstellungen();
-		File file = new File(test.pfad);
+		File file = new File(test.einstellungenPfad);
 		file.delete();
 		test.laden();
 	}
