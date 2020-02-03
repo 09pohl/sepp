@@ -12,6 +12,7 @@ public class Einstellungen {
 	private final String EINSTELLUNGEN_DATEINAME = "/sepp_config.properties";
 	private final String BENUTZER_PROPERTY = "benutzer";
 	private final String PROJEKT_PROPERTY = "projekt";
+
 	String einstellungenPfad = System.getProperty("user.home") + EINSTELLUNGEN_DATEINAME;
 
 	String projektPfad;
@@ -49,5 +50,9 @@ public class Einstellungen {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	public String getEinstellungenPfad() {
+		return einstellungenPfad;
 	}
 }
