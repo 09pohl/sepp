@@ -30,7 +30,7 @@ public class DateiGUI extends JFrame implements ActionListener{
 		setSize(350, 200);
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		setLocationRelativeTo(null);
-		setTitle(getTitel()); 
+		getTitel(); 
 		panel.setLayout(new BorderLayout());
 		JFrame.setDefaultLookAndFeelDecorated(true);
 	    removeMinMaxClose(fenster);
@@ -50,6 +50,7 @@ public class DateiGUI extends JFrame implements ActionListener{
 	}
 
 	private String getTitel() {
+		setTitle("Name");
 		//TODO - Get Username, Topic & Erstellungsdatum
 		return null;
 	}
