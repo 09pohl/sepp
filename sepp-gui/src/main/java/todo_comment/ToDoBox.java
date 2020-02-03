@@ -8,28 +8,37 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
-public class ToDoBox extends JFrame{
+import sepp.daten.DateiInformationen;
+import sepp.utils.DateiInfoHelfer;
+
+public class ToDoBox extends JPanel{
 	
-	private JLabel header;
-	private JScrollPane commentBox;
-	private JTextArea comment;
+	private JTable doneTable;
+	private DateiInformationen data;
 	
 	public ToDoBox() {
 		createToDoBox();
 	}
 
 	private void createToDoBox() {
-	
-		setLayout(new GridLayout(0, 1));
-		setSize(500,300);
-		setTitle("To Do's");
-		setLocationRelativeTo(null);
-	
+		
+		data = new DateiInformationen();
+		data.setToDos("Daniel:hallo\nLukas:hello\n");
+		String[][] userAndToDos = DateiInfoHelfer.getZeilenArray(data.getToDos());
+		String[] columns = {"User", "Kommentar"};
+		
+		TableModel model = new DefaultTableModel(userAndToDos, columns);
+		doneTable = new JTable(model);
+		add(doneTable);
+		
 		setVisible(true);
 	}
 	

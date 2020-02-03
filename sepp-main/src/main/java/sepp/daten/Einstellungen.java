@@ -16,7 +16,7 @@ public class Einstellungen {
 	String einstellungenPfad = System.getProperty("user.home") + EINSTELLUNGEN_DATEINAME;
 
 	String projektPfad;
-	String username;
+	String username; // keine Doppelpunkte zulassen!
 
 	public void speichern() throws IOException {
 		OutputStream output = new FileOutputStream(einstellungenPfad);

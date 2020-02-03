@@ -25,6 +25,11 @@ public class DateiHelfer {
 		return datei.exists() && !datei.isDirectory();
 	}
 
+	public static String pfadOhneEndung(String pfad) {
+		String result = pfad;
+		return result;
+	}
+
 	public BasicFileAttributes basisInformationen() throws IOException {
 		Path pfad = Paths.get(dateiName);
 		BasicFileAttributes basic = Files.readAttributes(pfad, BasicFileAttributes.class);

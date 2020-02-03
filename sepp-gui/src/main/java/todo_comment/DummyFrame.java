@@ -8,8 +8,9 @@ public class DummyFrame extends JFrame {
 		
 		setSize(800,700);
 		CommentBox comment = new CommentBox();
+		ToDoBox toDo = new ToDoBox();
+		add(toDo);
 		add(comment);
-		System.out.println("hi");
 		setVisible(true);
 	}
 	

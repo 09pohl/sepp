@@ -30,6 +30,8 @@ public class DatenSchnittstelleImpl implements DatenSchnittstelle {
 		dateiInfo.setName(pfad.getFileName().toString());
 		dateiInfo.setErstellungsDatum(datei.basisInformationen().creationTime());
 		dateiInfo.setAenderungsDatum(datei.basisInformationen().lastModifiedTime());
+		DateiHelfer dateiTodo = new DateiHelfer(dateiPfad);
+		DateiHelfer dateiKommentare = new DateiHelfer(dateiPfad);
 		return null;
 	}
 
