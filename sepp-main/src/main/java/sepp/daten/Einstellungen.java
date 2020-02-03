@@ -1,12 +1,18 @@
 package sepp.daten;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.Properties;
+
 public class Einstellungen {
 
-	private String projektPfad;
-	private String username;
+	private final String EINSTELLUNGEN_DATEINAME = "/sepp_config.properties";
+	private final String BENUTZER_PROPERTY = "benutzer";
+	private final String PROJEKT_PROPERTY = "projekt";
 
-<<<<<<< HEAD
-=======
 	String einstellungenPfad = System.getProperty("user.home") + EINSTELLUNGEN_DATEINAME;
 
 	String projektPfad;
@@ -49,5 +55,4 @@ public class Einstellungen {
 	public String getEinstellungenPfad() {
 		return einstellungenPfad;
 	}
->>>>>>> refs/remotes/origin/sepp-15-todo_kommentar_gui
 }
