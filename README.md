@@ -12,3 +12,4 @@
 ## Aufgaben
 * GUI Desgin
 * GUI Implementierung
+* Struktur der To-Do-, Kommentar-, Einstunnungsdatei(en)
