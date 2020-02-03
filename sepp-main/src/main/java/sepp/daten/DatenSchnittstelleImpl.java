@@ -1,5 +1,6 @@
 package sepp.daten;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -21,14 +22,14 @@ public class DatenSchnittstelleImpl implements DatenSchnittstelle {
 	}
 
 	@Override
-	public DateiInformationen getDateiInformationen(String dateiPfad) {
+	public DateiInformationen getDateiInformationen(String dateiPfad) throws IOException {
 		DateiInformationen dateiInfo = new DateiInformationen();
 		DateiHelfer datei = new DateiHelfer(dateiPfad);
 		Path pfad = Paths.get(dateiPfad);
 		dateiInfo.setIcon(datei.icon());
 		dateiInfo.setName(pfad.getFileName().toString());
-		dateiInfo.setErstellungsDatum(erstellungsDatum);
-		dateiInfo.setAenderungsDatum(aenderungsDatum);
+		dateiInfo.setErstellungsDatum(datei.basisInformationen().creationTime());
+		dateiInfo.setAenderungsDatum(datei.basisInformationen().lastModifiedTime());
 		return null;
 	}
 

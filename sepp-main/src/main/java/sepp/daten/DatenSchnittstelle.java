@@ -1,5 +1,6 @@
 package sepp.daten;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public interface DatenSchnittstelle {
@@ -12,7 +13,7 @@ public interface DatenSchnittstelle {
 
 	// Enthält Icon, Dateiname, Erstellungsdatum, Änderungsdatum, To-Dos und
 	// Kommentare
-	DateiInformationen getDateiInformationen(String dateiPfad);
+	DateiInformationen getDateiInformationen(String dateiPfad) throws IOException;
 
 	// speichert die DateiInformationen
 	void speichereDateiInformationen(DateiInformationen dateiInfo);

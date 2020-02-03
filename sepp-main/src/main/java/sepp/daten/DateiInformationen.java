@@ -1,6 +1,6 @@
 package sepp.daten;
 
-import java.time.LocalDateTime;
+import java.nio.file.attribute.FileTime;
 
 import javax.swing.Icon;
 
@@ -11,8 +11,8 @@ public class DateiInformationen {
 
 	private Icon icon;
 	private String name;
-	private LocalDateTime erstellungsDatum;
-	private LocalDateTime aenderungsDatum;
+	private FileTime erstellungsDatum;
+	private FileTime aenderungsDatum;
 	private String toDos;
 	private String kommentare;
 
@@ -32,19 +32,19 @@ public class DateiInformationen {
 		this.name = name;
 	}
 
-	public LocalDateTime getErstellungsDatum() {
+	public FileTime getErstellungsDatum() {
 		return erstellungsDatum;
 	}
 
-	public void setErstellungsDatum(LocalDateTime erstellungsDatum) {
+	public void setErstellungsDatum(FileTime erstellungsDatum) {
 		this.erstellungsDatum = erstellungsDatum;
 	}
 
-	public LocalDateTime getAenderungsDatum() {
+	public FileTime getAenderungsDatum() {
 		return aenderungsDatum;
 	}
 
-	public void setAenderungsDatum(LocalDateTime aenderungsDatum) {
+	public void setAenderungsDatum(FileTime aenderungsDatum) {
 		this.aenderungsDatum = aenderungsDatum;
 	}
 
