@@ -16,27 +16,26 @@ import de.verbund.sepp.gui.controller.ChangeUserController;
 import de.verbund.sepp.gui.controller.StartUpController;
 import de.verbund.sepp.gui.todo.comment.ToDoAndCommentBoxes;
 
-public class SEPPMainDlg{
-	
+public class SEPPMainDlg {
+
 	private JPanel mainPanel;
 	private JPanel panel;
 	private JFrame seppMainFrame = new JFrame();
 	private ToDoAndCommentBoxes toDoComments = new ToDoAndCommentBoxes();
 
 	public SEPPMainDlg() {
-		  erzeugeSplitLayout();
-		  erzeugeMenue();
-		  
-		  seppMainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		  seppMainFrame.setTitle("SuperEffectiveProjectPlanning (SEPP)");
-		  seppMainFrame.setContentPane(panel);
-		  seppMainFrame.setSize(1000, 800);
-		  seppMainFrame.setResizable(false);
-		  seppMainFrame.setLocationRelativeTo(null);
-		  seppMainFrame.setVisible(true);
+		erzeugeSplitLayout();
+		erzeugeMenue();
+
+		seppMainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		seppMainFrame.setTitle("SuperEffectiveProjectPlanning (SEPP)");
+		seppMainFrame.setContentPane(panel);
+		seppMainFrame.setSize(1000, 800);
+		seppMainFrame.setResizable(false);
+		seppMainFrame.setLocationRelativeTo(null);
+		seppMainFrame.setVisible(true);
 	}
-	
-	
+
 	private void erzeugeSplitLayout() {
 		mainPanel = new JPanel(new BorderLayout());
 		panel = new JPanel(new BorderLayout());
@@ -57,18 +56,16 @@ public class SEPPMainDlg{
 	}
 
 	private void erzeugeButtonPanel() {
-		  JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-		  JButton refreshButton = new JButton("Aktualisieren...");
-		  refreshButton.addActionListener(e -> refreshState());
-		  buttonPanel.add(refreshButton);
-		  panel.add(buttonPanel, BorderLayout.NORTH);
+		JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+		JButton refreshButton = new JButton("Aktualisieren...");
+		refreshButton.addActionListener(e -> refreshState());
+		buttonPanel.add(refreshButton);
+		panel.add(buttonPanel, BorderLayout.NORTH);
 	}
-
 
 	private void refreshState() {
 		System.out.println("Aktualisieren...");
 	}
-
 
 	private void erzeugeMenue() {
 		JMenuBar menubar = new JMenuBar();

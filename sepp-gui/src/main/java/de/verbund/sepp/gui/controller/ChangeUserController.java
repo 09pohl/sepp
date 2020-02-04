@@ -12,13 +12,13 @@ import de.verbund.sepp.main.daten.DatenSchnittstelle;
 import de.verbund.sepp.main.daten.DatenSchnittstelleImpl;
 
 public class ChangeUserController {
-	
+
 	private ChangeUserDlg changeDlg;
 	private DatenSchnittstelle schnittstelle = new DatenSchnittstelleImpl();
-	
+
 	public ChangeUserController(JFrame frame) {
 		EventQueue.invokeLater(new Runnable() {
-			
+
 			public void run() {
 				initDialog(frame);
 			}
@@ -43,7 +43,8 @@ public class ChangeUserController {
 			schnittstelle.getEinstellungen().setUsername(change);
 			schnittstelle.getEinstellungen().speichern();
 		} catch (IOException e) {
-			JOptionPane.showMessageDialog(changeDlg, "Benutzername konnte nicht festgelegt werden!", "FEHLER!", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(changeDlg, "Benutzername konnte nicht festgelegt werden!", "FEHLER!",
+					JOptionPane.ERROR_MESSAGE);
 		}
 		changeDlg.dispose();
 	}
