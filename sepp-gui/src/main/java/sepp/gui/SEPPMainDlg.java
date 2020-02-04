@@ -34,12 +34,12 @@ public class SEPPMainDlg{
 		  JPanel infoPanel = new JPanel(new BorderLayout());
 		  JPanel toDoPanel = new JPanel();
 		  JPanel commentsPanel = new JPanel();
-		  JSplitPane toDo_comments_sp = new JSplitPane(JSplitPane.VERTICAL_SPLIT, toDoPanel, commentsPanel);
-		  toDo_comments_sp.setDividerLocation(360);
-		  infoPanel.add(toDo_comments_sp, BorderLayout.CENTER);
-		  JSplitPane sp = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, dateiPanel, infoPanel);
-		  sp.setDividerLocation(485);
-		  mainPanel.add(sp, BorderLayout.CENTER);
+		  JSplitPane infoSplitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, toDoPanel, commentsPanel);
+		  infoSplitPane.setDividerLocation(360);
+		  infoPanel.add(infoSplitPane, BorderLayout.CENTER);
+		  JSplitPane frameSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, dateiPanel, infoPanel);
+		  frameSplitPane.setDividerLocation(485);
+		  mainPanel.add(frameSplitPane, BorderLayout.CENTER);
 	}
 
 
@@ -56,6 +56,16 @@ public class SEPPMainDlg{
 		source.setMnemonic('q');
 		source.addActionListener(e -> showSourceDlg());
 		settings.add(source);
+		
+		JMenuItem user = new JMenuItem("Benutzernamen ändern...");
+		user.setMnemonic('b');
+		user.addActionListener(e -> showUserDlg());
+		settings.add(user);
+	}
+
+
+	private void showUserDlg() {
+		new ChangeUserController(seppMainFrame);
 	}
 
 

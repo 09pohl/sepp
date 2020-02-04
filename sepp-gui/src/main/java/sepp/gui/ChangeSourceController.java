@@ -31,17 +31,12 @@ public class ChangeSourceController {
 	}
 
 	protected void saveSelection() {
-		System.out.println("Neuer Ordner: " + changeDlg.getTextField().getText());
+		String newDirectory = changeDlg.getTextField().getText();
+		System.out.println("Neuer Ordner: " + newDirectory);
 		changeDlg.dispose();
 	}
 
 	private void chooseFolder() {
-//		FileDialog fd = new FileDialog(changeDlg, "Neues Quellverzeichnis wählen...");
-//		fd.setDirectory(System.getProperty("user.home"));
-//		fd.setVisible(true);
-//		String filename = fd.getFile();
-//		changeDlg.getTextField().setText(filename);
-//		System.out.println(fd.getDirectory());
 		JFileChooser fc = new JFileChooser(System.getProperty("user.home"));
 		fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		fc.showOpenDialog(changeDlg);
