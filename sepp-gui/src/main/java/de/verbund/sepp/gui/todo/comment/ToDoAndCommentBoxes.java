@@ -1,4 +1,4 @@
-package todo.comment;
+package de.verbund.sepp.gui.todo.comment;
 
 import java.io.IOException;
 
