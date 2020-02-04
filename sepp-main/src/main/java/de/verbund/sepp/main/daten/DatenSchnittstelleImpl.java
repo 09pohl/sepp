@@ -17,8 +17,10 @@ public class DatenSchnittstelleImpl implements DatenSchnittstelle {
 
 	@Override
 	public ArrayList<String> getDateiPfade(Einstellungen einstellungen) throws IOException {
+		ArrayList<String> pfadListe = new ArrayList<String>();
 		File projektOrdner = new File(einstellungen.projektPfad);
-		return DateiHelfer.dateienInOrdner(projektOrdner);
+		DateiHelfer.dateienInOrdner(projektOrdner, pfadListe);
+		return pfadListe;
 	}
 
 	@Override
@@ -31,10 +33,20 @@ public class DatenSchnittstelleImpl implements DatenSchnittstelle {
 		dateiInfo.setName(pfad.getFileName().toString());
 		dateiInfo.setErstellungsDatum(datei.basisInformationen().creationTime());
 		dateiInfo.setAenderungsDatum(datei.basisInformationen().lastModifiedTime());
+
 		DateiHelfer dateiTodo = new DateiHelfer(dateiPfad + DateiInformationen.DATEIENDUNG_TODOS);
+		if (dateiTodo.existiert()) {
+			dateiInfo.setToDos(datei.lese());
+		} else {
+			datei.schreibe("");
+		}
+
 		DateiHelfer dateiKommentare = new DateiHelfer(dateiPfad + DateiInformationen.DATEIENDUNG_KOMMENTARE);
-		leseSeppDateien(dateiTodo, dateiInfo);
-		leseSeppDateien(dateiKommentare, dateiInfo);
+		if (dateiKommentare.existiert()) {
+			dateiInfo.setKommentare(datei.lese());
+		} else {
+			datei.schreibe("");
+		}
 		return dateiInfo;
 	}
 

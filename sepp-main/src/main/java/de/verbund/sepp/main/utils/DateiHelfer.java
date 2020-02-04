@@ -31,16 +31,19 @@ public class DateiHelfer {
 		return result;
 	}
 
-	public static ArrayList<String> dateienInOrdner(File ordner) throws IOException {
-		ArrayList<String> result = new ArrayList<String>();
+	public static String dateiEndung(String pfad) {
+		String endung = pfad.substring(pfad.lastIndexOf('.') + 1);
+		return endung;
+	}
+
+	public static void dateienInOrdner(File ordner, ArrayList<String> pfadListe) throws IOException {
 		for (File datei : ordner.listFiles()) {
 			if (datei.isDirectory()) {
-				dateienInOrdner(datei);
+				dateienInOrdner(datei, pfadListe);
 			} else {
-				result.add(datei.getCanonicalPath());
+				pfadListe.add(datei.getCanonicalPath());
 			}
 		}
-		return result;
 
 	}
 
