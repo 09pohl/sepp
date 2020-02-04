@@ -1,4 +1,4 @@
-package sepp.gui;
+package de.verbund.sepp.gui.dialoge;
 
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -39,20 +39,20 @@ public class ChangeSourceDlg extends JDialog{
 		}
 		return lblNameDesNeuen;
 	}
-	JTextField getTextField() {
+	public JTextField getTextField() {
 		if (textField == null) {
 			textField = new JTextField();
 			textField.setColumns(30);
 		}
 		return textField;
 	}
-	JButton getEnterButton() {
+	public JButton getEnterButton() {
 		if (btnBesttigen == null) {
 			btnBesttigen = new JButton("Bestätigen");
 		}
 		return btnBesttigen;
 	}
-	JButton getChooseButton() {
+	public JButton getChooseButton() {
 		if (btnDurchsuchen == null) {
 			btnDurchsuchen = new JButton("Durchsuchen");
 		}

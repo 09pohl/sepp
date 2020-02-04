@@ -1,11 +1,7 @@
-package todo.comment;
+package de.verbund.sepp.gui.todo.comment;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.IOException;
 
-import javax.swing.JOptionPane;
-import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -55,19 +51,13 @@ public class ToDoAndCommentBoxes {
 			String[][] userAndToDos = DateiInfoHelfer.getZeilenArray(dataToDos.getToDos());
 			String[] columns = { "User", "To Do's" };
 			TableModel model = new DefaultTableModel(userAndToDos, columns);
-			JTable doneTable = new JTable();
-			doneTable = new TableAndPopUpMenu(model).getTable();
+			JTable doneTable = new JTable(model);
 			return doneTable;
 		} catch (IOException e) {
 			System.out.println("Fehler ToDo's");
 			return null;
 		}
 	}
-	
-	private void deleteJOP() {
-		JOptionPane.showMessageDialog(null, "Löschen", "Wollen Sie die Zeile wirklich löschen?", JOptionPane.WARNING_MESSAGE);
-	}
-	
 
 	public JScrollPane getCommentBox() {
 		return initCommentBox();
