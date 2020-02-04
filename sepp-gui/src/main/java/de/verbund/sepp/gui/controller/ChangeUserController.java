@@ -20,15 +20,20 @@ public class ChangeUserController {
 		EventQueue.invokeLater(new Runnable() {
 
 			public void run() {
-				initDialog(frame);
+				try {
+					initDialog(frame);
+				} catch (IOException e) {
+					JOptionPane.showMessageDialog(changeDlg, "Wechseln des Benutzernamens nicht möglich!", "Fehler", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 	}
 
-	protected void initDialog(JFrame frame) {
+	protected void initDialog(JFrame frame) throws IOException {
 		changeDlg = new ChangeUserDlg(frame);
 		changeDlg.getRootPane().setDefaultButton(changeDlg.getAcceptButton());
 		changeDlg.getAcceptButton().addActionListener(e -> saveUserName());
+		changeDlg.getOldUserNameLabel().setText(schnittstelle.getEinstellungen().getUsername());
 		changeDlg.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		changeDlg.setSize(330, 110);
 		changeDlg.setResizable(false);
@@ -39,6 +44,7 @@ public class ChangeUserController {
 
 	protected void saveUserName() {
 		String change = changeDlg.getNewUserNameTf().getText();
+		if (!(change.contains(":"))) {
 		try {
 			schnittstelle.getEinstellungen().setUsername(change);
 			schnittstelle.getEinstellungen().speichern();
@@ -47,6 +53,7 @@ public class ChangeUserController {
 					JOptionPane.ERROR_MESSAGE);
 		}
 		changeDlg.dispose();
+		}
 	}
 
 }

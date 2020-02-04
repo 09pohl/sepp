@@ -21,19 +21,24 @@ public class ChangeSourceController {
 		EventQueue.invokeLater(new Runnable() {
 
 			public void run() {
-				initDialog(frame);
+				try {
+					initDialog(frame);
+				} catch (IOException e) {
+					JOptionPane.showMessageDialog(changeDlg, "Wechseln des Projektverzeichnisses nicht möglich", "FEHLER", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 
 	}
 
-	protected void initDialog(JFrame frame) {
+	protected void initDialog(JFrame frame) throws IOException {
 		changeDlg = new ChangeSourceDlg(frame);
 		changeDlg.getRootPane().setDefaultButton(changeDlg.getChooseButton());
 		changeDlg.getChooseButton().addActionListener(e -> chooseFolder());
-		changeDlg.getEnterButton().addActionListener(e -> saveSelection());
+		changeDlg.getAcceptButton().addActionListener(e -> saveSelection());
+		changeDlg.getOldDirectoryNameLabel().setText(schnittstelle.getEinstellungen().getProjektPfad());
 		changeDlg.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		changeDlg.setSize(600, 100);
+		changeDlg.setSize(600, 130);
 		changeDlg.setResizable(false);
 		changeDlg.setModal(true);
 		changeDlg.setLocationRelativeTo(frame);
@@ -41,7 +46,7 @@ public class ChangeSourceController {
 	}
 
 	protected void saveSelection() {
-		String change = changeDlg.getTextField().getText();
+		String change = changeDlg.getNewDirectoryTf().getText();
 		try {
 			schnittstelle.getEinstellungen().setProjektPfad(change);
 			schnittstelle.getEinstellungen().speichern();
@@ -56,7 +61,7 @@ public class ChangeSourceController {
 		JFileChooser fc = new JFileChooser(System.getProperty("user.home"));
 		fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		fc.showOpenDialog(changeDlg);
-		changeDlg.getTextField().setText(fc.getSelectedFile().getPath());
+		changeDlg.getNewDirectoryTf().setText(fc.getSelectedFile().getPath());
 	}
 
 }

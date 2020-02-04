@@ -73,12 +73,14 @@ public class StartUpController {
 		String dir = startDlg.getDirectoryTf().getText();
 		String user = startDlg.getUserNameTf().getText();
 		if (!(dir.equals("") || user.equals(""))) {
+			if (!(user.contains(":"))) {
 			System.out.println("Projektverzeichnis: " + dir);
 			System.out.println("Benutzername: " + user);
 			schnittstelle.getEinstellungen().setProjektPfad(dir);
 			schnittstelle.getEinstellungen().setUsername(user);
 			schnittstelle.getEinstellungen().speichern();
 			startDlg.dispose();
+			}
 		}
 	}
 
