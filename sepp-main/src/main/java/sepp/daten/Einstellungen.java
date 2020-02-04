@@ -22,18 +22,22 @@ public class Einstellungen {
 	private Einstellungen() {
 	}
 
-	public static Einstellungen getInstance() {
-		if (Einstellungen.instanz == null) {
-			Einstellungen.instanz = new Einstellungen();
+	public static Einstellungen getInstance() throws IOException {
+		if (instanz == null) {
+			instanz = new Einstellungen();
 		}
-		return Einstellungen.instanz;
+		return instanz;
+	}
+
+	static void resetInstance() throws IOException {
+		instanz = new Einstellungen();
 	}
 
 	public void speichern() throws IOException {
 		OutputStream output = new FileOutputStream(einstellungenPfad);
 		Properties einstellungen = new Properties();
 		einstellungen.setProperty(BENUTZER_PROPERTY, username);
-		einstellungen.setProperty("projekt", projektPfad);
+		einstellungen.setProperty(PROJEKT_PROPERTY, projektPfad);
 		einstellungen.store(output, null);
 		output.close();
 	}

@@ -89,7 +89,6 @@ public class DateiHelfer {
 				}
 				inhalt.append(zeile);
 			}
-
 		}
 		return inhalt.toString();
 	}
