@@ -34,10 +34,18 @@ public class DatenSchnittstelleImpl implements DatenSchnittstelle {
 				DateiHelfer.pfadOhneEndung(dateiPfad) + DateiInformationen.DATEIENDUNG_TODOS);
 		DateiHelfer dateiKommentare = new DateiHelfer(
 				DateiHelfer.pfadOhneEndung(dateiPfad) + DateiInformationen.DATEIENDUNG_KOMMENTARE);
-		dateiInfo.setToDos(dateiTodo.lese());
-		dateiInfo.setKommentare(dateiKommentare.lese());
 
+		leseSeppDateien(dateiTodo, dateiInfo);
+		leseSeppDateien(dateiKommentare, dateiInfo);
 		return dateiInfo;
+	}
+
+	private void leseSeppDateien(DateiHelfer datei, DateiInformationen dateiInfo) throws IOException {
+		if (datei.existiert()) {
+			dateiInfo.setToDos(datei.lese());
+		} else {
+			datei.schreibe("");
+		}
 	}
 
 	@Override
