@@ -123,7 +123,7 @@ public class SEPPMainDlg {
 	}
 
 	private void showSourceDlg() {
-		new ChangeSourceController(seppMainFrame);
+		new ChangeSourceController(seppMainFrame, this);
 	}
 
 	public static void main(String[] args) {
