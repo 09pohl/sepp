@@ -65,10 +65,19 @@ public class TableAndPopUpMenu {
 		}
 		
 		String comment = "";
-		String alphabet = "abcdefghijklmnopqrstuvwxyz";
+		boolean content = false;
+		boolean cancel = false;
 		
-		while (true) {
+		while (content == false || cancel == false) {
 			comment = JOptionPane.showInputDialog(null, addOrEdit + ":", addOrEdit, JOptionPane.OK_CANCEL_OPTION);
+			try {
+				if (!comment.replaceAll("\\s+", "").isEmpty()) {
+					System.out.println(comment);
+					content = true;
+				}
+			}catch (NullPointerException npe) {
+				cancel = true;
+			}
 			
 		}
 		
