@@ -1,8 +1,11 @@
 package de.verbund.sepp.gui.todo.comment;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.JTable;
 import javax.swing.table.TableModel;
@@ -37,9 +40,9 @@ public class TableAndPopUpMenu {
 		    }
 
 			private JPopupMenu createPopUpMenu(JPopupMenu popup) {
-				popup.add("Hinzufügen");
-				popup.add("Editieren");
-				popup.add("Löschen");
+				popup.add("Hinzufügen").addActionListener(e -> addOrEditJOP("add"));
+				popup.add("Editieren").addActionListener(e -> addOrEditJOP("edit"));
+				popup.add("Löschen").addActionListener(e -> deleteJOP());
 				return popup;
 			}
 		});
@@ -51,4 +54,34 @@ public class TableAndPopUpMenu {
 		return createTable();
 		
 	}
+	private void addOrEditJOP(String text) {
+		String addOrEdit;
+		
+		if(text.equals("add")){
+			addOrEdit = "Hinzufügen";
+		}
+		else {
+			addOrEdit = "Bearbeiten";
+		}
+		
+		String comment = "";
+		
+		while (comment.equals("")) {
+			comment = JOptionPane.showInputDialog(null, addOrEdit + ":", addOrEdit, JOptionPane.OK_CANCEL_OPTION);
+	
+			if (!comment.contentEquals("")) {
+			System.out.println(comment);
+			}
+		}
+		
+	}
+	
+	private void deleteJOP() {
+		int doDelete = JOptionPane.showConfirmDialog(null, "Wollen Sie diese Zeile wirklich löschen?", "Löschen", JOptionPane.YES_NO_OPTION);
+		
+		if (doDelete==JOptionPane.YES_OPTION) {
+			System.out.println("DoDelete");
+		}
+		}
+
 }
