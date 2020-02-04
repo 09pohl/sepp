@@ -10,9 +10,8 @@ import sepp.utils.DateiHelfer;
 public class DatenSchnittstelleImpl implements DatenSchnittstelle {
 
 	@Override
-	public Einstellungen getEinstellungen() {
-		// TODO Auto-generated method stub
-		return null;
+	public Einstellungen getEinstellungen() throws IOException {
+		return Einstellungen.getInstance();
 	}
 
 	@Override

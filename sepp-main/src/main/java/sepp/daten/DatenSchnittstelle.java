@@ -5,21 +5,14 @@ import java.util.ArrayList;
 
 public interface DatenSchnittstelle {
 
-<<<<<<< HEAD
-	String getProjektPfad();
-
-=======
-	final String DATEINAME = "sepp";
+	final static String PRIMAER_DATEINAME = "projekt.sepp";
 
 	// Enthält Benutzername und Projektpfad
->>>>>>> refs/remotes/origin/sepp-15-todo_kommentar_gui
-	Einstellungen getEinstellungen();
+	Einstellungen getEinstellungen() throws IOException;
 
+	// Gibt eine Liste aller Dateien des Projekts zurück, auch aus Unterordnern
 	ArrayList<String> getDateiNamen();
 
-<<<<<<< HEAD
-	DateiInformationen getDateiInformationen(String dateiName);
-=======
 	// Enthält Icon, Dateiname, Erstellungsdatum, Änderungsdatum, To-Dos und
 	// Kommentare
 	DateiInformationen getDateiInformationen(String dateiPfad) throws IOException;
@@ -27,5 +20,4 @@ public interface DatenSchnittstelle {
 	// speichert die DateiInformationen
 	void speichereDateiInformationen(DateiInformationen dateiInfo);
 
->>>>>>> refs/remotes/origin/sepp-15-todo_kommentar_gui
 }

@@ -11,25 +11,14 @@ public class DateiInformationen {
 
 	private Icon icon;
 	private String name;
-<<<<<<< HEAD
-	private String erstellungsDatum;
-	private String aenderungsDatum;
-
-	public ArrayList<ToDo> getToDos(String dateiName) {
-		return null;
-	}
-=======
 	private FileTime erstellungsDatum;
 	private FileTime aenderungsDatum;
 	private String toDos;
 	private String kommentare;
->>>>>>> refs/remotes/origin/sepp-15-todo_kommentar_gui
 
-	public ArrayList<Kommentar> getKommentare(String dateiName) {
-		return null;
+	public Icon getIcon() {
+		return icon;
 	}
-<<<<<<< HEAD
-=======
 
 	public void setIcon(Icon icon) {
 		this.icon = icon;
@@ -75,5 +64,4 @@ public class DateiInformationen {
 		this.kommentare = kommentare;
 	}
 
->>>>>>> refs/remotes/origin/sepp-15-todo_kommentar_gui
 }

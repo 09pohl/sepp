@@ -1,5 +1,6 @@
 package sepp.daten;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
 import java.io.IOException;
@@ -14,14 +15,21 @@ public class DateiHelferTest {
 	// 001
 	@Test(expected = Test.None.class)
 	public void testBasisInfo() throws IOException {
-		Einstellungen test = new Einstellungen();
+		Einstellungen test = Einstellungen.getInstance();
 		DateiHelfer datei = new DateiHelfer(test.einstellungenPfad);
-		test.setProjektPfad("a");
-		test.setUsername("b");
+		test.username = "user";
+		test.projektPfad = "pfad";
 		test.speichern();
 		FileTime datumEins = datei.basisInformationen().lastModifiedTime();
-		test.speichern();
+		datei.schreibe("a", true);
 		FileTime datumZwei = datei.basisInformationen().lastModifiedTime();
 		assertNotEquals(datumEins, datumZwei);
+	}
+
+	@Test(expected = Test.None.class)
+	public void testPfadOhneEndung() throws IOException {
+		Einstellungen test = Einstellungen.getInstance();
+		assertEquals(test.einstellungenPfad.replace(".properties", ""),
+				DateiHelfer.pfadOhneEndung(test.einstellungenPfad));
 	}
 }
