@@ -10,9 +10,8 @@ import sepp.utils.DateiHelfer;
 public class DatenSchnittstelleImpl implements DatenSchnittstelle {
 
 	@Override
-	public Einstellungen getEinstellungen() {
-		// TODO Auto-generated method stub
-		return null;
+	public Einstellungen getEinstellungen() throws IOException {
+		return Einstellungen.getInstance();
 	}
 
 	@Override
@@ -30,14 +29,17 @@ public class DatenSchnittstelleImpl implements DatenSchnittstelle {
 		dateiInfo.setName(pfad.getFileName().toString());
 		dateiInfo.setErstellungsDatum(datei.basisInformationen().creationTime());
 		dateiInfo.setAenderungsDatum(datei.basisInformationen().lastModifiedTime());
-		DateiHelfer dateiTodo = new DateiHelfer(
-				DateiHelfer.pfadOhneEndung(dateiPfad) + DateiInformationen.DATEIENDUNG_TODOS);
-		DateiHelfer dateiKommentare = new DateiHelfer(
-				DateiHelfer.pfadOhneEndung(dateiPfad) + DateiInformationen.DATEIENDUNG_KOMMENTARE);
-
+		DateiHelfer dateiTodo = new DateiHelfer(dateiPfad + DateiInformationen.DATEIENDUNG_TODOS);
+		DateiHelfer dateiKommentare = new DateiHelfer(dateiPfad + DateiInformationen.DATEIENDUNG_KOMMENTARE);
 		leseSeppDateien(dateiTodo, dateiInfo);
 		leseSeppDateien(dateiKommentare, dateiInfo);
 		return dateiInfo;
+	}
+
+	@Override
+	public void speichereDateiInformationen(DateiInformationen dateiInfo) {
+		// TODO Auto-generated method stub
+
 	}
 
 	private void leseSeppDateien(DateiHelfer datei, DateiInformationen dateiInfo) throws IOException {
@@ -46,11 +48,5 @@ public class DatenSchnittstelleImpl implements DatenSchnittstelle {
 		} else {
 			datei.schreibe("");
 		}
-	}
-
-	@Override
-	public void speichereDateiInformationen(DateiInformationen dateiInfo) {
-		// TODO Auto-generated method stub
-
 	}
 }
