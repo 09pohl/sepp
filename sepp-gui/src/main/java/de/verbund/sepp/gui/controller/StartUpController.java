@@ -3,6 +3,7 @@ package de.verbund.sepp.gui.controller;
 import java.awt.EventQueue;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javax.swing.JDialog;
@@ -29,12 +30,21 @@ public class StartUpController {
 	protected void initStartUp() {
 		try {
 			Einstellungen settings = schnittstelle.getEinstellungen();
-			//settings.laden();
-			if (settings.getProjektPfad() == null && settings.getUsername() == null) {
+			try {
+				settings.laden();
+				System.out.println("Einstellungen vorhanden");
+			} catch (FileNotFoundException e) {
 				startDlg = new StartUpDlg();
 				startDlg.getRootPane().setDefaultButton(startDlg.getSaveButton());
-				startDlg.getChooseButton().addActionListener(e -> chooseDirectory());
-				startDlg.getSaveButton().addActionListener(e -> saveSettings());
+				startDlg.getChooseButton().addActionListener(e2 -> chooseDirectory());
+				startDlg.getSaveButton().addActionListener(e2 -> {
+					try {
+						saveSettings();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				});
 				startDlg.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				startDlg.setSize(800, 150);
 				startDlg.setResizable(false);
@@ -49,16 +59,15 @@ public class StartUpController {
 					
 				});
 				startDlg.setVisible(true);
-			} else {
-				System.out.println("Einstellungen vorhanden");
 			}
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	private void saveSettings() {
+	private void saveSettings() throws IOException {
 		String dir = startDlg.getDirectoryTf().getText();
 		String user = startDlg.getUserNameTf().getText();
 		if (dir.equals("") || user.equals("")) {
@@ -67,6 +76,9 @@ public class StartUpController {
 		else {
 			System.out.println("Projektverzeichnis: " + dir);
 			System.out.println("Benutzername: " + user);
+			schnittstelle.getEinstellungen().setProjektPfad(dir);
+			schnittstelle.getEinstellungen().setUsername(user);
+			schnittstelle.getEinstellungen().speichern();
 			startDlg.dispose();
 		}
 	}
