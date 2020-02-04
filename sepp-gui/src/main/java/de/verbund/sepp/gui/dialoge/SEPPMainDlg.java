@@ -2,6 +2,7 @@ package de.verbund.sepp.gui.dialoge;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -10,11 +11,18 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
+import javax.swing.JTable;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableModel;
 
 import de.verbund.sepp.gui.controller.ChangeSourceController;
 import de.verbund.sepp.gui.controller.ChangeUserController;
 import de.verbund.sepp.gui.controller.StartUpController;
 import de.verbund.sepp.gui.todo.comment.ToDoAndCommentBoxes;
+import de.verbund.sepp.main.daten.DateiInformationen;
+import de.verbund.sepp.main.daten.DatenSchnittstelle;
+import de.verbund.sepp.main.daten.DatenSchnittstelleImpl;
+import de.verbund.sepp.main.utils.DateiInfoHelfer;
 
 public class SEPPMainDlg {
 
@@ -26,7 +34,6 @@ public class SEPPMainDlg {
 	public SEPPMainDlg() {
 		erzeugeSplitLayout();
 		erzeugeMenue();
-
 		seppMainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		seppMainFrame.setTitle("SuperEffectiveProjectPlanning (SEPP)");
 		seppMainFrame.setContentPane(panel);
@@ -58,13 +65,37 @@ public class SEPPMainDlg {
 	private void erzeugeButtonPanel() {
 		JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		JButton refreshButton = new JButton("Aktualisieren...");
-		refreshButton.addActionListener(e -> refreshState());
+		refreshButton.addActionListener(e -> {
+
+			try {
+				refreshMainTables();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
+		});
 		buttonPanel.add(refreshButton);
 		panel.add(buttonPanel, BorderLayout.NORTH);
 	}
 
-	private void refreshState() {
-		System.out.println("Aktualisieren...");
+	public void refreshMainTables() throws IOException {
+		DatenSchnittstelle dataSchnittstelle = new DatenSchnittstelleImpl();
+		DateiInformationen daten;
+		daten = dataSchnittstelle.getDateiInformationen(
+				dataSchnittstelle.getEinstellungen().getProjektPfad() + "\\" + DatenSchnittstelle.PRIMAER_DATEINAME);
+		String[][] userKommentare = DateiInfoHelfer.getZeilenArray(daten.getKommentare());
+		refreshTableModel(userKommentare, ToDoAndCommentBoxes.spaltenKommentare, toDoComments.getTableComment());
+		String[][] userToDos = DateiInfoHelfer.getZeilenArray(daten.getToDos());
+		refreshTableModel(userToDos, ToDoAndCommentBoxes.spaltenTodos, toDoComments.getTableToDo());
+	}
+
+	private void refreshTableModel(String[][] inhalte, String[] spaltenTitel, JTable table) {
+		if (table != null) {
+			table.setModel(new DefaultTableModel(inhalte, spaltenTitel));
+			AbstractTableModel absz = (AbstractTableModel) toDoComments.getTableComment().getModel();
+			absz.fireTableDataChanged();
+		}
 	}
 
 	private void erzeugeMenue() {
@@ -92,7 +123,7 @@ public class SEPPMainDlg {
 	}
 
 	private void showSourceDlg() {
-		new ChangeSourceController(seppMainFrame);
+		new ChangeSourceController(seppMainFrame, this);
 	}
 
 	public static void main(String[] args) {

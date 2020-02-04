@@ -86,7 +86,7 @@ public class ChangeUserDlg extends JDialog {
 		return oldUserLabel;
 	}
 
-	JLabel getOldUserNameLabel() {
+	public JLabel getOldUserNameLabel() {
 		if (oldUserNameLabel == null) {
 			oldUserNameLabel = new JLabel("*/*old_username*/*");
 		}
