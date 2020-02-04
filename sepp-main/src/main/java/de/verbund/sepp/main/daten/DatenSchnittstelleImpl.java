@@ -1,5 +1,6 @@
 package de.verbund.sepp.main.daten;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -15,9 +16,9 @@ public class DatenSchnittstelleImpl implements DatenSchnittstelle {
 	}
 
 	@Override
-	public ArrayList<String> getDateiNamen() {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<String> getDateiPfade(Einstellungen einstellungen) throws IOException {
+		File projektOrdner = new File(einstellungen.projektPfad);
+		return DateiHelfer.dateienInOrdner(projektOrdner);
 	}
 
 	@Override

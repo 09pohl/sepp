@@ -11,7 +11,7 @@ public interface DatenSchnittstelle {
 	Einstellungen getEinstellungen() throws IOException;
 
 	// Gibt eine Liste aller Dateien des Projekts zurück, auch aus Unterordnern
-	ArrayList<String> getDateiNamen();
+	ArrayList<String> getDateiPfade(Einstellungen einstellungen) throws IOException;
 
 	// Enthält Icon, Dateiname, Erstellungsdatum, Änderungsdatum, To-Dos und
 	// Kommentare

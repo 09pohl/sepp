@@ -9,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.util.ArrayList;
 
 import javax.swing.Icon;
 import javax.swing.filechooser.FileSystemView;
@@ -28,6 +29,19 @@ public class DateiHelfer {
 	public static String pfadOhneEndung(String pfad) {
 		String result = pfad.substring(0, pfad.lastIndexOf('.'));
 		return result;
+	}
+
+	public static ArrayList<String> dateienInOrdner(File ordner) throws IOException {
+		ArrayList<String> result = new ArrayList<String>();
+		for (File datei : ordner.listFiles()) {
+			if (datei.isDirectory()) {
+				dateienInOrdner(datei);
+			} else {
+				result.add(datei.getCanonicalPath());
+			}
+		}
+		return result;
+
 	}
 
 	public BasicFileAttributes basisInformationen() throws IOException {
