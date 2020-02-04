@@ -51,7 +51,8 @@ public class ToDoAndCommentBoxes {
 			String[][] userAndToDos = DateiInfoHelfer.getZeilenArray(dataToDos.getToDos());
 			String[] columns = { "User", "To Do's" };
 			TableModel model = new DefaultTableModel(userAndToDos, columns);
-			JTable doneTable = new JTable(model);
+			JTable doneTable = new JTable();
+			doneTable = new TableAndPopUpMenu(model).getTable();
 			return doneTable;
 		} catch (IOException e) {
 			System.out.println("Fehler ToDo's");
