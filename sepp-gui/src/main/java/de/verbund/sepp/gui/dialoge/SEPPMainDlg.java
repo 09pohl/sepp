@@ -39,6 +39,9 @@ public class SEPPMainDlg{
 	
 	private void erzeugeSplitLayout() {
 		mainPanel = new JPanel(new BorderLayout());
+		panel = new JPanel(new BorderLayout());
+		erzeugeButtonPanel();
+		panel.add(mainPanel, BorderLayout.CENTER);
 		JPanel dateiPanel = new JPanel();
 		JPanel infoPanel = new JPanel(new BorderLayout());
 		JPanel toDoPanel = new JPanel();
