@@ -8,7 +8,6 @@ import java.nio.file.attribute.FileTime;
 
 import org.junit.Test;
 
-import de.verbund.sepp.main.daten.Einstellungen;
 import de.verbund.sepp.main.utils.DateiHelfer;
 
 public class DateiHelferTest {
@@ -32,5 +31,10 @@ public class DateiHelferTest {
 		Einstellungen test = Einstellungen.getInstance();
 		assertEquals(test.einstellungenPfad.replace(".properties", ""),
 				DateiHelfer.pfadOhneEndung(test.einstellungenPfad));
+	}
+
+	@Test(expected = Test.None.class)
+	public void testEndung() throws IOException {
+		assertEquals(".rtf", DateiHelfer.dateiEndung("C:\\Java\\0-sepp\\Dokument.rtf"));
 	}
 }
