@@ -7,6 +7,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Properties;
 
+import de.verbund.sepp.main.utils.DateiHelfer;
+
 public class Einstellungen {
 
 	private final String EINSTELLUNGEN_DATEINAME = "/sepp_config.properties";
@@ -39,6 +41,13 @@ public class Einstellungen {
 		einstellungen.setProperty(BENUTZER_PROPERTY, username);
 		einstellungen.setProperty(PROJEKT_PROPERTY, projektPfad);
 		einstellungen.store(output, null);
+		DateiHelfer projektDatei = new DateiHelfer(projektPfad + "\\" + DatenSchnittstelle.PRIMAER_DATEINAME);
+
+		System.out.println(projektPfad + "\\" + DatenSchnittstelle.PRIMAER_DATEINAME);
+
+		if (!projektDatei.existiert()) {
+			projektDatei.schreibe("");
+		}
 		output.close();
 	}
 

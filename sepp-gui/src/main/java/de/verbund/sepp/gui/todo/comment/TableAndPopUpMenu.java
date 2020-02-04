@@ -63,11 +63,25 @@ public class TableAndPopUpMenu {
 		else {
 			addOrEdit = "Bearbeiten";
 		}
-		JOptionPane.showInputDialog(null, addOrEdit + ":", addOrEdit, JOptionPane.OK_CANCEL_OPTION);
+		
+		String comment = "";
+		
+		while (comment.equals("")) {
+			comment = JOptionPane.showInputDialog(null, addOrEdit + ":", addOrEdit, JOptionPane.OK_CANCEL_OPTION);
+	
+			if (!comment.contentEquals("")) {
+			System.out.println(comment);
+			}
+		}
+		
 	}
 	
 	private void deleteJOP() {
-		JOptionPane.showConfirmDialog(null, "Wollen Sie diese Zeile wirklich löschen?", "Löschen", JOptionPane.YES_NO_OPTION);
+		int doDelete = JOptionPane.showConfirmDialog(null, "Wollen Sie diese Zeile wirklich löschen?", "Löschen", JOptionPane.YES_NO_OPTION);
+		
+		if (doDelete==JOptionPane.YES_OPTION) {
+			System.out.println("DoDelete");
+		}
 		}
 
 }
