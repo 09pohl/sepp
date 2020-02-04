@@ -1,10 +1,12 @@
-package sepp.gui;
+package de.verbund.sepp.gui.controller;
 
 import java.awt.EventQueue;
 
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+
+import de.verbund.sepp.gui.dialoge.ChangeSourceDlg;
 
 public class ChangeSourceController {
 	

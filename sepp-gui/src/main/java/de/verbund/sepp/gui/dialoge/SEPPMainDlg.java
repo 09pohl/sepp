@@ -1,4 +1,4 @@
-package sepp.gui;
+package de.verbund.sepp.gui.dialoge;
 
 import java.awt.BorderLayout;
 
@@ -7,16 +7,18 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 
+import de.verbund.sepp.gui.controller.ChangeSourceController;
+import de.verbund.sepp.gui.controller.ChangeUserController;
+import de.verbund.sepp.gui.controller.StartUpController;
 import todo.comment.*;
 
 public class SEPPMainDlg{
 	
 	private JPanel mainPanel;
 	private JFrame seppMainFrame = new JFrame();
-	private ToDoAndCommentBoxes toDoComments;
+	private ToDoAndCommentBoxes toDoComments = new ToDoAndCommentBoxes();
 
 	public SEPPMainDlg() {
 		  erzeugeSplitLayout();

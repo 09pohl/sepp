@@ -1,6 +1,8 @@
-package sepp.gui;
+package de.verbund.sepp.gui.controller;
 
 import java.awt.EventQueue;
+
+import de.verbund.sepp.gui.dialoge.StartUpDlg;
 
 public class StartUpController {
 	

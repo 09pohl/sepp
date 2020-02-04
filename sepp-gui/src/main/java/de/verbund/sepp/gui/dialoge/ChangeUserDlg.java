@@ -1,4 +1,4 @@
-package sepp.gui;
+package de.verbund.sepp.gui.dialoge;
 
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -34,7 +34,7 @@ public class ChangeUserDlg extends JDialog{
 		}
 		return panel;
 	}
-	JButton getAcceptButton() {
+	public JButton getAcceptButton() {
 		if (acceptButton == null) {
 			acceptButton = new JButton("Bestätigen");
 		}
@@ -93,7 +93,7 @@ public class ChangeUserDlg extends JDialog{
 		}
 		return newUserNameLabel;
 	}
-	JTextField getNewUserNameTf() {
+	public JTextField getNewUserNameTf() {
 		if (newUserNameTf == null) {
 			newUserNameTf = new JTextField();
 			newUserNameTf.setColumns(15);
