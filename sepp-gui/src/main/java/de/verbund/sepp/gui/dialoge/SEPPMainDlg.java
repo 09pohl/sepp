@@ -91,9 +91,11 @@ public class SEPPMainDlg {
 	}
 
 	private void refreshTableModel(String[][] inhalte, String[] spaltenTitel, JTable table) {
-		table.setModel(new DefaultTableModel(inhalte, spaltenTitel));
-		AbstractTableModel absz = (AbstractTableModel) toDoComments.getTableComment().getModel();
-		absz.fireTableDataChanged();
+		if (table != null) {
+			table.setModel(new DefaultTableModel(inhalte, spaltenTitel));
+			AbstractTableModel absz = (AbstractTableModel) toDoComments.getTableComment().getModel();
+			absz.fireTableDataChanged();
+		}
 	}
 
 	private void erzeugeMenue() {
