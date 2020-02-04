@@ -60,13 +60,13 @@ public class StartUpController {
 	private void saveSettings() {
 		String dir = startDlg.getDirectoryTf().getText();
 		String user = startDlg.getUserNameTf().getText();
-		if (!(dir.equals(null) && user.equals(null))) {
+		if (dir.equals("") || user.equals("")) {
+			System.out.println("Speicher nicht möglich!");
+		}
+		else {
 			System.out.println("Projektverzeichnis: " + dir);
 			System.out.println("Benutzername: " + user);
 			startDlg.dispose();
-		}
-		else {
-			System.out.println("Speicher nicht möglich!");
 		}
 	}
 
