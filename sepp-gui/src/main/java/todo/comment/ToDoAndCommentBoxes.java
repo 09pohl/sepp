@@ -1,47 +1,61 @@
 package todo.comment;
 
+import java.io.IOException;
+
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-import sepp.daten.DateiInformationen;
-import sepp.utils.DateiInfoHelfer;
+import de.verbund.sepp.main.daten.DateiInformationen;
+import de.verbund.sepp.main.daten.DatenSchnittstelleImpl;
+import de.verbund.sepp.main.utils.DateiInfoHelfer;
 
 public class ToDoAndCommentBoxes {
 
-	private DateiInformationen dataComments;
-	private DateiInformationen dataToDos;
+	private DatenSchnittstelleImpl dataSchnittstelle;
 
 	private JScrollPane initCommentBox() {
-
 		return new JScrollPane(createCommentTable());
 	}
 
 	private JScrollPane initToDoBox() {
-
 		return new JScrollPane(createToDoTable());
 	}
 
 	private JTable createCommentTable() {
-		dataComments = new DateiInformationen();
-		dataComments.setKommentare("Daniel:Schmidt\nLukas:Lüthke\nJonathan:Pohl\nDuong:Le\nDuong:Le");
-		String[][] userAndComments = DateiInfoHelfer.getZeilenArray(dataComments.getKommentare());
-		String[] columns = { "User", "Kommentar" };
-		TableModel model = new DefaultTableModel(userAndComments, columns);
-		JTable doneTable = new JTable(model);
-		return doneTable;
+		dataSchnittstelle = new DatenSchnittstelleImpl();
+		DateiInformationen dataComments;
+		
+		try {
+			dataComments = dataSchnittstelle.getDateiInformationen("C:\\Users\\Administrator\\git\\sepp\\TestOrdner\\projekt.sepp");
+			String[][] userAndComments = DateiInfoHelfer.getZeilenArray(dataComments.getKommentare());
+			String[] columns = { "User", "Kommentar" };
+			TableModel model = new DefaultTableModel(userAndComments, columns);
+			JTable doneTable = new JTable(model);
+			return doneTable;
+		} catch (IOException e) {
+			System.out.println("Fehler Comments");
+			return null;
+		}
+		
 	}
 
 	private JTable createToDoTable() {
-		dataToDos = new DateiInformationen();
-		dataToDos.setToDos(
-				"Daniel:Schmidt\nLukas:Lüthke\nJonathan:Pohl\nDuong:Le\nDuong:Le\nDaniel:Schmidt\nLukas:Lüthke\nJonathan:Pohl\nDuong:Le\nDuong:Le");
-		String[][] userAndToDos = DateiInfoHelfer.getZeilenArray(dataToDos.getToDos());
-		String[] columns = { "User", "To Do's" };
-		TableModel model = new DefaultTableModel(userAndToDos, columns);
-		JTable doneTable = new JTable(model);
-		return doneTable;
+		dataSchnittstelle = new DatenSchnittstelleImpl();
+		DateiInformationen dataToDos;
+		
+		try {
+			dataToDos = dataSchnittstelle.getDateiInformationen("C:\\Users\\Administrator\\git\\sepp\\TestOrdner\\projekt.sepp");
+			String[][] userAndToDos = DateiInfoHelfer.getZeilenArray(dataToDos.getToDos());
+			String[] columns = { "User", "To Do's" };
+			TableModel model = new DefaultTableModel(userAndToDos, columns);
+			JTable doneTable = new JTable(model);
+			return doneTable;
+		} catch (IOException e) {
+			System.out.println("Fehler ToDo's");
+			return null;
+		}
 	}
 
 	public JScrollPane getCommentBox() {
