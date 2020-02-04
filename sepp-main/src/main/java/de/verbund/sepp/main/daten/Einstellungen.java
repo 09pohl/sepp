@@ -12,8 +12,8 @@ public class Einstellungen {
 	private final String EINSTELLUNGEN_DATEINAME = "/sepp_config.properties";
 	private final String BENUTZER_PROPERTY = "benutzer";
 	private final String PROJEKT_PROPERTY = "projekt";
-	private static Einstellungen instanz;
 
+	private static Einstellungen instanz;
 	String einstellungenPfad = System.getProperty("user.home") + EINSTELLUNGEN_DATEINAME;
 
 	String projektPfad;
