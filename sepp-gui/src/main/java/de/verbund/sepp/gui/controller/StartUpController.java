@@ -29,6 +29,7 @@ public class StartUpController {
 	protected void initStartUp() {
 		try {
 			Einstellungen settings = schnittstelle.getEinstellungen();
+			//settings.laden();
 			if (settings.getProjektPfad() == null && settings.getUsername() == null) {
 				startDlg = new StartUpDlg();
 				startDlg.getRootPane().setDefaultButton(startDlg.getSaveButton());
