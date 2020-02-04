@@ -7,6 +7,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 
 public class SEPPMainDlg{
@@ -31,9 +32,12 @@ public class SEPPMainDlg{
 	private void erzeugeSplitLayout() {
 		  mainPanel = new JPanel(new BorderLayout());
 		  JPanel dateiPanel = new JPanel();
+		  dateiPanel.add(new JScrollPane());
 		  JPanel infoPanel = new JPanel(new BorderLayout());
 		  JPanel toDoPanel = new JPanel();
+		  toDoPanel.add(new JScrollPane());
 		  JPanel commentsPanel = new JPanel();
+		  commentsPanel.add(new JScrollPane());
 		  JSplitPane infoSplitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, toDoPanel, commentsPanel);
 		  infoSplitPane.setDividerLocation(360);
 		  infoPanel.add(infoSplitPane, BorderLayout.CENTER);
