@@ -1,4 +1,4 @@
-package sepp.utils;
+package de.verbund.sepp.main.utils;
 
 public class DateiInfoHelfer {
 

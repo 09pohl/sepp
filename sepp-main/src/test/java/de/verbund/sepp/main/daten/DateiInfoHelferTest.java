@@ -1,4 +1,4 @@
-package sepp.daten;
+package de.verbund.sepp.main.daten;
 
 import static org.junit.Assert.assertEquals;
 
@@ -6,7 +6,7 @@ import java.io.IOException;
 
 import org.junit.Test;
 
-import sepp.utils.DateiInfoHelfer;
+import de.verbund.sepp.main.utils.DateiInfoHelfer;
 
 public class DateiInfoHelferTest {
 

@@ -1,4 +1,4 @@
-package sepp.daten;
+package de.verbund.sepp.main.daten;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -8,7 +8,8 @@ import java.nio.file.attribute.FileTime;
 
 import org.junit.Test;
 
-import sepp.utils.DateiHelfer;
+import de.verbund.sepp.main.daten.Einstellungen;
+import de.verbund.sepp.main.utils.DateiHelfer;
 
 public class DateiHelferTest {
 

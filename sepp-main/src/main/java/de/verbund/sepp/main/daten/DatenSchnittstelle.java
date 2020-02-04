@@ -1,4 +1,4 @@
-package sepp.daten;
+package de.verbund.sepp.main.daten;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,6 +18,6 @@ public interface DatenSchnittstelle {
 	DateiInformationen getDateiInformationen(String dateiPfad) throws IOException;
 
 	// speichert die DateiInformationen
-	void speichereDateiInformationen(DateiInformationen dateiInfo);
+	void speichereDateiInformationen(DateiInformationen dateiInfo) throws IOException;
 
 }

@@ -1,4 +1,4 @@
-package sepp.utils;
+package de.verbund.sepp.main.utils;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -56,20 +56,17 @@ public class DateiHelfer {
 		datei.createNewFile();
 	}
 
-	public void schreibe(String text) {
+	public void schreibe(String text) throws IOException {
 		schreibe(text, false);
 	}
 
-	public void schreibe(String txt, boolean append) {
+	public void schreibe(String txt, boolean append) throws IOException {
 		File datei = null;
 		datei = new File(dateiName);
 		try (FileWriter outStream = new FileWriter(datei, append)) {
 
 			outStream.write(txt);
 
-		} catch (IOException e) {
-			// Fehlerbehandlung
-			e.printStackTrace();
 		}
 	}
 
