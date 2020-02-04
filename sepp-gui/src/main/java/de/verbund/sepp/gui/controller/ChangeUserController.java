@@ -28,7 +28,7 @@ public class ChangeUserController {
 	protected void initDialog(JFrame frame) {
 		changeDlg = new ChangeUserDlg(frame);
 		changeDlg.getRootPane().setDefaultButton(changeDlg.getAcceptButton());
-		changeDlg.getAcceptButton().addActionListener(e -> changeUserName());
+		changeDlg.getAcceptButton().addActionListener(e -> saveUserName());
 		changeDlg.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		changeDlg.setSize(330, 110);
 		changeDlg.setResizable(false);
@@ -37,14 +37,13 @@ public class ChangeUserController {
 		changeDlg.setVisible(true);
 	}
 
-	protected void changeUserName() {
-		String newName = changeDlg.getNewUserNameTf().getText();
-		System.out.println("Neuer Username: " + newName);
+	protected void saveUserName() {
+		String change = changeDlg.getNewUserNameTf().getText();
 		try {
-			schnittstelle.getEinstellungen().setUsername(newName);
+			schnittstelle.getEinstellungen().setUsername(change);
 			schnittstelle.getEinstellungen().speichern();
 		} catch (IOException e) {
-			JOptionPane.showMessageDialog(changeDlg, "Fehler beim Festlegen des neuen Benutzernamens!", "FEHLER!", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(changeDlg, "Benutzername konnte nicht festgelegt werden!", "FEHLER!", JOptionPane.ERROR_MESSAGE);
 		}
 		changeDlg.dispose();
 	}
