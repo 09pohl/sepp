@@ -34,10 +34,15 @@ public class DatenSchnittstelleImpl implements DatenSchnittstelle {
 				DateiHelfer.pfadOhneEndung(dateiPfad) + DateiInformationen.DATEIENDUNG_TODOS);
 		DateiHelfer dateiKommentare = new DateiHelfer(
 				DateiHelfer.pfadOhneEndung(dateiPfad) + DateiInformationen.DATEIENDUNG_KOMMENTARE);
-
 		leseSeppDateien(dateiTodo, dateiInfo);
 		leseSeppDateien(dateiKommentare, dateiInfo);
 		return dateiInfo;
+	}
+
+	@Override
+	public void speichereDateiInformationen(DateiInformationen dateiInfo) {
+		// TODO Auto-generated method stub
+
 	}
 
 	private void leseSeppDateien(DateiHelfer datei, DateiInformationen dateiInfo) throws IOException {
@@ -46,11 +51,5 @@ public class DatenSchnittstelleImpl implements DatenSchnittstelle {
 		} else {
 			datei.schreibe("");
 		}
-	}
-
-	@Override
-	public void speichereDateiInformationen(DateiInformationen dateiInfo) {
-		// TODO Auto-generated method stub
-
 	}
 }

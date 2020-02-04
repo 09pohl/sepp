@@ -12,11 +12,22 @@ public class Einstellungen {
 	private final String EINSTELLUNGEN_DATEINAME = "/sepp_config.properties";
 	private final String BENUTZER_PROPERTY = "benutzer";
 	private final String PROJEKT_PROPERTY = "projekt";
+	private static Einstellungen instanz;
 
 	String einstellungenPfad = System.getProperty("user.home") + EINSTELLUNGEN_DATEINAME;
 
 	String projektPfad;
 	String username; // keine Doppelpunkte zulassen!
+
+	private Einstellungen() {
+	}
+
+	public static Einstellungen getInstance() {
+		if (Einstellungen.instanz == null) {
+			Einstellungen.instanz = new Einstellungen();
+		}
+		return Einstellungen.instanz;
+	}
 
 	public void speichern() throws IOException {
 		OutputStream output = new FileOutputStream(einstellungenPfad);
