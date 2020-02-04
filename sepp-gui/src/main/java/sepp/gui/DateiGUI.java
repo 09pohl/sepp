@@ -5,34 +5,40 @@ import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.io.IOException;
 
-import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
+import javax.swing.Icon;
+
+import sepp.daten.DateiInformationen;
+import sepp.daten.DatenSchnittstelle;
+import sepp.daten.DatenSchnittstelleImpl;
 
 public class DateiGUI extends JFrame implements ActionListener{
 
 	private JButton bTODO;
 	private JButton bKommentare;
 	private JButton bLoeschen;
+	private static final String VERZEICHNIS = "C:\\java\\git\\sepp\\TestOrdner\\Aufgaben.rtf";
 	
-	public DateiGUI() {
+	public DateiGUI() throws IOException {
 		Container panel = getContentPane();
 		setSize(350, 300);
 		getUserIconImage();
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		setLocationRelativeTo(null);
-		getTitel(); 
+		setTitle(getTitel()); 
 		panel.setLayout(new BorderLayout());
 		JFrame.setDefaultLookAndFeelDecorated(true);
 	    setResizable(true);
@@ -54,25 +60,35 @@ public class DateiGUI extends JFrame implements ActionListener{
 	    
 	  }
 	
-	private void getUserIconImage() {
-		ImageIcon img = new ImageIcon();
-		//TODO Path to UserImage
-		setIconImage(img.getImage());
+	//Laden von UserIconimage
+	private void getUserIconImage() throws IOException {
+		DatenSchnittstelle schnittstelle = new DatenSchnittstelleImpl();
+		DateiInformationen data = schnittstelle.getDateiInformationen(VERZEICHNIS);
+		setIconImage((Image) data.getIcon());
+	
+	}
+	
+	//Laden von Titel mit Name und Datum
+	private String getTitel() throws IOException {
+		DatenSchnittstelle schnittstelle = new DatenSchnittstelleImpl();
+		DateiInformationen data = schnittstelle.getDateiInformationen(VERZEICHNIS);
+		String name = data.getName();
+		String datum = data.getErstellungsDatum().toString();
+		return name + datum;
 	}
 
-	private String getTitel() {
-		setTitle("Name");
-		//TODO - Get Username, Topic & Erstellungsdatum
-		return null;
-	}
-
-	private Component getMitte() {
+	//Laden von ToDOs und Kommentaren
+	private Component getMitte() throws IOException {
+		DatenSchnittstelle schnittstelle = new DatenSchnittstelleImpl();
+		DateiInformationen data = schnittstelle.getDateiInformationen(VERZEICHNIS);
 		JPanel p = new JPanel();
-		//TODO - Get Kommentare & Änderungsdatum
+		p.add(bTODO, data.getAenderungsDatum().toString());
+		// TODO - User und Kommentare
 		p.setLayout(new FlowLayout());  
 		return p;
 	}
 
+	//BorderLayout mit Buttons
 	private Component getSueden() {
 		JPanel p = new JPanel();
 		p.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -80,7 +96,7 @@ public class DateiGUI extends JFrame implements ActionListener{
 		bTODO.addActionListener(this);
 		bKommentare = new JButton("Kommentare");
 		bKommentare.addActionListener(this);
-		bLoeschen = new JButton("Loeschen");
+		bLoeschen = new JButton("Loeschen");  //Loeschen von ToDo - Liste (WIP)
 		bLoeschen.addActionListener(this);
 		p.add(bTODO); 
 		p.add(bKommentare);
@@ -88,6 +104,7 @@ public class DateiGUI extends JFrame implements ActionListener{
 		return p;
 	}
 
+	//Deaktivierung von Min-Max-Icon
 	public void removeMinMaxClose(Component comp)
 	  {
 		 if(comp instanceof JButton)
@@ -104,23 +121,29 @@ public class DateiGUI extends JFrame implements ActionListener{
 		    {
 		      removeMinMaxClose(comps[x]);
 		    }
-	    }
+		  }	
 	  }
-	  public static void main(String[] args)
+	
+	public static void main(String[] args)
 	  {
 	    SwingUtilities.invokeLater(new Runnable(){
 	      public void run(){
-	        new DateiGUI();
+	        try {
+				new DateiGUI();
+			} catch (IOException e) {
+				JOptionPane.showInputDialog("Failed to load!");
+			}
 	      }
 	    });
 	  }
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == bTODO) {
-			//TODO: Get TODO-List
+			//TODO: Load TODO-List
 		}
 		if (e.getSource() == bKommentare) {
-			//TODO: Get Kommentare
+			//TODO: Load Kommentare
 		}
 		if (e.getSource() == bLoeschen) {
 			//TODO: Remove TODO-List & Kommentare
