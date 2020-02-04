@@ -16,13 +16,13 @@ import de.verbund.sepp.main.daten.DatenSchnittstelleImpl;
 import de.verbund.sepp.main.daten.Einstellungen;
 
 public class StartUpController {
-	
+
 	private StartUpDlg startDlg;
 	private DatenSchnittstelle schnittstelle = new DatenSchnittstelleImpl();
-	
+
 	public StartUpController() {
 		EventQueue.invokeLater(new Runnable() {
-			
+
 			public void run() {
 				initStartUp();
 			}
@@ -43,7 +43,8 @@ public class StartUpController {
 					try {
 						saveSettings();
 					} catch (IOException e1) {
-						JOptionPane.showMessageDialog(startDlg, "Fehler beim Speichern der Einstellungen!", "FEHLER!", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(startDlg, "Fehler beim Speichern der Einstellungen!", "FEHLER!",
+								JOptionPane.ERROR_MESSAGE);
 					}
 				});
 				startDlg.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -52,18 +53,19 @@ public class StartUpController {
 				startDlg.setModal(true);
 				startDlg.setLocationRelativeTo(null);
 				startDlg.addWindowListener(new WindowAdapter() {
-					
+
 					@Override
 					public void windowClosing(WindowEvent e) {
 						System.exit(0);
 					}
-					
+
 				});
 				startDlg.setVisible(true);
 			}
 
 		} catch (IOException e) {
-			JOptionPane.showMessageDialog(startDlg, "Fehler beim Einlesen bestehender Einstellungen!", "FEHLER!", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(startDlg, "Fehler beim Einlesen bestehender Einstellungen!", "FEHLER!",
+					JOptionPane.ERROR_MESSAGE);
 		}
 	}
 

@@ -13,13 +13,13 @@ import de.verbund.sepp.main.daten.DatenSchnittstelle;
 import de.verbund.sepp.main.daten.DatenSchnittstelleImpl;
 
 public class ChangeSourceController {
-	
+
 	private ChangeSourceDlg changeDlg;
 	private DatenSchnittstelle schnittstelle = new DatenSchnittstelleImpl();
-	
+
 	public ChangeSourceController(JFrame frame) {
 		EventQueue.invokeLater(new Runnable() {
-			
+
 			public void run() {
 				initDialog(frame);
 			}
@@ -46,7 +46,8 @@ public class ChangeSourceController {
 			schnittstelle.getEinstellungen().setProjektPfad(change);
 			schnittstelle.getEinstellungen().speichern();
 		} catch (IOException e) {
-			JOptionPane.showMessageDialog(changeDlg, "Pfad konnte nicht festgelegt werden!", "FEHLER!", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(changeDlg, "Pfad konnte nicht festgelegt werden!", "FEHLER!",
+					JOptionPane.ERROR_MESSAGE);
 		}
 		changeDlg.dispose();
 	}
@@ -57,5 +58,5 @@ public class ChangeSourceController {
 		fc.showOpenDialog(changeDlg);
 		changeDlg.getTextField().setText(fc.getSelectedFile().getPath());
 	}
-	
+
 }

@@ -79,7 +79,7 @@ public class SEPPMainDlg {
 		panel.add(buttonPanel, BorderLayout.NORTH);
 	}
 
-	private void refreshMainTables() throws IOException {
+	public void refreshMainTables() throws IOException {
 		DatenSchnittstelle dataSchnittstelle = new DatenSchnittstelleImpl();
 		DateiInformationen daten;
 		daten = dataSchnittstelle.getDateiInformationen(
