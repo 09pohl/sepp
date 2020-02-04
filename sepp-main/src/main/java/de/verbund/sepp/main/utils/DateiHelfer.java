@@ -1,4 +1,4 @@
-package sepp.utils;
+package de.verbund.sepp.main.utils;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -9,9 +9,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.util.ArrayList;
 
 import javax.swing.Icon;
 import javax.swing.filechooser.FileSystemView;
+
+import de.verbund.sepp.main.daten.DateiInformationen;
 
 public class DateiHelfer {
 	private String dateiName;
@@ -28,6 +31,39 @@ public class DateiHelfer {
 	public static String pfadOhneEndung(String pfad) {
 		String result = pfad.substring(0, pfad.lastIndexOf('.'));
 		return result;
+	}
+
+	public static String dateiEndung(String pfad) {
+		String endung = pfad.substring(pfad.lastIndexOf('.') + 1);
+		return endung;
+	}
+
+	public static String dateiEndungMitPunkt(String pfad) {
+		String endung = pfad.substring(pfad.lastIndexOf('.'));
+		return endung;
+	}
+
+	public static void dateienInOrdner(File ordner, ArrayList<String> pfadListe) throws IOException {
+		for (File datei : ordner.listFiles()) {
+			if (datei.isDirectory()) {
+				dateienInOrdner(datei, pfadListe);
+			} else {
+				pfadListe.add(datei.getCanonicalPath());
+			}
+		}
+	}
+
+	public static void dateienInOrdnerSepp(File ordner, ArrayList<String> pfadListe) throws IOException {
+		for (File datei : ordner.listFiles()) {
+			if (datei.isDirectory()) {
+				dateienInOrdner(datei, pfadListe);
+			} else if (!DateiHelfer.dateiEndungMitPunkt(datei.getCanonicalPath())
+					.equals(DateiInformationen.DATEIENDUNG_KOMMENTARE)
+					&& !DateiHelfer.dateiEndungMitPunkt(datei.getCanonicalPath())
+							.equals(DateiInformationen.DATEIENDUNG_TODOS)) {
+				pfadListe.add(datei.getCanonicalPath());
+			}
+		}
 	}
 
 	public BasicFileAttributes basisInformationen() throws IOException {
@@ -56,20 +92,17 @@ public class DateiHelfer {
 		datei.createNewFile();
 	}
 
-	public void schreibe(String text) {
+	public void schreibe(String text) throws IOException {
 		schreibe(text, false);
 	}
 
-	public void schreibe(String txt, boolean append) {
+	public void schreibe(String txt, boolean append) throws IOException {
 		File datei = null;
 		datei = new File(dateiName);
 		try (FileWriter outStream = new FileWriter(datei, append)) {
 
 			outStream.write(txt);
 
-		} catch (IOException e) {
-			// Fehlerbehandlung
-			e.printStackTrace();
 		}
 	}
 
@@ -93,4 +126,3 @@ public class DateiHelfer {
 		return inhalt.toString();
 	}
 }
-

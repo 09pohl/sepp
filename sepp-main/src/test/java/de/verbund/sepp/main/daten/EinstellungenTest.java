@@ -1,4 +1,4 @@
-package sepp.daten;
+package de.verbund.sepp.main.daten;
 
 import static org.junit.Assert.assertEquals;
 

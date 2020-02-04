@@ -1,4 +1,4 @@
-package sepp.daten;
+package de.verbund.sepp.main.daten;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -8,7 +8,7 @@ import java.nio.file.attribute.FileTime;
 
 import org.junit.Test;
 
-import sepp.utils.DateiHelfer;
+import de.verbund.sepp.main.utils.DateiHelfer;
 
 public class DateiHelferTest {
 
@@ -22,6 +22,9 @@ public class DateiHelferTest {
 		test.speichern();
 		FileTime datumEins = datei.basisInformationen().lastModifiedTime();
 		datei.schreibe("a", true);
+		datei.schreibe("a", true);
+		datei.schreibe("a", true);
+		datei.schreibe("a", true);
 		FileTime datumZwei = datei.basisInformationen().lastModifiedTime();
 		assertNotEquals(datumEins, datumZwei);
 	}
@@ -31,5 +34,10 @@ public class DateiHelferTest {
 		Einstellungen test = Einstellungen.getInstance();
 		assertEquals(test.einstellungenPfad.replace(".properties", ""),
 				DateiHelfer.pfadOhneEndung(test.einstellungenPfad));
+	}
+
+	@Test(expected = Test.None.class)
+	public void testEndung() throws IOException {
+		assertEquals("rtf", DateiHelfer.dateiEndung("C:\\Java\\0-sepp\\Dokument.rtf"));
 	}
 }
