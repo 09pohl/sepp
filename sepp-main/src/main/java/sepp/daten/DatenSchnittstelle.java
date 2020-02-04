@@ -18,6 +18,6 @@ public interface DatenSchnittstelle {
 	DateiInformationen getDateiInformationen(String dateiPfad) throws IOException;
 
 	// speichert die DateiInformationen
-	void speichereDateiInformationen(DateiInformationen dateiInfo);
+	void speichereDateiInformationen(DateiInformationen dateiInfo) throws IOException;
 
 }

@@ -26,6 +26,7 @@ public class DatenSchnittstelleImpl implements DatenSchnittstelle {
 		DateiHelfer datei = new DateiHelfer(dateiPfad);
 		Path pfad = Paths.get(dateiPfad);
 		dateiInfo.setIcon(datei.icon());
+		dateiInfo.setPfad(pfad);
 		dateiInfo.setName(pfad.getFileName().toString());
 		dateiInfo.setErstellungsDatum(datei.basisInformationen().creationTime());
 		dateiInfo.setAenderungsDatum(datei.basisInformationen().lastModifiedTime());
@@ -37,9 +38,11 @@ public class DatenSchnittstelleImpl implements DatenSchnittstelle {
 	}
 
 	@Override
-	public void speichereDateiInformationen(DateiInformationen dateiInfo) {
-		// TODO Auto-generated method stub
-
+	public void speichereDateiInformationen(DateiInformationen dateiInfo) throws IOException {
+		DateiHelfer dateiTodo = new DateiHelfer(dateiInfo.getPfad() + DateiInformationen.DATEIENDUNG_TODOS);
+		dateiTodo.schreibe(dateiInfo.getToDos());
+		DateiHelfer dateiKommentare = new DateiHelfer(dateiInfo.getPfad() + DateiInformationen.DATEIENDUNG_KOMMENTARE);
+		dateiKommentare.schreibe(dateiInfo.getKommentare());
 	}
 
 	private void leseSeppDateien(DateiHelfer datei, DateiInformationen dateiInfo) throws IOException {
