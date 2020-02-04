@@ -78,9 +78,7 @@ public class TableAndPopUpMenu {
 			}catch (NullPointerException npe) {
 				cancel = true;
 			}
-			
 		}
-		
 	}
 	
 	private void deleteJOP() {
