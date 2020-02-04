@@ -8,13 +8,13 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
-public class ChangeSourceDlg extends JDialog{
+public class ChangeSourceDlg extends JDialog {
 	private JPanel panel;
 	private JLabel lblNameDesNeuen;
 	private JTextField textField;
 	private JButton btnBesttigen;
 	private JButton btnDurchsuchen;
-	
+
 	public ChangeSourceDlg(JFrame frame) {
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setTitle("Quellverzeichnis wechseln...");
@@ -33,12 +33,14 @@ public class ChangeSourceDlg extends JDialog{
 		}
 		return panel;
 	}
+
 	private JLabel getLblNameDesNeuen() {
 		if (lblNameDesNeuen == null) {
 			lblNameDesNeuen = new JLabel("Name des neuen Verzeichnisses: ");
 		}
 		return lblNameDesNeuen;
 	}
+
 	public JTextField getTextField() {
 		if (textField == null) {
 			textField = new JTextField();
@@ -46,12 +48,14 @@ public class ChangeSourceDlg extends JDialog{
 		}
 		return textField;
 	}
+
 	public JButton getEnterButton() {
 		if (btnBesttigen == null) {
 			btnBesttigen = new JButton("Bestätigen");
 		}
 		return btnBesttigen;
 	}
+
 	public JButton getChooseButton() {
 		if (btnDurchsuchen == null) {
 			btnDurchsuchen = new JButton("Durchsuchen");

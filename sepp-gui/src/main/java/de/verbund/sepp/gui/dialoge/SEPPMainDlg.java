@@ -1,7 +1,9 @@
 package de.verbund.sepp.gui.dialoge;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -17,6 +19,7 @@ import de.verbund.sepp.gui.todo.comment.ToDoAndCommentBoxes;
 public class SEPPMainDlg {
 
 	private JPanel mainPanel;
+	private JPanel panel;
 	private JFrame seppMainFrame = new JFrame();
 	private ToDoAndCommentBoxes toDoComments = new ToDoAndCommentBoxes();
 
@@ -26,7 +29,7 @@ public class SEPPMainDlg {
 
 		seppMainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		seppMainFrame.setTitle("SuperEffectiveProjectPlanning (SEPP)");
-		seppMainFrame.setContentPane(mainPanel);
+		seppMainFrame.setContentPane(panel);
 		seppMainFrame.setSize(1000, 800);
 		seppMainFrame.setResizable(false);
 		seppMainFrame.setLocationRelativeTo(null);
@@ -35,6 +38,9 @@ public class SEPPMainDlg {
 
 	private void erzeugeSplitLayout() {
 		mainPanel = new JPanel(new BorderLayout());
+		panel = new JPanel(new BorderLayout());
+		erzeugeButtonPanel();
+		panel.add(mainPanel, BorderLayout.CENTER);
 		JPanel dateiPanel = new JPanel();
 		JPanel infoPanel = new JPanel(new BorderLayout());
 		JPanel toDoPanel = new JPanel();
@@ -47,6 +53,18 @@ public class SEPPMainDlg {
 		JSplitPane frameSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, dateiPanel, infoPanel);
 		frameSplitPane.setDividerLocation(485);
 		mainPanel.add(frameSplitPane, BorderLayout.CENTER);
+	}
+
+	private void erzeugeButtonPanel() {
+		JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+		JButton refreshButton = new JButton("Aktualisieren...");
+		refreshButton.addActionListener(e -> refreshState());
+		buttonPanel.add(refreshButton);
+		panel.add(buttonPanel, BorderLayout.NORTH);
+	}
+
+	private void refreshState() {
+		System.out.println("Aktualisieren...");
 	}
 
 	private void erzeugeMenue() {
