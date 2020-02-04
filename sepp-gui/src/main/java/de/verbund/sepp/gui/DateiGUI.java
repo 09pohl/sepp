@@ -31,7 +31,6 @@ public class DateiGUI extends JFrame implements ActionListener{
 	public DateiGUI() throws IOException {
 		Container panel = getContentPane();
 		setSize(350, 300);
-//		getUserIconImage();
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setTitle(getTitel()); 
@@ -55,17 +54,6 @@ public class DateiGUI extends JFrame implements ActionListener{
 	    setVisible(true);
 	    
 	  }
-	
-	//Laden von UserIconimage
-//	private void getUserIconImage() throws IOException {
-//		DatenSchnittstelle schnittstelle = new DatenSchnittstelleImpl();
-//		DateiInformationen data = schnittstelle.getDateiInformationen(VERZEICHNIS);
-//		Icon icon = data.getIcon();
-//		JLabel label = new JLabel(icon);
-//		add(label);
-//		
-//	
-//	}
 	
 	//Laden von Titel mit Name und Datum
 	private String getTitel() throws IOException {
