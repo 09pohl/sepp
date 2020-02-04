@@ -5,14 +5,16 @@ import java.io.IOException;
 
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import de.verbund.sepp.gui.dialoge.ChangeUserDlg;
+import de.verbund.sepp.main.daten.DatenSchnittstelle;
 import de.verbund.sepp.main.daten.DatenSchnittstelleImpl;
 
 public class ChangeUserController {
 	
 	private ChangeUserDlg changeDlg;
-	private DatenSchnittstelleImpl schnittstelle = new DatenSchnittstelleImpl();
+	private DatenSchnittstelle schnittstelle = new DatenSchnittstelleImpl();
 	
 	public ChangeUserController(JFrame frame) {
 		EventQueue.invokeLater(new Runnable() {
@@ -42,7 +44,7 @@ public class ChangeUserController {
 			schnittstelle.getEinstellungen().setUsername(newName);
 			schnittstelle.getEinstellungen().speichern();
 		} catch (IOException e) {
-			System.err.println("Fehler beim Festlegen des Benutzernamens");
+			JOptionPane.showMessageDialog(changeDlg, "Fehler beim Festlegen des neuen Benutzernamens!", "FEHLER!", JOptionPane.ERROR_MESSAGE);
 		}
 		changeDlg.dispose();
 	}

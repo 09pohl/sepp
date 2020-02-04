@@ -6,14 +6,16 @@ import java.io.IOException;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import de.verbund.sepp.gui.dialoge.ChangeSourceDlg;
+import de.verbund.sepp.main.daten.DatenSchnittstelle;
 import de.verbund.sepp.main.daten.DatenSchnittstelleImpl;
 
 public class ChangeSourceController {
 	
 	private ChangeSourceDlg changeDlg;
-	private DatenSchnittstelleImpl schnittstelle = new DatenSchnittstelleImpl();
+	private DatenSchnittstelle schnittstelle = new DatenSchnittstelleImpl();
 	
 	public ChangeSourceController(JFrame frame) {
 		EventQueue.invokeLater(new Runnable() {
@@ -45,7 +47,7 @@ public class ChangeSourceController {
 			schnittstelle.getEinstellungen().setProjektPfad(newDirectory);
 			schnittstelle.getEinstellungen().speichern();
 		} catch (IOException e) {
-			System.err.println("Fehler beim Festlegen des neuen Pfades!");
+			JOptionPane.showMessageDialog(changeDlg, "Fehler beim Festlegen des neuen Pfades!", "FEHLER!", JOptionPane.ERROR_MESSAGE);
 		}
 		changeDlg.dispose();
 	}
