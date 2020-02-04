@@ -53,11 +53,11 @@ public class SEPPMainDlg {
 		JPanel infoPanel = new JPanel(new BorderLayout());
 		JPanel toDoPanel = new JPanel(new BorderLayout());
 		JScrollPane toDoScroll = toDoComments.getToDoBox();
-		toDoScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		toDoScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		toDoPanel.add(toDoScroll);
 		JPanel commentsPanel = new JPanel(new BorderLayout());
 		JScrollPane commentScroll = toDoComments.getCommentBox();
-		commentScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		commentScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		commentsPanel.add(commentScroll);
 		JSplitPane infoSplitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, toDoPanel, commentsPanel);
 		infoSplitPane.setDividerLocation(360);
