@@ -1,4 +1,4 @@
-package todo.comment;
+package de.verbund.sepp.gui.todo.comment;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
