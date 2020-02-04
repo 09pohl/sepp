@@ -1,16 +1,21 @@
 package de.verbund.sepp.gui.controller;
 
 import java.awt.EventQueue;
+import java.io.IOException;
 
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import de.verbund.sepp.gui.dialoge.ChangeSourceDlg;
+import de.verbund.sepp.main.daten.DatenSchnittstelle;
+import de.verbund.sepp.main.daten.DatenSchnittstelleImpl;
 
 public class ChangeSourceController {
 	
 	private ChangeSourceDlg changeDlg;
+	private DatenSchnittstelle schnittstelle = new DatenSchnittstelleImpl();
 	
 	public ChangeSourceController(JFrame frame) {
 		EventQueue.invokeLater(new Runnable() {
@@ -36,8 +41,13 @@ public class ChangeSourceController {
 	}
 
 	protected void saveSelection() {
-		String newDirectory = changeDlg.getTextField().getText();
-		System.out.println("Neuer Ordner: " + newDirectory);
+		String change = changeDlg.getTextField().getText();
+		try {
+			schnittstelle.getEinstellungen().setProjektPfad(change);
+			schnittstelle.getEinstellungen().speichern();
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(changeDlg, "Pfad konnte nicht festgelegt werden!", "FEHLER!", JOptionPane.ERROR_MESSAGE);
+		}
 		changeDlg.dispose();
 	}
 
