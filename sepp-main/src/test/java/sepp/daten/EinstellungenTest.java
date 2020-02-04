@@ -13,14 +13,15 @@ public class EinstellungenTest {
 	// 001
 	@Test(expected = Test.None.class)
 	public void testUsernameNull() throws IOException {
-		Einstellungen test = new Einstellungen();
+		Einstellungen.resetInstance();
+		Einstellungen test = Einstellungen.getInstance();
 		assertEquals(null, test.getUsername());
 	}
 
 	// 002
 	@Test(expected = Test.None.class)
 	public void testUsernameSet() throws IOException {
-		Einstellungen test = new Einstellungen();
+		Einstellungen test = Einstellungen.getInstance();
 		test.username = "testName";
 		assertEquals("testName", test.getUsername());
 	}
@@ -28,14 +29,14 @@ public class EinstellungenTest {
 	// 003
 	@Test(expected = Test.None.class)
 	public void testProjektPfadNull() throws IOException {
-		Einstellungen test = new Einstellungen();
+		Einstellungen test = Einstellungen.getInstance();
 		assertEquals(null, test.getProjektPfad());
 	}
 
 	// 004
 	@Test(expected = Test.None.class)
 	public void testProjektPfadSet() throws IOException {
-		Einstellungen test = new Einstellungen();
+		Einstellungen test = Einstellungen.getInstance();
 		test.projektPfad = "testPfad";
 		assertEquals("testPfad", test.getProjektPfad());
 	}
@@ -43,7 +44,7 @@ public class EinstellungenTest {
 	// 005
 	@Test(expected = Test.None.class)
 	public void testSpeichern() throws IOException {
-		Einstellungen test = new Einstellungen();
+		Einstellungen test = Einstellungen.getInstance();
 		test.projektPfad = "testPfad";
 		test.username = "testName";
 		test.speichern();
@@ -52,7 +53,7 @@ public class EinstellungenTest {
 	// 006
 	@Test(expected = Test.None.class)
 	public void testLaden() throws IOException {
-		Einstellungen test = new Einstellungen();
+		Einstellungen test = Einstellungen.getInstance();
 		test.projektPfad = "eins";
 		test.username = "zwei";
 		test.speichern();
@@ -64,9 +65,10 @@ public class EinstellungenTest {
 	// 007
 	@Test(expected = FileNotFoundException.class)
 	public void testLadenError() throws IOException {
-		Einstellungen test = new Einstellungen();
+		Einstellungen test = Einstellungen.getInstance();
 		File file = new File(test.einstellungenPfad);
 		file.delete();
 		test.laden();
 	}
+
 }

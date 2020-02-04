@@ -8,7 +8,7 @@ public interface DatenSchnittstelle {
 	final static String PRIMAER_DATEINAME = "projekt.sepp";
 
 	// Enthält Benutzername und Projektpfad
-	Einstellungen getEinstellungen();
+	Einstellungen getEinstellungen() throws IOException;
 
 	// Gibt eine Liste aller Dateien des Projekts zurück, auch aus Unterordnern
 	ArrayList<String> getDateiNamen();
