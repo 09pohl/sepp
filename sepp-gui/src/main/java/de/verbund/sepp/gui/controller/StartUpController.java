@@ -72,7 +72,7 @@ public class StartUpController {
 	private void saveSettings() throws IOException {
 		String dir = startDlg.getDirectoryTf().getText();
 		String user = startDlg.getUserNameTf().getText();
-		if (!(dir.equals("") || user.equals(""))) {
+		if (!("".equals(dir) || "".equals(user))) {
 			if (!(user.contains(":"))) {
 			System.out.println("Projektverzeichnis: " + dir);
 			System.out.println("Benutzername: " + user);
