@@ -68,9 +68,14 @@ public class TableAndPopUpMenu {
 		
 		while (comment.equals("")) {
 			comment = JOptionPane.showInputDialog(null, addOrEdit + ":", addOrEdit, JOptionPane.OK_CANCEL_OPTION);
-	
-			if (!comment.contentEquals("")) {
-			System.out.println(comment);
+			
+			String alphabet = "abcdefghijklmnopqrstuvwxyz";
+			
+			if (comment.replace(alphabet, " ").length() == comment.length()) {
+				System.out.println("Kein Inhalt");
+			}
+			else {
+				System.out.println(comment);
 			}
 		}
 		
