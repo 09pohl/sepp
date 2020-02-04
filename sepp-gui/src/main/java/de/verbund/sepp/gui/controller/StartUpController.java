@@ -42,7 +42,7 @@ public class StartUpController {
 						saveSettings();
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						System.err.println("Fehler beim Speichern der Einstellungen!");
 					}
 				});
 				startDlg.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -62,8 +62,7 @@ public class StartUpController {
 			}
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err.println("Fehler beim Einlesen bestehender Einstellungen!");
 		}
 	}
 
