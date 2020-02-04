@@ -32,8 +32,7 @@ public class ToDoAndCommentBoxes {
 			String[][] userAndComments = DateiInfoHelfer.getZeilenArray(dataComments.getKommentare());
 			String[] columns = { "User", "Kommentar" };
 			TableModel model = new DefaultTableModel(userAndComments, columns);
-			JTable doneTable = new JTable();
-			doneTable = new TableAndPopUpMenu(model).getTable();
+			JTable doneTable = new TableAndPopUpMenu(model).getTable();
 			return doneTable;
 		} catch (IOException e) {
 			System.out.println("Fehler Comments");
@@ -51,8 +50,7 @@ public class ToDoAndCommentBoxes {
 			String[][] userAndToDos = DateiInfoHelfer.getZeilenArray(dataToDos.getToDos());
 			String[] columns = { "User", "To Do's" };
 			TableModel model = new DefaultTableModel(userAndToDos, columns);
-			JTable doneTable = new JTable();
-			doneTable = new TableAndPopUpMenu(model).getTable();
+			JTable doneTable = new TableAndPopUpMenu(model).getTable();
 			return doneTable;
 		} catch (IOException e) {
 			System.out.println("Fehler ToDo's");
