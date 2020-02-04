@@ -1,4 +1,4 @@
-package sepp.gui;
+package de.verbund.sepp.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -12,18 +12,14 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.io.IOException;
 
-import javax.swing.ImageIcon;
+import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
-import javax.swing.Icon;
-
-import sepp.daten.DateiInformationen;
-import sepp.daten.DatenSchnittstelle;
-import sepp.daten.DatenSchnittstelleImpl;
+import de.verbund.sepp.main.daten.*;
 
 public class DateiGUI extends JFrame implements ActionListener{
 
@@ -35,7 +31,7 @@ public class DateiGUI extends JFrame implements ActionListener{
 	public DateiGUI() throws IOException {
 		Container panel = getContentPane();
 		setSize(350, 300);
-		getUserIconImage();
+//		getUserIconImage();
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setTitle(getTitel()); 
@@ -61,12 +57,15 @@ public class DateiGUI extends JFrame implements ActionListener{
 	  }
 	
 	//Laden von UserIconimage
-	private void getUserIconImage() throws IOException {
-		DatenSchnittstelle schnittstelle = new DatenSchnittstelleImpl();
-		DateiInformationen data = schnittstelle.getDateiInformationen(VERZEICHNIS);
-		setIconImage((Image) data.getIcon());
-	
-	}
+//	private void getUserIconImage() throws IOException {
+//		DatenSchnittstelle schnittstelle = new DatenSchnittstelleImpl();
+//		DateiInformationen data = schnittstelle.getDateiInformationen(VERZEICHNIS);
+//		Icon icon = data.getIcon();
+//		JLabel label = new JLabel(icon);
+//		add(label);
+//		
+//	
+//	}
 	
 	//Laden von Titel mit Name und Datum
 	private String getTitel() throws IOException {
@@ -81,8 +80,11 @@ public class DateiGUI extends JFrame implements ActionListener{
 	private Component getMitte() throws IOException {
 		DatenSchnittstelle schnittstelle = new DatenSchnittstelleImpl();
 		DateiInformationen data = schnittstelle.getDateiInformationen(VERZEICHNIS);
+		Icon icon = data.getIcon();
 		JPanel p = new JPanel();
-		p.add(bTODO, data.getAenderungsDatum().toString());
+		JLabel label = new JLabel(icon);
+		p.add(data.getAenderungsDatum().toString(), label);
+		p.add(label);
 		// TODO - User und Kommentare
 		p.setLayout(new FlowLayout());  
 		return p;
