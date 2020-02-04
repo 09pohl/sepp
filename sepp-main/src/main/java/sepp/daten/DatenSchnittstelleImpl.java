@@ -29,24 +29,14 @@ public class DatenSchnittstelleImpl implements DatenSchnittstelle {
 		dateiInfo.setName(pfad.getFileName().toString());
 		dateiInfo.setErstellungsDatum(datei.basisInformationen().creationTime());
 		dateiInfo.setAenderungsDatum(datei.basisInformationen().lastModifiedTime());
-		DateiHelfer dateiTodo = new DateiHelfer(dateiPfad + DateiInformationen.DATEIENDUNG_TODOS);
-		DateiHelfer dateiKommentare = new DateiHelfer(dateiPfad + DateiInformationen.DATEIENDUNG_KOMMENTARE);
-		leseSeppDateien(dateiTodo, dateiInfo);
-		leseSeppDateien(dateiKommentare, dateiInfo);
-		return dateiInfo;
+		DateiHelfer dateiTodo = new DateiHelfer(dateiPfad);
+		DateiHelfer dateiKommentare = new DateiHelfer(dateiPfad);
+		return null;
 	}
 
 	@Override
 	public void speichereDateiInformationen(DateiInformationen dateiInfo) {
 		// TODO Auto-generated method stub
 
-	}
-
-	private void leseSeppDateien(DateiHelfer datei, DateiInformationen dateiInfo) throws IOException {
-		if (datei.existiert()) {
-			dateiInfo.setToDos(datei.lese());
-		} else {
-			datei.schreibe("");
-		}
 	}
 }

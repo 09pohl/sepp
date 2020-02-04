@@ -6,8 +6,8 @@ import javax.swing.Icon;
 
 public class DateiInformationen {
 
-	final static String DATEIENDUNG_TODOS = ".sepptodo";
-	final static String DATEIENDUNG_KOMMENTARE = ".seppkomm";
+	private final String DATEIENDUNG_TODOS = ".sepptodo";
+	private final String DATEIENDUNG_KOMMENTARE = ".seppkomm";
 
 	private Icon icon;
 	private String name;

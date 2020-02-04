@@ -93,3 +93,4 @@ public class DateiHelfer {
 		return inhalt.toString();
 	}
 }
+
