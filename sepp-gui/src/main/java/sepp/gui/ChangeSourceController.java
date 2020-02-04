@@ -14,20 +14,23 @@ public class ChangeSourceController {
 		EventQueue.invokeLater(new Runnable() {
 			
 			public void run() {
-				changeDlg = new ChangeSourceDlg(frame);
-				changeDlg.getRootPane().setDefaultButton(changeDlg.getChooseButton());
-				changeDlg.getChooseButton().addActionListener(e -> chooseFolder());
-				changeDlg.getEnterButton().addActionListener(e -> saveSelection());
-				changeDlg.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-				changeDlg.setSize(600, 100);
-				changeDlg.setResizable(false);
-				changeDlg.setModal(true);
-				changeDlg.setLocationRelativeTo(frame);
-				changeDlg.setVisible(true);
-				
+				initDialog(frame);
 			}
 		});
 
+	}
+
+	protected void initDialog(JFrame frame) {
+		changeDlg = new ChangeSourceDlg(frame);
+		changeDlg.getRootPane().setDefaultButton(changeDlg.getChooseButton());
+		changeDlg.getChooseButton().addActionListener(e -> chooseFolder());
+		changeDlg.getEnterButton().addActionListener(e -> saveSelection());
+		changeDlg.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		changeDlg.setSize(600, 100);
+		changeDlg.setResizable(false);
+		changeDlg.setModal(true);
+		changeDlg.setLocationRelativeTo(frame);
+		changeDlg.setVisible(true);
 	}
 
 	protected void saveSelection() {

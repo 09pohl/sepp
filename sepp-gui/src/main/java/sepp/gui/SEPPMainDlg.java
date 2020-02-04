@@ -10,10 +10,13 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 
+import todo.comment.*;
+
 public class SEPPMainDlg{
 	
 	private JPanel mainPanel;
 	private JFrame seppMainFrame = new JFrame();
+	private ToDoAndCommentBoxes toDoComments;
 
 	public SEPPMainDlg() {
 		  erzeugeSplitLayout();
@@ -32,12 +35,11 @@ public class SEPPMainDlg{
 	private void erzeugeSplitLayout() {
 		  mainPanel = new JPanel(new BorderLayout());
 		  JPanel dateiPanel = new JPanel();
-		  dateiPanel.add(new JScrollPane());
 		  JPanel infoPanel = new JPanel(new BorderLayout());
 		  JPanel toDoPanel = new JPanel();
-		  toDoPanel.add(new JScrollPane());
+		  toDoPanel.add(toDoComments.getToDoBox());
 		  JPanel commentsPanel = new JPanel();
-		  commentsPanel.add(new JScrollPane());
+		  commentsPanel.add(toDoComments.getCommentBox());
 		  JSplitPane infoSplitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, toDoPanel, commentsPanel);
 		  infoSplitPane.setDividerLocation(360);
 		  infoPanel.add(infoSplitPane, BorderLayout.CENTER);
@@ -79,6 +81,7 @@ public class SEPPMainDlg{
 
 
 	public static void main(String[] args) {
+		new StartUpController();
 		new SEPPMainDlg();
 	}
 }

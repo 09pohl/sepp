@@ -13,18 +13,21 @@ public class ChangeUserController {
 		EventQueue.invokeLater(new Runnable() {
 			
 			public void run() {
-				changeDlg = new ChangeUserDlg(frame);
-				changeDlg.getRootPane().setDefaultButton(changeDlg.getAcceptButton());
-				changeDlg.getAcceptButton().addActionListener(e -> changeUserName());
-				changeDlg.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-				changeDlg.setSize(330, 110);
-				changeDlg.setResizable(false);
-				changeDlg.setModal(true);
-				changeDlg.setLocationRelativeTo(frame);
-				changeDlg.setVisible(true);
-				
+				initDialog(frame);
 			}
 		});
+	}
+
+	protected void initDialog(JFrame frame) {
+		changeDlg = new ChangeUserDlg(frame);
+		changeDlg.getRootPane().setDefaultButton(changeDlg.getAcceptButton());
+		changeDlg.getAcceptButton().addActionListener(e -> changeUserName());
+		changeDlg.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		changeDlg.setSize(330, 110);
+		changeDlg.setResizable(false);
+		changeDlg.setModal(true);
+		changeDlg.setLocationRelativeTo(frame);
+		changeDlg.setVisible(true);
 	}
 
 	protected void changeUserName() {
