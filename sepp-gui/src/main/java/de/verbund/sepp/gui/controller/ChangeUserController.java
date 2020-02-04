@@ -44,6 +44,7 @@ public class ChangeUserController {
 
 	protected void saveUserName() {
 		String change = changeDlg.getNewUserNameTf().getText();
+		if (!(change.contains(":"))) {
 		try {
 			schnittstelle.getEinstellungen().setUsername(change);
 			schnittstelle.getEinstellungen().speichern();
@@ -52,6 +53,7 @@ public class ChangeUserController {
 					JOptionPane.ERROR_MESSAGE);
 		}
 		changeDlg.dispose();
+		}
 	}
 
 }
