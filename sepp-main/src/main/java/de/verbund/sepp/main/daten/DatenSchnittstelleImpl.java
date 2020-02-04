@@ -19,7 +19,7 @@ public class DatenSchnittstelleImpl implements DatenSchnittstelle {
 	public ArrayList<String> getDateiPfade(Einstellungen einstellungen) throws IOException {
 		ArrayList<String> pfadListe = new ArrayList<String>();
 		File projektOrdner = new File(einstellungen.projektPfad);
-		DateiHelfer.dateienInOrdner(projektOrdner, pfadListe);
+		DateiHelfer.dateienInOrdnerSepp(projektOrdner, pfadListe);
 		return pfadListe;
 	}
 
@@ -36,16 +36,16 @@ public class DatenSchnittstelleImpl implements DatenSchnittstelle {
 
 		DateiHelfer dateiTodo = new DateiHelfer(dateiPfad + DateiInformationen.DATEIENDUNG_TODOS);
 		if (dateiTodo.existiert()) {
-			dateiInfo.setToDos(datei.lese());
+			dateiInfo.setToDos(dateiTodo.lese());
 		} else {
-			datei.schreibe("");
+			dateiTodo.schreibe("");
 		}
 
 		DateiHelfer dateiKommentare = new DateiHelfer(dateiPfad + DateiInformationen.DATEIENDUNG_KOMMENTARE);
 		if (dateiKommentare.existiert()) {
-			dateiInfo.setKommentare(datei.lese());
+			dateiInfo.setKommentare(dateiKommentare.lese());
 		} else {
-			datei.schreibe("");
+			dateiKommentare.schreibe("");
 		}
 		return dateiInfo;
 	}
@@ -56,13 +56,5 @@ public class DatenSchnittstelleImpl implements DatenSchnittstelle {
 		dateiTodo.schreibe(dateiInfo.getToDos());
 		DateiHelfer dateiKommentare = new DateiHelfer(dateiInfo.getPfad() + DateiInformationen.DATEIENDUNG_KOMMENTARE);
 		dateiKommentare.schreibe(dateiInfo.getKommentare());
-	}
-
-	private void leseSeppDateien(DateiHelfer datei, DateiInformationen dateiInfo) throws IOException {
-		if (datei.existiert()) {
-			dateiInfo.setToDos(datei.lese());
-		} else {
-			datei.schreibe("");
-		}
 	}
 }

@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import javax.swing.Icon;
 import javax.swing.filechooser.FileSystemView;
 
+import de.verbund.sepp.main.daten.DateiInformationen;
+
 public class DateiHelfer {
 	private String dateiName;
 
@@ -36,6 +38,11 @@ public class DateiHelfer {
 		return endung;
 	}
 
+	public static String dateiEndungMitPunkt(String pfad) {
+		String endung = pfad.substring(pfad.lastIndexOf('.'));
+		return endung;
+	}
+
 	public static void dateienInOrdner(File ordner, ArrayList<String> pfadListe) throws IOException {
 		for (File datei : ordner.listFiles()) {
 			if (datei.isDirectory()) {
@@ -44,7 +51,19 @@ public class DateiHelfer {
 				pfadListe.add(datei.getCanonicalPath());
 			}
 		}
+	}
 
+	public static void dateienInOrdnerSepp(File ordner, ArrayList<String> pfadListe) throws IOException {
+		for (File datei : ordner.listFiles()) {
+			if (datei.isDirectory()) {
+				dateienInOrdner(datei, pfadListe);
+			} else if (!DateiHelfer.dateiEndungMitPunkt(datei.getCanonicalPath())
+					.equals(DateiInformationen.DATEIENDUNG_KOMMENTARE)
+					&& !DateiHelfer.dateiEndungMitPunkt(datei.getCanonicalPath())
+							.equals(DateiInformationen.DATEIENDUNG_TODOS)) {
+				pfadListe.add(datei.getCanonicalPath());
+			}
+		}
 	}
 
 	public BasicFileAttributes basisInformationen() throws IOException {

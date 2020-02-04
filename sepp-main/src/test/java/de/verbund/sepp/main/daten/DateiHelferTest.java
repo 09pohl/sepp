@@ -22,6 +22,9 @@ public class DateiHelferTest {
 		test.speichern();
 		FileTime datumEins = datei.basisInformationen().lastModifiedTime();
 		datei.schreibe("a", true);
+		datei.schreibe("a", true);
+		datei.schreibe("a", true);
+		datei.schreibe("a", true);
 		FileTime datumZwei = datei.basisInformationen().lastModifiedTime();
 		assertNotEquals(datumEins, datumZwei);
 	}
@@ -35,6 +38,6 @@ public class DateiHelferTest {
 
 	@Test(expected = Test.None.class)
 	public void testEndung() throws IOException {
-		assertEquals(".rtf", DateiHelfer.dateiEndung("C:\\Java\\0-sepp\\Dokument.rtf"));
+		assertEquals("rtf", DateiHelfer.dateiEndung("C:\\Java\\0-sepp\\Dokument.rtf"));
 	}
 }

@@ -3,6 +3,7 @@ package de.verbund.sepp.main.daten;
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
+import java.nio.file.NoSuchFileException;
 
 import org.junit.Test;
 
@@ -16,11 +17,10 @@ public class DatenSchnittstelleImplTest {
 	}
 
 	// 002
-	@Test(expected = Test.None.class)
-	public void testKommentar() throws IOException {
+	@Test(expected = NoSuchFileException.class)
+	public void testKeineDatei() throws IOException {
 		DatenSchnittstelle schnittstelle = new DatenSchnittstelleImpl();
-		DateiInformationen data = schnittstelle.getDateiInformationen("C:\\Java\\0-sepp\\Dokument.rtf");
-		assertEquals(null, data.getKommentare());
+		DateiInformationen data = schnittstelle.getDateiInformationen("C:\\Java\\0-sepp\\Dokument2.rtf");
 	}
 
 	// 003
@@ -57,6 +57,5 @@ public class DatenSchnittstelleImplTest {
 		for (String string : schnittstelle.getDateiPfade(test)) {
 			System.out.println(string);
 		}
-
 	}
 }
