@@ -1,7 +1,9 @@
 package de.verbund.sepp.gui.dialoge;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -14,27 +16,32 @@ import de.verbund.sepp.gui.controller.ChangeUserController;
 import de.verbund.sepp.gui.controller.StartUpController;
 import de.verbund.sepp.gui.todo.comment.ToDoAndCommentBoxes;
 
-public class SEPPMainDlg {
-
+public class SEPPMainDlg{
+	
 	private JPanel mainPanel;
+	private JPanel panel;
 	private JFrame seppMainFrame = new JFrame();
 	private ToDoAndCommentBoxes toDoComments = new ToDoAndCommentBoxes();
 
 	public SEPPMainDlg() {
-		erzeugeSplitLayout();
-		erzeugeMenue();
-
-		seppMainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		seppMainFrame.setTitle("SuperEffectiveProjectPlanning (SEPP)");
-		seppMainFrame.setContentPane(mainPanel);
-		seppMainFrame.setSize(1000, 800);
-		seppMainFrame.setResizable(false);
-		seppMainFrame.setLocationRelativeTo(null);
-		seppMainFrame.setVisible(true);
+		  erzeugeSplitLayout();
+		  erzeugeMenue();
+		  
+		  seppMainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		  seppMainFrame.setTitle("SuperEffectiveProjectPlanning (SEPP)");
+		  seppMainFrame.setContentPane(panel);
+		  seppMainFrame.setSize(1000, 800);
+		  seppMainFrame.setResizable(false);
+		  seppMainFrame.setLocationRelativeTo(null);
+		  seppMainFrame.setVisible(true);
 	}
-
+	
+	
 	private void erzeugeSplitLayout() {
 		mainPanel = new JPanel(new BorderLayout());
+		panel = new JPanel(new BorderLayout());
+		erzeugeButtonPanel();
+		panel.add(mainPanel, BorderLayout.CENTER);
 		JPanel dateiPanel = new JPanel();
 		JPanel infoPanel = new JPanel(new BorderLayout());
 		JPanel toDoPanel = new JPanel();
@@ -48,6 +55,20 @@ public class SEPPMainDlg {
 		frameSplitPane.setDividerLocation(485);
 		mainPanel.add(frameSplitPane, BorderLayout.CENTER);
 	}
+
+	private void erzeugeButtonPanel() {
+		  JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+		  JButton refreshButton = new JButton("Aktualisieren...");
+		  refreshButton.addActionListener(e -> refreshState());
+		  buttonPanel.add(refreshButton);
+		  panel.add(buttonPanel, BorderLayout.NORTH);
+	}
+
+
+	private void refreshState() {
+		System.out.println("Aktualisieren...");
+	}
+
 
 	private void erzeugeMenue() {
 		JMenuBar menubar = new JMenuBar();
