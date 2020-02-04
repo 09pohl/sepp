@@ -9,7 +9,9 @@ repositories {
 }
 
 dependencies {
-	compile project(':sepp-main')	
+	compile project(':sepp-main')
+
+	
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 

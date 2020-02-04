@@ -1,16 +1,18 @@
-package sepp.daten;
+package de.verbund.sepp.main.daten;
 
+import java.nio.file.Path;
 import java.nio.file.attribute.FileTime;
 
 import javax.swing.Icon;
 
 public class DateiInformationen {
 
-	final static String DATEIENDUNG_TODOS = ".sepptodo";
-	final static String DATEIENDUNG_KOMMENTARE = ".seppkomm";
+	public final static String DATEIENDUNG_TODOS = ".sepptodo";
+	public final static String DATEIENDUNG_KOMMENTARE = ".seppkomm";
 
 	private Icon icon;
 	private String name;
+	private Path pfad;
 	private FileTime erstellungsDatum;
 	private FileTime aenderungsDatum;
 	private String toDos;
@@ -62,6 +64,22 @@ public class DateiInformationen {
 
 	public void setKommentare(String kommentare) {
 		this.kommentare = kommentare;
+	}
+
+	public Path getPfad() {
+		return pfad;
+	}
+
+	public void setPfad(Path pfad) {
+		this.pfad = pfad;
+	}
+
+	public String getKommentareDatei() {
+		return pfad + DATEIENDUNG_TODOS;
+	}
+
+	public String getToDosDatei() {
+		return pfad + DATEIENDUNG_KOMMENTARE;
 	}
 
 }
