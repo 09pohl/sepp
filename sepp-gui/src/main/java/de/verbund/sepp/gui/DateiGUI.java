@@ -30,7 +30,7 @@ public class DateiGUI extends JFrame implements ActionListener{
 	
 	public DateiGUI() throws IOException {
 		Container panel = getContentPane();
-		setSize(350, 300);
+		setSize(400, 300);
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setTitle(getTitel()); 
@@ -42,15 +42,14 @@ public class DateiGUI extends JFrame implements ActionListener{
 
 	        @Override
 	        public void componentResized(ComponentEvent e) {
-	        	setSize(new Dimension(350, getHeight()));
+	        	setSize(new Dimension(400, getHeight()));
 	            super.componentResized(e);
 	        }
 
 	    });
 	    
 	    getContentPane().add(getMitte(), BorderLayout.CENTER);
-	    getContentPane().add(getSueden(), BorderLayout.SOUTH);
-	    removeMinMaxClose(panel);
+//	    removeMinMaxClose(panel);
 	    setVisible(true);
 	    
 	  }
@@ -78,41 +77,26 @@ public class DateiGUI extends JFrame implements ActionListener{
 		return p;
 	}
 
-	//BorderLayout mit Buttons
-	private Component getSueden() {
-		JPanel p = new JPanel();
-		p.setLayout(new FlowLayout(FlowLayout.CENTER));
-		bTODO = new JButton("TODO-Liste");
-		bTODO.addActionListener(this);
-		bKommentare = new JButton("Kommentare");
-		bKommentare.addActionListener(this);
-		bLoeschen = new JButton("Loeschen");  //Loeschen von ToDo - Liste (WIP)
-		bLoeschen.addActionListener(this);
-		p.add(bTODO); 
-		p.add(bKommentare);
-		p.add(bLoeschen);
-		return p;
-	}
 
-	//Deaktivierung von Min-Max-Icon
-	public void removeMinMaxClose(Component comp)
-	  {
-		 if(comp instanceof JButton)
-		  {
-		    String accName = ((JButton) comp).getAccessibleContext().getAccessibleName();
-		    System.out.println(accName);
-		    if(accName.equals("Maximize")|| accName.equals("Iconify")||
-		       accName.equals("Close")) comp.getParent().remove(comp);
-		  }
-		  if (comp instanceof Container)
-		  {
-		    Component[] comps = ((Container)comp).getComponents();
-		    for(int x = 0, y = comps.length; x < y; x++)
-		    {
-		      removeMinMaxClose(comps[x]);
-		    }
-		  }	
-	  }
+//	//Deaktivierung von Min-Max-Icon
+//	public void removeMinMaxClose(Component comp)
+//	  {
+//		 if(comp instanceof JButton)
+//		  {
+//		    String accName = ((JButton) comp).getAccessibleContext().getAccessibleName();
+//		    System.out.println(accName);
+//		    if(accName.equals("Maximize")|| accName.equals("Iconify")||
+//		       accName.equals("Close")) comp.getParent().remove(comp);
+//		  }
+//		  if (comp instanceof Container)
+//		  {
+//		    Component[] comps = ((Container)comp).getComponents();
+//		    for(int x = 0, y = comps.length; x < y; x++)
+//		    {
+//		      removeMinMaxClose(comps[x]);
+//		    }
+//		  }	
+//	  }
 	
 	public static void main(String[] args)
 	  {
