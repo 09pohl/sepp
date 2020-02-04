@@ -1,4 +1,4 @@
-package todo_comment;
+package todo.comment;
 
 import java.awt.BorderLayout;
 import java.awt.GridBagLayout;
@@ -32,25 +32,21 @@ public class ToDoBox extends JPanel{
 	private void createToDoBox() {
 		
 		setSize(500, 300);
-		
+		scrollPane = new JScrollPane(createTable());
+		add(scrollPane);
+		setVisible(true);
+
+	}
+	
+	private JTable createTable() {
 		data = new DateiInformationen();
 		data.setToDos("Daniel:Schmidt\nLukas:Lüthke\nJonathan:Pohl\nDuong:Le");
 		String[][] userAndToDos = DateiInfoHelfer.getZeilenArray(data.getToDos());
 		String[] columns = {"User", "To Do's"};
 		TableModel model = new DefaultTableModel(userAndToDos, columns);
 		doneTable = new JTable(model);
-		scrollPane = new JScrollPane(doneTable);
-		add(doneTable);
-		scrollPane = new JScrollPane(doneTable);
-		add(scrollPane);
-		setVisible(true);
-
+		return doneTable;
 	}
-	
-	public static void main(String[] args) {
-		new ToDoBox();
-	}
-	
 }
 
 

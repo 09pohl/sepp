@@ -1,4 +1,4 @@
-package todo_comment;
+package todo.comment;
 
 import java.awt.GridLayout;
 

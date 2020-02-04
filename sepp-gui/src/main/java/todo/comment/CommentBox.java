@@ -1,4 +1,4 @@
-package todo_comment;
+package todo.comment;
 
 import java.awt.Dimension;
 
@@ -19,25 +19,24 @@ public class CommentBox extends JPanel{
 	private JScrollPane scrollPane;
 	
 	public CommentBox() {
-		createTable();
+		init();
 	}
 	
-	private void createTable() {
-		
+	private void init() {
 		setSize(500, 300);
+		scrollPane = new JScrollPane(createTable());
+		add(scrollPane);
+		setVisible(true);
+		}
+			
+	private JTable createTable() {
 		data = new DateiInformationen();
 		data.setKommentare("Daniel:Schmidt\nLukas:Lüthke\nJonathan:Pohl\nDuong:Le");
 		String[][] userAndComments = DateiInfoHelfer.getZeilenArray(data.getKommentare());
 		String[] columns = {"User", "Kommentar"};
 		TableModel model = new DefaultTableModel(userAndComments, columns);
 		doneTable = new JTable(model);
-		scrollPane = new JScrollPane(doneTable);
-		add(scrollPane);
-		setVisible(true);
-		}
-			
-	public static void main(String[] args) {
-		new CommentBox();
+		return doneTable;
 	}
 	
 }
