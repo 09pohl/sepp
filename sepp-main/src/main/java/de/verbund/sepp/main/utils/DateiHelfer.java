@@ -15,6 +15,7 @@ import javax.swing.Icon;
 import javax.swing.filechooser.FileSystemView;
 
 import de.verbund.sepp.main.daten.DateiInformationen;
+import de.verbund.sepp.main.daten.DatenSchnittstelle;
 
 public class DateiHelfer {
 	private String dateiName;
@@ -60,7 +61,9 @@ public class DateiHelfer {
 			} else if (!DateiHelfer.dateiEndungMitPunkt(datei.getCanonicalPath())
 					.equals(DateiInformationen.DATEIENDUNG_KOMMENTARE)
 					&& !DateiHelfer.dateiEndungMitPunkt(datei.getCanonicalPath())
-							.equals(DateiInformationen.DATEIENDUNG_TODOS)) {
+							.equals(DateiInformationen.DATEIENDUNG_TODOS)
+					&& !DateiHelfer.dateiEndungMitPunkt(datei.getCanonicalPath())
+							.equals(DatenSchnittstelle.PRIMAER_DATEIENDUNG)) {
 				pfadListe.add(datei.getCanonicalPath());
 			}
 		}
