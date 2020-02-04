@@ -8,19 +8,21 @@ import java.io.IOException;
 
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 import de.verbund.sepp.gui.dialoge.StartUpDlg;
+import de.verbund.sepp.main.daten.DatenSchnittstelle;
 import de.verbund.sepp.main.daten.DatenSchnittstelleImpl;
 import de.verbund.sepp.main.daten.Einstellungen;
 
 public class StartUpController {
-	
+
 	private StartUpDlg startDlg;
-	private DatenSchnittstelleImpl schnittstelle = new DatenSchnittstelleImpl();
-	
+	private DatenSchnittstelle schnittstelle = new DatenSchnittstelleImpl();
+
 	public StartUpController() {
 		EventQueue.invokeLater(new Runnable() {
-			
+
 			public void run() {
 				initStartUp();
 			}
@@ -41,8 +43,8 @@ public class StartUpController {
 					try {
 						saveSettings();
 					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						JOptionPane.showMessageDialog(startDlg, "Fehler beim Speichern der Einstellungen!", "FEHLER!",
+								JOptionPane.ERROR_MESSAGE);
 					}
 				});
 				startDlg.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -51,35 +53,34 @@ public class StartUpController {
 				startDlg.setModal(true);
 				startDlg.setLocationRelativeTo(null);
 				startDlg.addWindowListener(new WindowAdapter() {
-					
+
 					@Override
 					public void windowClosing(WindowEvent e) {
 						System.exit(0);
 					}
-					
+
 				});
 				startDlg.setVisible(true);
 			}
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(startDlg, "Fehler beim Einlesen bestehender Einstellungen!", "FEHLER!",
+					JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
 	private void saveSettings() throws IOException {
 		String dir = startDlg.getDirectoryTf().getText();
 		String user = startDlg.getUserNameTf().getText();
-		if (dir.equals("") || user.equals("")) {
-			System.out.println("Speicher nicht möglich!");
-		}
-		else {
+		if (!(dir.equals("") || user.equals(""))) {
+			if (!(user.contains(":"))) {
 			System.out.println("Projektverzeichnis: " + dir);
 			System.out.println("Benutzername: " + user);
 			schnittstelle.getEinstellungen().setProjektPfad(dir);
 			schnittstelle.getEinstellungen().setUsername(user);
 			schnittstelle.getEinstellungen().speichern();
 			startDlg.dispose();
+			}
 		}
 	}
 

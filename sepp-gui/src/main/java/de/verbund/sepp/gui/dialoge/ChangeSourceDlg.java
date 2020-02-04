@@ -8,13 +8,18 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
-public class ChangeSourceDlg extends JDialog{
+public class ChangeSourceDlg extends JDialog {
 	private JPanel panel;
-	private JLabel lblNameDesNeuen;
-	private JTextField textField;
-	private JButton btnBesttigen;
-	private JButton btnDurchsuchen;
-	
+	private JPanel panel_1;
+	private JLabel oldDirectoryLabel;
+	private JLabel oldDirectoryNameLabel;
+	private JPanel panel_2;
+	private JButton acceptButton;
+	private JPanel panel_3;
+	private JLabel newDirectoryLabel;
+	private JTextField newDirectoryTf;
+	private JButton chooseButton;
+
 	public ChangeSourceDlg(JFrame frame) {
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setTitle("Quellverzeichnis wechseln...");
@@ -26,36 +31,72 @@ public class ChangeSourceDlg extends JDialog{
 	private JPanel getPanel() {
 		if (panel == null) {
 			panel = new JPanel();
-			panel.add(getLblNameDesNeuen());
-			panel.add(getTextField());
-			panel.add(getEnterButton());
-			panel.add(getChooseButton());
+			panel.setLayout(new BorderLayout(0, 0));
+			panel.add(getPanel_1(), BorderLayout.NORTH);
+			panel.add(getPanel_2(), BorderLayout.SOUTH);
+			panel.add(getPanel_3(), BorderLayout.CENTER);
 		}
 		return panel;
 	}
-	private JLabel getLblNameDesNeuen() {
-		if (lblNameDesNeuen == null) {
-			lblNameDesNeuen = new JLabel("Name des neuen Verzeichnisses: ");
+	private JPanel getPanel_1() {
+		if (panel_1 == null) {
+			panel_1 = new JPanel();
+			panel_1.add(getOldDirectoryLabel());
+			panel_1.add(getOldDirectoryNameLabel());
 		}
-		return lblNameDesNeuen;
+		return panel_1;
 	}
-	public JTextField getTextField() {
-		if (textField == null) {
-			textField = new JTextField();
-			textField.setColumns(30);
+	private JLabel getOldDirectoryLabel() {
+		if (oldDirectoryLabel == null) {
+			oldDirectoryLabel = new JLabel("Bisheriges Verzeichnis:");
 		}
-		return textField;
+		return oldDirectoryLabel;
 	}
-	public JButton getEnterButton() {
-		if (btnBesttigen == null) {
-			btnBesttigen = new JButton("Bestätigen");
+	public JLabel getOldDirectoryNameLabel() {
+		if (oldDirectoryNameLabel == null) {
+			oldDirectoryNameLabel = new JLabel("*/*old_directory*/*");
 		}
-		return btnBesttigen;
+		return oldDirectoryNameLabel;
+	}
+	private JPanel getPanel_2() {
+		if (panel_2 == null) {
+			panel_2 = new JPanel();
+			panel_2.add(getAcceptButton());
+		}
+		return panel_2;
+	}
+	public JButton getAcceptButton() {
+		if (acceptButton == null) {
+			acceptButton = new JButton("Bestätigen");
+		}
+		return acceptButton;
+	}
+	private JPanel getPanel_3() {
+		if (panel_3 == null) {
+			panel_3 = new JPanel();
+			panel_3.add(getNewDirectoryLabel());
+			panel_3.add(getNewDirectoryTf());
+			panel_3.add(getChooseButton());
+		}
+		return panel_3;
+	}
+	private JLabel getNewDirectoryLabel() {
+		if (newDirectoryLabel == null) {
+			newDirectoryLabel = new JLabel("Neues Verzeichnis:");
+		}
+		return newDirectoryLabel;
+	}
+	public JTextField getNewDirectoryTf() {
+		if (newDirectoryTf == null) {
+			newDirectoryTf = new JTextField();
+			newDirectoryTf.setColumns(30);
+		}
+		return newDirectoryTf;
 	}
 	public JButton getChooseButton() {
-		if (btnDurchsuchen == null) {
-			btnDurchsuchen = new JButton("Durchsuchen");
+		if (chooseButton == null) {
+			chooseButton = new JButton("Durchsuchen...");
 		}
-		return btnDurchsuchen;
+		return chooseButton;
 	}
 }

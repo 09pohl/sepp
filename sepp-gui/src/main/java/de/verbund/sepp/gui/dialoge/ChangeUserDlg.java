@@ -12,7 +12,7 @@ import javax.swing.JButton;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
 
-public class ChangeUserDlg extends JDialog{
+public class ChangeUserDlg extends JDialog {
 	private JPanel panel;
 	private JButton acceptButton;
 	private JPanel panel_1;
@@ -20,13 +20,14 @@ public class ChangeUserDlg extends JDialog{
 	private JLabel oldUserNameLabel;
 	private JLabel newUserNameLabel;
 	private JTextField newUserNameTf;
-	
+
 	public ChangeUserDlg(JFrame frame) {
 		setTitle("Benutzernamen ändern...");
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		getContentPane().add(getPanel(), BorderLayout.SOUTH);
 		getContentPane().add(getPanel_1(), BorderLayout.CENTER);
 	}
+
 	private JPanel getPanel() {
 		if (panel == null) {
 			panel = new JPanel();
@@ -34,20 +35,22 @@ public class ChangeUserDlg extends JDialog{
 		}
 		return panel;
 	}
+
 	public JButton getAcceptButton() {
 		if (acceptButton == null) {
 			acceptButton = new JButton("Bestätigen");
 		}
 		return acceptButton;
 	}
+
 	private JPanel getPanel_1() {
 		if (panel_1 == null) {
 			panel_1 = new JPanel();
 			GridBagLayout gbl_panel_1 = new GridBagLayout();
-			gbl_panel_1.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
-			gbl_panel_1.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
-			gbl_panel_1.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
-			gbl_panel_1.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+			gbl_panel_1.columnWidths = new int[] { 0, 0, 0, 0, 0, 0, 0, 0 };
+			gbl_panel_1.rowHeights = new int[] { 0, 0, 0, 0, 0, 0 };
+			gbl_panel_1.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
+			gbl_panel_1.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 			panel_1.setLayout(gbl_panel_1);
 			GridBagConstraints gbc_oldUserLabel = new GridBagConstraints();
 			gbc_oldUserLabel.anchor = GridBagConstraints.EAST;
@@ -75,24 +78,28 @@ public class ChangeUserDlg extends JDialog{
 		}
 		return panel_1;
 	}
+
 	private JLabel getOldUserLabel() {
 		if (oldUserLabel == null) {
 			oldUserLabel = new JLabel("Bisheriger Benutzername:");
 		}
 		return oldUserLabel;
 	}
-	JLabel getOldUserNameLabel() {
+
+	public JLabel getOldUserNameLabel() {
 		if (oldUserNameLabel == null) {
 			oldUserNameLabel = new JLabel("*/*old_username*/*");
 		}
 		return oldUserNameLabel;
 	}
+
 	private JLabel getNewUserNameLabel() {
 		if (newUserNameLabel == null) {
 			newUserNameLabel = new JLabel("Neuer Benutzername:");
 		}
 		return newUserNameLabel;
 	}
+
 	public JTextField getNewUserNameTf() {
 		if (newUserNameTf == null) {
 			newUserNameTf = new JTextField();
