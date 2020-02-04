@@ -1,4 +1,4 @@
-package sepp.daten;
+package de.verbund.sepp.main.daten;
 
 import java.io.IOException;
 import java.util.ArrayList;

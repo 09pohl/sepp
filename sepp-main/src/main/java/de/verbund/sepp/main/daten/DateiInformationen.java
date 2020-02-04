@@ -1,4 +1,4 @@
-package sepp.daten;
+package de.verbund.sepp.main.daten;
 
 import java.nio.file.Path;
 import java.nio.file.attribute.FileTime;

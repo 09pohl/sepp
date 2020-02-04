@@ -1,11 +1,11 @@
-package sepp.daten;
+package de.verbund.sepp.main.daten;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-import sepp.utils.DateiHelfer;
+import de.verbund.sepp.main.utils.DateiHelfer;
 
 public class DatenSchnittstelleImpl implements DatenSchnittstelle {
 
