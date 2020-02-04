@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public interface DatenSchnittstelle {
 
-	final String DATEINAME = "sepp";
+	final static String PRIMAER_DATEINAME = "projekt.sepp";
 
 	// Enthält Benutzername und Projektpfad
 	Einstellungen getEinstellungen();
