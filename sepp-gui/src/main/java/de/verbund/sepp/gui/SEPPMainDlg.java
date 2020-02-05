@@ -1,4 +1,4 @@
-package de.verbund.sepp.gui.dialoge;
+package de.verbund.sepp.gui;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -78,13 +78,13 @@ public class SEPPMainDlg {
 	private void erzeugeButtonPanel() throws IOException {
 		DatenSchnittstelle schnittstelle = new DatenSchnittstelleImpl();
 		JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-		JButton refreshButton = new JButton("Aktualisieren...");
+		JButton refreshButton = new JButton("Aktualisieren");
 		refreshButton.addActionListener(e -> {
 
 			try {
 				refreshMainTables();
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
+				// TODO #54 Fehlermeldungen überarbeiten
 				e1.printStackTrace();
 			}
 
@@ -92,19 +92,19 @@ public class SEPPMainDlg {
 		JButton bZurHauptdatei = new JButton("Zur Hauptdatei");
 		bZurHauptdatei.addActionListener(e -> {
 			try {
-				ActiveFileController.getInstanz()
+				ActiveFileController.getInstance()
 						.setAktiveDateiPfad(schnittstelle.getEinstellungen().getProjektDateiPfad());
 				this.refreshMainTables();
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
+				// TODO #54 Fehlermeldungen überarbeiten
 				e1.printStackTrace();
 			}
 		});
 		JLabel lAktiveDatei = new JLabel("");
-		ActiveFileController.getInstanz().setLAktiveDatei(lAktiveDatei);
+		ActiveFileController.getInstance().setLAktiveDatei(lAktiveDatei);
 		buttonPanel.add(lAktiveDatei);
-		ActiveFileController.getInstanz().refreshLabel();
-		ActiveFileController.getInstanz().setBZurHauptdatei(bZurHauptdatei);
+		ActiveFileController.getInstance().refreshLabel();
+		ActiveFileController.getInstance().setBZurHauptdatei(bZurHauptdatei);
 		buttonPanel.add(bZurHauptdatei);
 		bZurHauptdatei.setVisible(false);
 		buttonPanel.add(refreshButton);
@@ -114,7 +114,7 @@ public class SEPPMainDlg {
 	public void refreshMainTables() throws IOException {
 		DatenSchnittstelle dataSchnittstelle = new DatenSchnittstelleImpl();
 		DateiInformationen daten;
-		String dateiPfad = ActiveFileController.getInstanz().getAktiveDateiPfad();
+		String dateiPfad = ActiveFileController.getInstance().getAktiveDateiPfad();
 		daten = dataSchnittstelle.getDateiInformationen(dateiPfad);
 		String[][] userKommentare = DateiInfoHelfer.getZeilenArray(daten.getKommentare());
 		refreshTableModel(userKommentare, ToDoAndCommentBoxes.spaltenKommentare, toDoComments.getTableComment());

@@ -1,12 +1,13 @@
 package de.verbund.sepp.gui.dialoge;
 
+import java.awt.BorderLayout;
+
+import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
-import java.awt.BorderLayout;
-import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.JButton;
 
 public class ChangeSourceDlg extends JDialog {
 	private JPanel panel;
@@ -25,7 +26,6 @@ public class ChangeSourceDlg extends JDialog {
 		setTitle("Quellverzeichnis wechseln...");
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		getContentPane().add(getPanel(), BorderLayout.CENTER);
-		// TODO Auto-generated constructor stub
 	}
 
 	private JPanel getPanel() {
@@ -38,6 +38,7 @@ public class ChangeSourceDlg extends JDialog {
 		}
 		return panel;
 	}
+
 	private JPanel getPanel_1() {
 		if (panel_1 == null) {
 			panel_1 = new JPanel();
@@ -46,18 +47,21 @@ public class ChangeSourceDlg extends JDialog {
 		}
 		return panel_1;
 	}
+
 	private JLabel getOldDirectoryLabel() {
 		if (oldDirectoryLabel == null) {
 			oldDirectoryLabel = new JLabel("Bisheriges Verzeichnis:");
 		}
 		return oldDirectoryLabel;
 	}
+
 	public JLabel getOldDirectoryNameLabel() {
 		if (oldDirectoryNameLabel == null) {
 			oldDirectoryNameLabel = new JLabel("*/*old_directory*/*");
 		}
 		return oldDirectoryNameLabel;
 	}
+
 	private JPanel getPanel_2() {
 		if (panel_2 == null) {
 			panel_2 = new JPanel();
@@ -65,12 +69,14 @@ public class ChangeSourceDlg extends JDialog {
 		}
 		return panel_2;
 	}
+
 	public JButton getAcceptButton() {
 		if (acceptButton == null) {
 			acceptButton = new JButton("Bestätigen");
 		}
 		return acceptButton;
 	}
+
 	private JPanel getPanel_3() {
 		if (panel_3 == null) {
 			panel_3 = new JPanel();
@@ -80,12 +86,14 @@ public class ChangeSourceDlg extends JDialog {
 		}
 		return panel_3;
 	}
+
 	private JLabel getNewDirectoryLabel() {
 		if (newDirectoryLabel == null) {
 			newDirectoryLabel = new JLabel("Neues Verzeichnis:");
 		}
 		return newDirectoryLabel;
 	}
+
 	public JTextField getNewDirectoryTf() {
 		if (newDirectoryTf == null) {
 			newDirectoryTf = new JTextField();
@@ -93,6 +101,7 @@ public class ChangeSourceDlg extends JDialog {
 		}
 		return newDirectoryTf;
 	}
+
 	public JButton getChooseButton() {
 		if (chooseButton == null) {
 			chooseButton = new JButton("Durchsuchen...");
