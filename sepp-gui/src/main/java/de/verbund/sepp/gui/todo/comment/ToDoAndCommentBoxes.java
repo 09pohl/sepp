@@ -40,6 +40,7 @@ public class ToDoAndCommentBoxes {
 			tableComment = gefuellteTabelle(userAndComments, spaltenKommentare);
 			return tableComment;
 		} catch (IOException e) {
+			// TODO #61 sysout entfernen
 			System.out.println("Fehler Comments");
 			return null;
 		}
@@ -56,6 +57,7 @@ public class ToDoAndCommentBoxes {
 			tableToDo = gefuellteTabelle(userAndToDos, spaltenTodos);
 			return tableToDo;
 		} catch (IOException e) {
+			// TODO #61 sysout entfernen
 			System.out.println("Fehler ToDo's");
 			return null;
 		}
