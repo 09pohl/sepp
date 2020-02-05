@@ -16,10 +16,16 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import de.verbund.sepp.main.daten.*;
 
+import java.nio.file.attribute.FileTime;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+
 public class DateiGUI extends JFrame implements ActionListener{
 
 	private JButton bInfo;
-	private static final String VERZEICHNIS = "C:\\java\\git\\sepp\\TestOrdner\\Aufgaben.rtf";
+	private static final String VERZEICHNIS = "C:\\java\\git\\sepp\\TestOrdner\\Aufgaben.rtf"; //TODO - Verzeichnis als Parameter
+	private static final DateTimeFormatter DATE_FORMATTER_WITH_TIME = DateTimeFormatter.ofPattern("MMM d, yyyy HH:mm:ss");
 	
 	DatenSchnittstelle schnittstelle = new DatenSchnittstelleImpl();
 	DateiInformationen data = schnittstelle.getDateiInformationen(VERZEICHNIS);
@@ -32,6 +38,7 @@ public class DateiGUI extends JFrame implements ActionListener{
 		panel.setLayout(new BorderLayout());
 		setDefaultLookAndFeelDecorated(true);
 	    setResizable(false);
+	    getVerzeichnis();
 	    
 	    getContentPane().add(getNorden(), BorderLayout.NORTH);
 	    getContentPane().add(getMitte(), BorderLayout.CENTER);
@@ -39,6 +46,10 @@ public class DateiGUI extends JFrame implements ActionListener{
 	    setVisible(true); 
 	  }
 	
+	private void getVerzeichnis() {
+		
+	}
+
 	//Laden von Icon und Namen
 	private Component getNorden() {
 		Icon icon = data.getIcon();
@@ -54,10 +65,12 @@ public class DateiGUI extends JFrame implements ActionListener{
 	//Laden von Datum
 	private Component getMitte() throws IOException {
 		JPanel p = new JPanel();
-		String datum_1 = data.getErstellungsDatum().toString();
-		String datum_2 = data.getAenderungsDatum().toString();
-		JLabel label_1 = new JLabel("Erstellungsdatum: " + datum_1);
-		JLabel label_2 = new JLabel("Aenderungsdatum: " + datum_2);
+		FileTime datum_1 = data.getErstellungsDatum();
+		FileTime datum_2 = data.getAenderungsDatum();
+		String s = fileTimeToString(datum_1);
+		JLabel label_1 = new JLabel("Erstellungsdatum: " + s);
+		String s1 = fileTimeToString(datum_2);
+		JLabel label_2 = new JLabel("Aenderungsdatum: " + s1);
 		p.add(label_1);
 		p.add(label_2);
 		return p;
@@ -72,6 +85,26 @@ public class DateiGUI extends JFrame implements ActionListener{
 		return p;
 	}
 
+	public static String fileTimeToString(FileTime fileTime) {
+	      String s = parseToString(
+	              fileTime.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
+	      return s;
+	}
+
+	public static FileTime fileTimeFromString(String dateTimeString) {
+	      LocalDateTime localDateTime = parseFromString(dateTimeString);
+	      return FileTime.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
+	}
+	
+	public static String parseToString(LocalDateTime localDateTime) {
+	      return localDateTime.format(DATE_FORMATTER_WITH_TIME);
+	}
+
+	public static LocalDateTime parseFromString(String date) {
+	      return LocalDateTime.parse(date, DATE_FORMATTER_WITH_TIME);
+	}
+	
+	
 	public static void main(String[] args)
 	  {
 	    SwingUtilities.invokeLater(new Runnable(){
@@ -88,7 +121,9 @@ public class DateiGUI extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == bInfo) {
-			//TODO: Load TODO-List & Kommenaterliste;
+			//TODO: Load TODO-List & Kommentarliste;
 		}
 	}
+	
+	
 }
