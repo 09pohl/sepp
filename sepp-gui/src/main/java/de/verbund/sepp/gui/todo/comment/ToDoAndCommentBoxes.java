@@ -8,7 +8,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import de.verbund.sepp.main.daten.DateiInformationen;
-import de.verbund.sepp.main.daten.DatenSchnittstelle;
 import de.verbund.sepp.main.daten.DatenSchnittstelleImpl;
 import de.verbund.sepp.main.utils.DateiInfoHelfer;
 
@@ -35,8 +34,8 @@ public class ToDoAndCommentBoxes {
 		DateiInformationen dataComments;
 
 		try {
-			dataComments = dataSchnittstelle.getDateiInformationen(
-					dataSchnittstelle.getEinstellungen().getProjektPfad() + "/" + DatenSchnittstelle.PRIMAER_DATEINAME);
+			dataComments = dataSchnittstelle
+					.getDateiInformationen(dataSchnittstelle.getEinstellungen().getProjektDateiPfad());
 			String[][] userAndComments = DateiInfoHelfer.getZeilenArray(dataComments.getKommentare());
 			tableComment = gefuellteTabelle(userAndComments, spaltenKommentare);
 			return tableComment;
@@ -51,8 +50,8 @@ public class ToDoAndCommentBoxes {
 		DateiInformationen dataToDos;
 
 		try {
-			dataToDos = dataSchnittstelle.getDateiInformationen(dataSchnittstelle.getEinstellungen().getProjektPfad()
-					+ "\\" + DatenSchnittstelle.PRIMAER_DATEINAME);
+			dataToDos = dataSchnittstelle
+					.getDateiInformationen(dataSchnittstelle.getEinstellungen().getProjektDateiPfad());
 			String[][] userAndToDos = DateiInfoHelfer.getZeilenArray(dataToDos.getToDos());
 			tableToDo = gefuellteTabelle(userAndToDos, spaltenTodos);
 			return tableToDo;

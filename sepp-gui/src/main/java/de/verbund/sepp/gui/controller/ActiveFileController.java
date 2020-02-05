@@ -2,6 +2,7 @@ package de.verbund.sepp.gui.controller;
 
 import java.io.IOException;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 
 import de.verbund.sepp.main.daten.DatenSchnittstelle;
@@ -12,7 +13,8 @@ public class ActiveFileController {
 
 	private DatenSchnittstelle schnittstelle = new DatenSchnittstelleImpl();
 	private String aktiveDateiPfad;
-	private JLabel ativeDateiLabel;
+	private JLabel lAktiveDatei;
+	private JButton bZurHauptdatei;
 
 	private static ActiveFileController instanz;
 
@@ -31,26 +33,40 @@ public class ActiveFileController {
 		return aktiveDateiPfad;
 	}
 
-	public void setAktiveDateiPfad(String aktiveDateiPfad) {
+	public void setAktiveDateiPfad(String aktiveDateiPfad) throws IOException {
 		this.aktiveDateiPfad = aktiveDateiPfad;
-		if (ativeDateiLabel != null) {
+		if (lAktiveDatei != null) {
 			DateiHelfer datei = new DateiHelfer(aktiveDateiPfad);
-			ativeDateiLabel.setText(datei.nameMitEndung());
+			lAktiveDatei.setText(datei.nameMitEndung());
+			if (!schnittstelle.getEinstellungen().getProjektDateiPfad().equals(aktiveDateiPfad)
+					&& bZurHauptdatei != null) {
+				bZurHauptdatei.setVisible(true);
+			} else {
+				bZurHauptdatei.setVisible(false);
+			}
 		}
 	}
 
-	public JLabel getAktiveDateiLabel() {
-		return ativeDateiLabel;
+	public JLabel getLAktiveDatei() {
+		return lAktiveDatei;
 	}
 
-	public void setAktiveDateiLabel(JLabel ativeDateiLabel) {
-		this.ativeDateiLabel = ativeDateiLabel;
+	public void setLAktiveDatei(JLabel ativeDateiLabel) {
+		this.lAktiveDatei = ativeDateiLabel;
 	}
 
 	public void refreshLabel() {
-		if (ativeDateiLabel != null) {
+		if (lAktiveDatei != null) {
 			DateiHelfer datei = new DateiHelfer(aktiveDateiPfad);
-			ativeDateiLabel.setText(datei.nameMitEndung());
+			lAktiveDatei.setText(datei.nameMitEndung());
 		}
+	}
+
+	public JButton getBZurHauptdatei() {
+		return bZurHauptdatei;
+	}
+
+	public void setBZurHauptdatei(JButton bZurHauptdatei) {
+		this.bZurHauptdatei = bZurHauptdatei;
 	}
 }

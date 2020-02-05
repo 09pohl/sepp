@@ -89,15 +89,24 @@ public class SEPPMainDlg {
 			}
 
 		});
+		JButton bZurHauptdatei = new JButton("Zur Hauptdatei");
+		bZurHauptdatei.addActionListener(e -> {
+			try {
+				ActiveFileController.getInstanz()
+						.setAktiveDateiPfad(schnittstelle.getEinstellungen().getProjektDateiPfad());
+				this.refreshMainTables();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
 		JLabel lAktiveDatei = new JLabel("");
-		ActiveFileController.getInstanz().setAktiveDateiLabel(lAktiveDatei);
+		ActiveFileController.getInstanz().setLAktiveDatei(lAktiveDatei);
 		buttonPanel.add(lAktiveDatei);
-		if (!schnittstelle.getEinstellungen().getProjektDateiPfad()
-				.equals(ActiveFileController.getInstanz().getAktiveDateiPfad())) {
-			buttonPanel.add(new JButton("Zur Hauptdatei"));
-		} else {
-			ActiveFileController.getInstanz().refreshLabel();
-		}
+		ActiveFileController.getInstanz().refreshLabel();
+		ActiveFileController.getInstanz().setBZurHauptdatei(bZurHauptdatei);
+		buttonPanel.add(bZurHauptdatei);
+		bZurHauptdatei.setVisible(false);
 		buttonPanel.add(refreshButton);
 		panel.add(buttonPanel, BorderLayout.NORTH);
 	}
