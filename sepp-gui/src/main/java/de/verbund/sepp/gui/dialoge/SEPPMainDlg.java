@@ -29,14 +29,14 @@ import de.verbund.sepp.main.daten.DatenSchnittstelle;
 import de.verbund.sepp.main.daten.DatenSchnittstelleImpl;
 import de.verbund.sepp.main.utils.DateiInfoHelfer;
 
-public class SEPPMainGUI {
+public class SEPPMainDlg {
 
 	private JPanel mainPanel;
 	private JPanel panel;
 	private JFrame seppMainFrame = new JFrame();
 	private ToDoAndCommentBoxes toDoComments = new ToDoAndCommentBoxes();
 
-	public SEPPMainGUI() {
+	public SEPPMainDlg() {
 		erzeugeSplitLayout();
 		erzeugeMenue();
 		seppMainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -143,6 +143,6 @@ public class SEPPMainGUI {
 
 	public static void main(String[] args) {
 		new StartUpController();
-		new SEPPMainGUI();
+		new SEPPMainDlg();
 	}
 }

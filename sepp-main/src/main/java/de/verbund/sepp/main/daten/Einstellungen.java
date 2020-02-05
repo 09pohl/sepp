@@ -64,6 +64,10 @@ public class Einstellungen {
 		return projektPfad;
 	}
 
+	public String getProjektDateiPfad() {
+		return projektPfad + "/" + DatenSchnittstelle.PRIMAER_DATEINAME;
+	}
+
 	public void setProjektPfad(String projektPfad) {
 		this.projektPfad = projektPfad;
 	}
