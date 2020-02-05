@@ -6,13 +6,13 @@ import java.util.ArrayList;
 
 import javax.swing.JScrollPane;
 
-import de.verbund.sepp.gui.DummyFileInfoGUI;
+import de.verbund.sepp.gui.FileInfoGUI;
 import de.verbund.sepp.main.daten.DatenSchnittstelle;
 import de.verbund.sepp.main.daten.DatenSchnittstelleImpl;
 
 public class DateiViewController extends JScrollPane{
 	
-	private DummyFileInfoGUI infoGUI;
+	private FileInfoGUI infoGUI;
 	private DatenSchnittstelle data = DatenSchnittstelleImpl.getInstance();
 	private ArrayList<String> files;
 	
@@ -26,7 +26,7 @@ public class DateiViewController extends JScrollPane{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		infoGUI = new DummyFileInfoGUI(files);
+		infoGUI = new FileInfoGUI(files);
 		return new JScrollPane(infoGUI);
 	}
 
