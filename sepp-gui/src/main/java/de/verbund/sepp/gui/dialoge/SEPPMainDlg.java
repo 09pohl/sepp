@@ -105,7 +105,8 @@ public class SEPPMainDlg {
 	public void refreshMainTables() throws IOException {
 		DatenSchnittstelle dataSchnittstelle = new DatenSchnittstelleImpl();
 		DateiInformationen daten;
-		daten = dataSchnittstelle.getDateiInformationen(dataSchnittstelle.getEinstellungen().getProjektDateiPfad());
+		String dateiPfad = ActiveFileController.getInstanz().getAktiveDateiPfad();
+		daten = dataSchnittstelle.getDateiInformationen(dateiPfad);
 		String[][] userKommentare = DateiInfoHelfer.getZeilenArray(daten.getKommentare());
 		refreshTableModel(userKommentare, ToDoAndCommentBoxes.spaltenKommentare, toDoComments.getTableComment());
 		String[][] userToDos = DateiInfoHelfer.getZeilenArray(daten.getToDos());
