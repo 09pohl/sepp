@@ -15,7 +15,7 @@ public class DummyFrame extends JFrame {
 	ToDoAndCommentBoxes boxes;
 
 	public DummyFrame() throws IOException {
-		Einstellungen einst = new DatenSchnittstelleImpl().getEinstellungen();
+		Einstellungen einst = DatenSchnittstelleImpl.getInstance().getEinstellungen();
 		einst.setUsername("test");
 		einst.setProjektPfad("C:/Users/Administrator/it/sepp/TestOrdner");
 		System.out.println(einst.getProjektPfad());

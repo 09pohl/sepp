@@ -9,16 +9,16 @@ import de.verbund.sepp.gui.DummyFileInfoGUI;
 import de.verbund.sepp.main.daten.DatenSchnittstelle;
 import de.verbund.sepp.main.daten.DatenSchnittstelleImpl;
 
-public class DateiViewController extends JScrollPane{
-	
+public class DateiViewController extends JScrollPane {
+
 	private DummyFileInfoGUI infoGUI;
-	private DatenSchnittstelle data = new DatenSchnittstelleImpl();
+	private DatenSchnittstelle data = DatenSchnittstelleImpl.getInstance();
 	private File directory;
-	
+
 	public DateiViewController() {
 	}
 
-	public JScrollPane init(){
+	public JScrollPane init() {
 		try {
 			directory = new File(data.getEinstellungen().getProjektPfad());
 		} catch (IOException e) {

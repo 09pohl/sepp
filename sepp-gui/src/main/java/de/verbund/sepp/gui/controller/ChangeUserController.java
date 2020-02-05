@@ -14,7 +14,7 @@ import de.verbund.sepp.main.daten.DatenSchnittstelleImpl;
 public class ChangeUserController {
 
 	private ChangeUserDlg changeDlg;
-	private DatenSchnittstelle schnittstelle = new DatenSchnittstelleImpl();
+	private DatenSchnittstelle schnittstelle = DatenSchnittstelleImpl.getInstance();
 
 	public ChangeUserController(JFrame frame) {
 		EventQueue.invokeLater(new Runnable() {

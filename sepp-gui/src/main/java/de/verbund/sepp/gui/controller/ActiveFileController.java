@@ -11,7 +11,7 @@ import de.verbund.sepp.main.utils.DateiHelfer;
 
 public class ActiveFileController {
 
-	private DatenSchnittstelle schnittstelle = new DatenSchnittstelleImpl();
+	private DatenSchnittstelle schnittstelle = DatenSchnittstelleImpl.getInstance();
 	private String aktiveDateiPfad;
 	private JLabel lAktiveDatei;
 	private JButton bZurHauptdatei;
