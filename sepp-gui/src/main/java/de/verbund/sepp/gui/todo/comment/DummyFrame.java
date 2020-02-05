@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 import de.verbund.sepp.main.daten.DatenSchnittstelleImpl;
 import de.verbund.sepp.main.daten.Einstellungen;
 
-//TODO #61 unbenutzte und Testklassen entfernen
+// TODO #61 unbenutzte und Testklassen entfernen
 
 public class DummyFrame extends JFrame {
 
