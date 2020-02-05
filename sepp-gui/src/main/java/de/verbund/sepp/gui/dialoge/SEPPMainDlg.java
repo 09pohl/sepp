@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
@@ -17,6 +18,7 @@ import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 
+import de.verbund.sepp.gui.controller.ActiveFileController;
 import de.verbund.sepp.gui.controller.ChangeSourceController;
 import de.verbund.sepp.gui.controller.ChangeUserController;
 import de.verbund.sepp.gui.controller.StartUpController;
@@ -48,7 +50,12 @@ public class SEPPMainDlg {
 	private void erzeugeSplitLayout() {
 		mainPanel = new JPanel(new BorderLayout());
 		panel = new JPanel(new BorderLayout());
-		erzeugeButtonPanel();
+		try {
+			erzeugeButtonPanel();
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(seppMainFrame, "Fehler beim Einlesen bestehender Einstellungen!", "FEHLER!",
+					JOptionPane.ERROR_MESSAGE);
+		}
 		panel.add(mainPanel, BorderLayout.CENTER);
 		JPanel dateiPanel = new JPanel();
 		JPanel infoPanel = new JPanel(new BorderLayout());
@@ -68,7 +75,8 @@ public class SEPPMainDlg {
 		mainPanel.add(frameSplitPane, BorderLayout.CENTER);
 	}
 
-	private void erzeugeButtonPanel() {
+	private void erzeugeButtonPanel() throws IOException {
+		DatenSchnittstelle schnittstelle = new DatenSchnittstelleImpl();
 		JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		JButton refreshButton = new JButton("Aktualisieren...");
 		refreshButton.addActionListener(e -> {
@@ -81,11 +89,14 @@ public class SEPPMainDlg {
 			}
 
 		});
-
-		buttonPanel.add(new JLabel("DATEINAME"));
-		boolean hautpdatei_platzhaler = false;
-		if (!hautpdatei_platzhaler) {
+		JLabel lAktiveDatei = new JLabel("");
+		ActiveFileController.getInstanz().setAktiveDateiLabel(lAktiveDatei);
+		buttonPanel.add(lAktiveDatei);
+		if (!schnittstelle.getEinstellungen().getProjektDateiPfad()
+				.equals(ActiveFileController.getInstanz().getAktiveDateiPfad())) {
 			buttonPanel.add(new JButton("Zur Hauptdatei"));
+		} else {
+			ActiveFileController.getInstanz().refreshLabel();
 		}
 		buttonPanel.add(refreshButton);
 		panel.add(buttonPanel, BorderLayout.NORTH);
