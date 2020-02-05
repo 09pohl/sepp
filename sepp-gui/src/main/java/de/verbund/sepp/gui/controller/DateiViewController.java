@@ -11,20 +11,13 @@ import de.verbund.sepp.gui.DummyFileInfoGUI;
 import de.verbund.sepp.main.daten.DatenSchnittstelle;
 import de.verbund.sepp.main.daten.DatenSchnittstelleImpl;
 
-public class DateiViewController {
+public class DateiViewController extends JScrollPane{
 	
 	private DummyFileInfoGUI infoGUI;
 	private DatenSchnittstelle data = new DatenSchnittstelleImpl();
 	private File directory;
 	
 	public DateiViewController() {
-		EventQueue.invokeLater(new Runnable() {
-			
-			public void run() {
-					init();
-
-			}
-		});
 	}
 
 	public JScrollPane init(){
@@ -34,7 +27,7 @@ public class DateiViewController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		int filecount = directory.list().length;
+		int filecount = 10;
 		infoGUI = new DummyFileInfoGUI(filecount);
 		return new JScrollPane(infoGUI);
 	}

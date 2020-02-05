@@ -54,11 +54,9 @@ public class SEPPMainDlg {
 		erzeugeButtonPanel();
 		panel.add(mainPanel, BorderLayout.CENTER);
 		DateiViewController dc = new DateiViewController();
-		//JPanel dateiPanel = new JPanel();
 		JScrollPane dateiScroll = dc.init();
 		dateiScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		dateiScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		//dateiPanel.add(dateiScroll);
 		JPanel infoPanel = new JPanel(new BorderLayout());
 		JPanel toDoPanel = new JPanel(new BorderLayout());
 		JScrollPane toDoScroll = toDoComments.getToDoBox();

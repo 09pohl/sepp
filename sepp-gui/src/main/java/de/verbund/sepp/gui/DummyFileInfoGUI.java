@@ -16,6 +16,7 @@ public class DummyFileInfoGUI extends JPanel{
 			p.add(new JLabel("Panel " + i), BorderLayout.NORTH);
 			p.add(new JButton(""+i), BorderLayout.SOUTH);
 			add(p);
+			setVisible(true);
 		}
 	}
 }
