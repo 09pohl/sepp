@@ -13,25 +13,25 @@ public class DatenSchnittstelleImplTest {
 	@Test(expected = Test.None.class)
 	public void testGetDateiInformationen() throws IOException {
 		DatenSchnittstelle schnittstelle = new DatenSchnittstelleImpl();
-		schnittstelle.getDateiInformationen("C:\\Java\\0-sepp\\Dokument.rtf");
+		schnittstelle.getDateiInformationen("C:/Java/0-sepp/Dokument.rtf");
 	}
 
 	// 002
 	@Test(expected = NoSuchFileException.class)
 	public void testKeineDatei() throws IOException {
 		DatenSchnittstelle schnittstelle = new DatenSchnittstelleImpl();
-		DateiInformationen data = schnittstelle.getDateiInformationen("C:\\Java\\0-sepp\\Dokument2.rtf");
+		DateiInformationen data = schnittstelle.getDateiInformationen("C:/Java/0-sepp/Dokument2.rtf");
 	}
 
 	// 003
 	@Test(expected = Test.None.class)
 	public void testSchreiben() throws IOException {
 		DatenSchnittstelle schnittstelle = new DatenSchnittstelleImpl();
-		DateiInformationen data = schnittstelle.getDateiInformationen("C:\\Java\\0-sepp\\Dokument.rtf");
+		DateiInformationen data = schnittstelle.getDateiInformationen("C:/Java/0-sepp/Dokument.rtf");
 		data.setKommentare("ich:test");
 		data.setToDos("ich:test");
 		schnittstelle.speichereDateiInformationen(data);
-		DateiInformationen data2 = schnittstelle.getDateiInformationen("C:\\Java\\0-sepp\\Dokument.rtf");
+		DateiInformationen data2 = schnittstelle.getDateiInformationen("C:/Java/0-sepp/Dokument.rtf");
 		assertEquals("ich:test", data2.getToDos());
 	}
 
@@ -39,12 +39,12 @@ public class DatenSchnittstelleImplTest {
 	@Test(expected = Test.None.class)
 	public void testKommentarPfad() throws IOException {
 		DatenSchnittstelle schnittstelle = new DatenSchnittstelleImpl();
-		DateiInformationen data = schnittstelle.getDateiInformationen("C:\\Java\\0-sepp\\Dokument.rtf");
+		DateiInformationen data = schnittstelle.getDateiInformationen("C:/Java/0-sepp/Dokument.rtf");
 		data.setKommentare("ich:test");
 		data.setToDos("ich:test");
 		schnittstelle.speichereDateiInformationen(data);
-		DateiInformationen data2 = schnittstelle.getDateiInformationen("C:\\Java\\0-sepp\\Dokument.rtf");
-		assertEquals("C:\\Java\\0-sepp\\Dokument.rtf.sepptodo", data2.getKommentareDatei());
+		DateiInformationen data2 = schnittstelle.getDateiInformationen("C:/Java/0-sepp/Dokument.rtf");
+		assertEquals("C:/Java/0-sepp/Dokument.rtf.sepptodo", data2.getKommentareDatei());
 	}
 
 	// 005
@@ -52,7 +52,7 @@ public class DatenSchnittstelleImplTest {
 	public void testPfade() throws IOException {
 		Einstellungen test = Einstellungen.getInstance();
 		Einstellungen.resetInstance();
-		test.projektPfad = "C:\\Java\\0-sepp\\";
+		test.projektPfad = "C:/Java/0-sepp/0-sepp/";
 		DatenSchnittstelle schnittstelle = new DatenSchnittstelleImpl();
 		for (String string : schnittstelle.getDateiPfade(test)) {
 			System.out.println(string);

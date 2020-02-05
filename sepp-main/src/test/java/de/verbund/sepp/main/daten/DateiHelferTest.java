@@ -3,6 +3,7 @@ package de.verbund.sepp.main.daten;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.attribute.FileTime;
 
@@ -38,6 +39,9 @@ public class DateiHelferTest {
 
 	@Test(expected = Test.None.class)
 	public void testEndung() throws IOException {
-		assertEquals("rtf", DateiHelfer.dateiEndung("C:\\Java\\0-sepp\\Dokument.rtf"));
+		String rtfPfad = "C:/Java/0-sepp/Dokument.rtf";
+		File rtfFile = new File(rtfPfad);
+		rtfFile.createNewFile();
+		assertEquals("rtf", DateiHelfer.dateiEndung(rtfPfad));
 	}
 }
