@@ -29,7 +29,6 @@ public class DateiGUI extends JFrame implements ActionListener{
 		setSize(350, 150);
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		setLocationRelativeTo(null);
-		setTitle(getTitel()); 
 		panel.setLayout(new BorderLayout());
 		setDefaultLookAndFeelDecorated(true);
 	    setResizable(false);
@@ -40,23 +39,21 @@ public class DateiGUI extends JFrame implements ActionListener{
 	    setVisible(true);
 	    
 	  }
-	//Laden von Titel mit Name und Datum
-	private String getTitel() throws IOException {
-		String name = data.getName();
-		return name;
-	}
-	
+	//Laden von Icon und Namen
 	private Component getNorden() {
 		Icon icon = data.getIcon();
+		String name = data.getName();
 		JPanel p = new JPanel();
-		JLabel l = new JLabel(icon);
-		p.add(l);
+		JLabel i = new JLabel(icon);
+		JLabel n = new JLabel(name);
+		p.add(i);
+		p.add(n);
 		return p;
 	}
 
 	
 
-	//Laden von ToDOs und Kommentaren
+	//Laden von Datum
 	private Component getMitte() throws IOException {
 		JPanel p = new JPanel();
 		String datum_1 = data.getErstellungsDatum().toString();
@@ -67,7 +64,8 @@ public class DateiGUI extends JFrame implements ActionListener{
 		p.add(label_2);
 		return p;
 	}
-
+	
+	//Laden von Button mit Verweis auf ToDo - und Kommentarliste
 	private Component getSueden(){
 		JPanel p = new JPanel();
 		bInfo = new JButton("ToDo - & Kommenatarliste");
