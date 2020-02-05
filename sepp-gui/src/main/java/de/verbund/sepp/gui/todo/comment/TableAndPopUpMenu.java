@@ -18,8 +18,8 @@ public class TableAndPopUpMenu {
 		table = new JTable(model);
 	}
 
-	private JTable createTable() {
-
+	private JTable createTable(int toDifferentTables) {
+		
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -29,7 +29,6 @@ public class TableAndPopUpMenu {
 				} else {
 					table.clearSelection();
 				}
-
 				int rowindex = table.getSelectedRow();
 				if (rowindex < 0)
 					return;
@@ -40,9 +39,9 @@ public class TableAndPopUpMenu {
 			}
 
 			private JPopupMenu createPopUpMenu(JPopupMenu popup, int rowindex) {
-				popup.add("Hinzufügen").addActionListener(e -> addOrEditJOP(AddOrEdit.ADD, rowindex));
-				popup.add("Editieren").addActionListener(e -> addOrEditJOP(AddOrEdit.EDIT, rowindex));
-				popup.add("Löschen").addActionListener(e -> deleteJOP(rowindex));
+				popup.add("Hinzufügen").addActionListener(e -> addOrEditJOP(AddOrEdit.ADD, rowindex, toDifferentTables));
+				popup.add("Editieren").addActionListener(e -> addOrEditJOP(AddOrEdit.EDIT, rowindex, toDifferentTables));
+				popup.add("Löschen").addActionListener(e -> deleteJOP(rowindex, toDifferentTables));
 				return popup;
 			}
 		});
@@ -50,12 +49,12 @@ public class TableAndPopUpMenu {
 		return table;
 	}
 
-	public JTable getTable() {
-		return createTable();
+	public JTable getTable(int toDifferentTables) {
+		return createTable(toDifferentTables);
 
 	}
 
-	private void addOrEditJOP(AddOrEdit text, int rowindex) {
+	private void addOrEditJOP(AddOrEdit text, int rowindex, int toDifferentTables) {
 		
 		String comment = "";
 		boolean goOn = true;
@@ -89,12 +88,14 @@ public class TableAndPopUpMenu {
 
 	}
 
-	private void deleteJOP(int rowindex) {
+	private void deleteJOP(int rowindex, int toDifferentTables) {
+		
+		System.out.println(toDifferentTables + "dT");
 		int doDelete = JOptionPane.showConfirmDialog(null, "Wollen Sie diese Zeile wirklich löschen?", "Löschen",
 				JOptionPane.YES_NO_OPTION);
 
 		if (doDelete == JOptionPane.YES_OPTION) {
-			System.out.println(rowindex);
+			System.out.println(rowindex + " " + toDifferentTables);
 			//Funktion
 		}
 	}

@@ -21,6 +21,8 @@ public class ToDoAndCommentBoxes {
 
 	private JTable tableComment;
 	private JTable tableToDo;
+	private static final int COMMENT = 0;
+	private static final int TODO = 1;
 
 	private JScrollPane initCommentBox() {
 		return new JScrollPane(createCommentTable());
@@ -38,7 +40,8 @@ public class ToDoAndCommentBoxes {
 			dataComments = dataSchnittstelle.getDateiInformationen(dataSchnittstelle.getEinstellungen().getProjektPfad()
 					+ "\\" + DatenSchnittstelle.PRIMAER_DATEINAME);
 			String[][] userAndComments = DateiInfoHelfer.getZeilenArray(dataComments.getKommentare());
-			tableComment = gefuellteTabelle(userAndComments, spaltenKommentare);
+			System.out.println("UAC" + userAndComments[0][0] + userAndComments[0][1]);
+			tableComment = gefuellteTabelle(userAndComments, spaltenKommentare, COMMENT);
 			return tableComment;
 		} catch (IOException e) {
 			System.out.println("Fehler Comments");
@@ -54,7 +57,8 @@ public class ToDoAndCommentBoxes {
 			dataToDos = dataSchnittstelle.getDateiInformationen(dataSchnittstelle.getEinstellungen().getProjektPfad()
 					+ "\\" + DatenSchnittstelle.PRIMAER_DATEINAME);
 			String[][] userAndToDos = DateiInfoHelfer.getZeilenArray(dataToDos.getToDos());
-			tableToDo = gefuellteTabelle(userAndToDos, spaltenTodos);
+			System.out.println("UATD" + userAndToDos[0][0] + userAndToDos[0][1]);
+			tableToDo = gefuellteTabelle(userAndToDos, spaltenTodos, TODO);
 			return tableToDo;
 		} catch (IOException e) {
 			System.out.println("Fehler ToDo's");
@@ -62,9 +66,9 @@ public class ToDoAndCommentBoxes {
 		}
 	}
 
-	private JTable gefuellteTabelle(String[][] inhalte, String[] spaltenTitel) {
+	private JTable gefuellteTabelle(String[][] inhalte, String[] spaltenTitel, int toDifferentTables) {
 		TableModel model = new DefaultTableModel(inhalte, spaltenTitel);
-		JTable doneTable = new TableAndPopUpMenu(model).getTable();
+		JTable doneTable = new TableAndPopUpMenu(model).getTable(toDifferentTables);
 		return doneTable;
 	}
 
