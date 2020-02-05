@@ -57,7 +57,7 @@ public class DateiHelfer {
 	public static void dateienInOrdnerSepp(File ordner, ArrayList<String> pfadListe) throws IOException {
 		for (File datei : ordner.listFiles()) {
 			if (datei.isDirectory()) {
-				dateienInOrdner(datei, pfadListe);
+				dateienInOrdnerSepp(datei, pfadListe);
 			} else if (!DateiHelfer.dateiEndungMitPunkt(datei.getCanonicalPath())
 					.equals(DateiInformationen.DATEIENDUNG_KOMMENTARE)
 					&& !DateiHelfer.dateiEndungMitPunkt(datei.getCanonicalPath())
