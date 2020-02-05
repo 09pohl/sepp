@@ -2,8 +2,8 @@ package de.verbund.sepp.gui.temp;
 
 import java.io.IOException;
 
+import de.verbund.sepp.gui.SEPPMainDlg;
 import de.verbund.sepp.gui.controller.ActiveFileController;
-import de.verbund.sepp.gui.dialoge.SEPPMainDlg;
 
 // Zu #48
 // TODO #61 unbenutzte und Testklassen entfernen
