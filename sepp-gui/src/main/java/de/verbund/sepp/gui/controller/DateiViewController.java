@@ -27,7 +27,7 @@ public class DateiViewController extends JScrollPane{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		int filecount = 10;
+		int filecount = directory.list().length;
 		infoGUI = new DummyFileInfoGUI(filecount);
 		return new JScrollPane(infoGUI);
 	}
