@@ -92,7 +92,7 @@ public class SEPPMainDlg {
 		JButton bZurHauptdatei = new JButton("Zur Hauptdatei");
 		bZurHauptdatei.addActionListener(e -> {
 			try {
-				ActiveFileController.getInstanz()
+				ActiveFileController.getInstance()
 						.setAktiveDateiPfad(schnittstelle.getEinstellungen().getProjektDateiPfad());
 				this.refreshMainTables();
 			} catch (IOException e1) {
@@ -101,10 +101,10 @@ public class SEPPMainDlg {
 			}
 		});
 		JLabel lAktiveDatei = new JLabel("");
-		ActiveFileController.getInstanz().setLAktiveDatei(lAktiveDatei);
+		ActiveFileController.getInstance().setLAktiveDatei(lAktiveDatei);
 		buttonPanel.add(lAktiveDatei);
-		ActiveFileController.getInstanz().refreshLabel();
-		ActiveFileController.getInstanz().setBZurHauptdatei(bZurHauptdatei);
+		ActiveFileController.getInstance().refreshLabel();
+		ActiveFileController.getInstance().setBZurHauptdatei(bZurHauptdatei);
 		buttonPanel.add(bZurHauptdatei);
 		bZurHauptdatei.setVisible(false);
 		buttonPanel.add(refreshButton);
@@ -114,7 +114,7 @@ public class SEPPMainDlg {
 	public void refreshMainTables() throws IOException {
 		DatenSchnittstelle dataSchnittstelle = new DatenSchnittstelleImpl();
 		DateiInformationen daten;
-		String dateiPfad = ActiveFileController.getInstanz().getAktiveDateiPfad();
+		String dateiPfad = ActiveFileController.getInstance().getAktiveDateiPfad();
 		daten = dataSchnittstelle.getDateiInformationen(dateiPfad);
 		String[][] userKommentare = DateiInfoHelfer.getZeilenArray(daten.getKommentare());
 		refreshTableModel(userKommentare, ToDoAndCommentBoxes.spaltenKommentare, toDoComments.getTableComment());
