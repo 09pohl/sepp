@@ -78,7 +78,7 @@ public class SEPPMainDlg {
 	private void erzeugeButtonPanel() throws IOException {
 		DatenSchnittstelle schnittstelle = new DatenSchnittstelleImpl();
 		JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-		JButton refreshButton = new JButton("Aktualisieren...");
+		JButton refreshButton = new JButton("Aktualisieren");
 		refreshButton.addActionListener(e -> {
 
 			try {
