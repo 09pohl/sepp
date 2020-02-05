@@ -6,9 +6,11 @@ import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
@@ -16,6 +18,7 @@ import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 
+import de.verbund.sepp.gui.controller.ActiveFileController;
 import de.verbund.sepp.gui.controller.ChangeSourceController;
 import de.verbund.sepp.gui.controller.ChangeUserController;
 import de.verbund.sepp.gui.controller.StartUpController;
@@ -47,7 +50,12 @@ public class SEPPMainDlg {
 	private void erzeugeSplitLayout() {
 		mainPanel = new JPanel(new BorderLayout());
 		panel = new JPanel(new BorderLayout());
-		erzeugeButtonPanel();
+		try {
+			erzeugeButtonPanel();
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(seppMainFrame, "Fehler beim Einlesen bestehender Einstellungen!", "FEHLER!",
+					JOptionPane.ERROR_MESSAGE);
+		}
 		panel.add(mainPanel, BorderLayout.CENTER);
 		JPanel dateiPanel = new JPanel();
 		JPanel infoPanel = new JPanel(new BorderLayout());
@@ -67,7 +75,8 @@ public class SEPPMainDlg {
 		mainPanel.add(frameSplitPane, BorderLayout.CENTER);
 	}
 
-	private void erzeugeButtonPanel() {
+	private void erzeugeButtonPanel() throws IOException {
+		DatenSchnittstelle schnittstelle = new DatenSchnittstelleImpl();
 		JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		JButton refreshButton = new JButton("Aktualisieren...");
 		refreshButton.addActionListener(e -> {
@@ -80,6 +89,24 @@ public class SEPPMainDlg {
 			}
 
 		});
+		JButton bZurHauptdatei = new JButton("Zur Hauptdatei");
+		bZurHauptdatei.addActionListener(e -> {
+			try {
+				ActiveFileController.getInstanz()
+						.setAktiveDateiPfad(schnittstelle.getEinstellungen().getProjektDateiPfad());
+				this.refreshMainTables();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
+		JLabel lAktiveDatei = new JLabel("");
+		ActiveFileController.getInstanz().setLAktiveDatei(lAktiveDatei);
+		buttonPanel.add(lAktiveDatei);
+		ActiveFileController.getInstanz().refreshLabel();
+		ActiveFileController.getInstanz().setBZurHauptdatei(bZurHauptdatei);
+		buttonPanel.add(bZurHauptdatei);
+		bZurHauptdatei.setVisible(false);
 		buttonPanel.add(refreshButton);
 		panel.add(buttonPanel, BorderLayout.NORTH);
 	}
@@ -87,8 +114,8 @@ public class SEPPMainDlg {
 	public void refreshMainTables() throws IOException {
 		DatenSchnittstelle dataSchnittstelle = new DatenSchnittstelleImpl();
 		DateiInformationen daten;
-		daten = dataSchnittstelle.getDateiInformationen(
-				dataSchnittstelle.getEinstellungen().getProjektPfad() + "/" + DatenSchnittstelle.PRIMAER_DATEINAME);
+		String dateiPfad = ActiveFileController.getInstanz().getAktiveDateiPfad();
+		daten = dataSchnittstelle.getDateiInformationen(dateiPfad);
 		String[][] userKommentare = DateiInfoHelfer.getZeilenArray(daten.getKommentare());
 		refreshTableModel(userKommentare, ToDoAndCommentBoxes.spaltenKommentare, toDoComments.getTableComment());
 		String[][] userToDos = DateiInfoHelfer.getZeilenArray(daten.getToDos());
