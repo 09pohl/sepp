@@ -1,6 +1,7 @@
 package de.verbund.sepp.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.io.IOException;
 

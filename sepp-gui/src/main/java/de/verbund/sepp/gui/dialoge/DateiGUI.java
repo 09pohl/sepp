@@ -19,27 +19,27 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
-public class DateiGUI extends JFrame implements ActionListener{
+public class DateiGUI extends JPanel implements ActionListener{
 	
-	Einstellungen einstellungen;
+	DatenSchnittstelle schnittstelle = new DatenSchnittstelleImpl();
+	Einstellungen einstellungen = schnittstelle.getEinstellungen();
 	private JButton bInfo;
 	private static final DateTimeFormatter DATE_FORMATTER_WITH_TIME = DateTimeFormatter.ofPattern("MMM d, yyyy HH:mm:ss");
 	private String verzeichnis = einstellungen.getProjektDateiPfad(); //TODO - Dateiaufruf
-	DatenSchnittstelle schnittstelle = new DatenSchnittstelleImpl();
 	DateiInformationen data = schnittstelle.getDateiInformationen(verzeichnis);
 	
 	public DateiGUI() throws IOException {
-		Container panel = getContentPane();
+		//Container panel = getContentPane();
 		setSize(350, 150);
-		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-		setLocationRelativeTo(null);
-		panel.setLayout(new BorderLayout());
-		setDefaultLookAndFeelDecorated(true);
-	    setResizable(false);
+		//setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+		//setLocationRelativeTo(null);
+		setLayout(new BorderLayout());
+		//setDefaultLookAndFeelDecorated(true);
+	    //setResizable(false);
 	    
-	    getContentPane().add(getNorden(), BorderLayout.NORTH);
-	    getContentPane().add(getMitte(), BorderLayout.CENTER);
-	    getContentPane().add(getSueden(), BorderLayout.SOUTH);
+	    add(getNorden(), BorderLayout.NORTH);
+	    add(getMitte(), BorderLayout.CENTER);
+	    add(getSueden(), BorderLayout.SOUTH);
 	    setVisible(true); 
 	  }
 
