@@ -21,6 +21,7 @@ import javax.swing.table.DefaultTableModel;
 import de.verbund.sepp.gui.controller.ActiveFileController;
 import de.verbund.sepp.gui.controller.ChangeSourceController;
 import de.verbund.sepp.gui.controller.ChangeUserController;
+import de.verbund.sepp.gui.controller.DateiViewController;
 import de.verbund.sepp.gui.controller.StartUpController;
 import de.verbund.sepp.gui.todo.comment.ToDoAndCommentBoxes;
 import de.verbund.sepp.main.daten.DateiInformationen;
@@ -38,11 +39,11 @@ public class SEPPMainDlg {
 	public SEPPMainDlg() {
 		erzeugeSplitLayout();
 		erzeugeMenue();
-		seppMainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		seppMainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		seppMainFrame.setTitle("SuperEffectiveProjectPlanning (SEPP)");
 		seppMainFrame.setContentPane(panel);
 		seppMainFrame.setSize(1000, 800);
-		seppMainFrame.setResizable(false);
+		seppMainFrame.setResizable(true);
 		seppMainFrame.setLocationRelativeTo(null);
 		seppMainFrame.setVisible(true);
 	}
@@ -57,20 +58,24 @@ public class SEPPMainDlg {
 					JOptionPane.ERROR_MESSAGE);
 		}
 		panel.add(mainPanel, BorderLayout.CENTER);
-		JPanel dateiPanel = new JPanel();
+		DateiViewController dc = new DateiViewController();
+		JScrollPane dateiScroll = dc.init();
+		dateiScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		dateiScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		JPanel infoPanel = new JPanel(new BorderLayout());
 		JPanel toDoPanel = new JPanel(new BorderLayout());
 		JScrollPane toDoScroll = toDoComments.getToDoBox();
-		toDoScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		toDoScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		toDoPanel.add(toDoScroll);
 		JPanel commentsPanel = new JPanel(new BorderLayout());
 		JScrollPane commentScroll = toDoComments.getCommentBox();
-		commentScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		commentScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		commentsPanel.add(commentScroll);
 		JSplitPane infoSplitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, toDoPanel, commentsPanel);
 		infoSplitPane.setDividerLocation(360);
 		infoPanel.add(infoSplitPane, BorderLayout.CENTER);
-		JSplitPane frameSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, dateiPanel, infoPanel);
+		JSplitPane frameSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, dateiScroll, infoPanel);
+		frameSplitPane.resetToPreferredSizes();
 		frameSplitPane.setDividerLocation(485);
 		mainPanel.add(frameSplitPane, BorderLayout.CENTER);
 	}

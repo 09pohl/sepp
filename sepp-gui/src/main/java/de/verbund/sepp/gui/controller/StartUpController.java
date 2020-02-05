@@ -28,8 +28,6 @@ public class StartUpController {
 			Einstellungen settings = schnittstelle.getEinstellungen();
 			try {
 				settings.laden();
-				// TODO #61 sysout entfernen
-				System.out.println("Einstellungen vorhanden");
 			} catch (FileNotFoundException e) {
 				startDlg = new StartUpDlg();
 				startDlg.getRootPane().setDefaultButton(startDlg.getSaveButton());
