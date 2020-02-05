@@ -11,9 +11,7 @@ import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 import de.verbund.sepp.main.daten.*;
 
 import java.nio.file.attribute.FileTime;
@@ -22,11 +20,11 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
 public class DateiGUI extends JFrame implements ActionListener{
-
-	private JButton bInfo;
-	private String verzeichnis = "C:\\java\\git\\sepp\\TestOrdner\\Aufgaben.rtf"; //TODO - Verzeichnis als Parameter
-	private static final DateTimeFormatter DATE_FORMATTER_WITH_TIME = DateTimeFormatter.ofPattern("MMM d, yyyy HH:mm:ss");
 	
+	Einstellungen einstellungen;
+	private JButton bInfo;
+	private static final DateTimeFormatter DATE_FORMATTER_WITH_TIME = DateTimeFormatter.ofPattern("MMM d, yyyy HH:mm:ss");
+	private String verzeichnis = einstellungen.getProjektDateiPfad(); //TODO - Dateiaufruf
 	DatenSchnittstelle schnittstelle = new DatenSchnittstelleImpl();
 	DateiInformationen data = schnittstelle.getDateiInformationen(verzeichnis);
 	
@@ -38,17 +36,13 @@ public class DateiGUI extends JFrame implements ActionListener{
 		panel.setLayout(new BorderLayout());
 		setDefaultLookAndFeelDecorated(true);
 	    setResizable(false);
-	    getVerzeichnis();
 	    
 	    getContentPane().add(getNorden(), BorderLayout.NORTH);
 	    getContentPane().add(getMitte(), BorderLayout.CENTER);
 	    getContentPane().add(getSueden(), BorderLayout.SOUTH);
 	    setVisible(true); 
 	  }
-	
-	private void getVerzeichnis() {
-		
-	}
+
 
 	//Laden von Icon und Namen
 	private Component getNorden() {
@@ -84,7 +78,8 @@ public class DateiGUI extends JFrame implements ActionListener{
 		p.add(bInfo);
 		return p;
 	}
-
+	
+	//DateTimeFormatter
 	public static String fileTimeToString(FileTime fileTime) {
 	      String s = parseToString(
 	              fileTime.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
@@ -103,20 +98,6 @@ public class DateiGUI extends JFrame implements ActionListener{
 	public static LocalDateTime parseFromString(String date) {
 	      return LocalDateTime.parse(date, DATE_FORMATTER_WITH_TIME);
 	}
-	
-	
-	public static void main(String[] args)
-	  {
-	    SwingUtilities.invokeLater(new Runnable(){
-	      public void run(){
-	        try {
-				new DateiGUI();
-			} catch (IOException e) {
-				JOptionPane.showInputDialog("Failed to load!");
-			}
-	      }
-	    });
-	  }
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
