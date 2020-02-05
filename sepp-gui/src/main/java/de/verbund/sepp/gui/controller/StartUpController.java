@@ -74,6 +74,9 @@ public class StartUpController {
 				schnittstelle.getEinstellungen().setUsername(user);
 				schnittstelle.getEinstellungen().speichern();
 				startDlg.dispose();
+			} else {
+				JOptionPane.showMessageDialog(startDlg, "Der Benutzername darf keinen Doppelpunkt enthalten!",
+						"FEHLER!", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 	}
