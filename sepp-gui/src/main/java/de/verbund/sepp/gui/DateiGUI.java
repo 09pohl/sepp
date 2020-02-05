@@ -3,13 +3,8 @@ package de.verbund.sepp.gui;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.io.IOException;
 
 import javax.swing.Icon;
@@ -23,80 +18,64 @@ import de.verbund.sepp.main.daten.*;
 
 public class DateiGUI extends JFrame implements ActionListener{
 
-	private JButton bTODO;
-	private JButton bKommentare;
-	private JButton bLoeschen;
+	private JButton bInfo;
 	private static final String VERZEICHNIS = "C:\\java\\git\\sepp\\TestOrdner\\Aufgaben.rtf";
+	
+	DatenSchnittstelle schnittstelle = new DatenSchnittstelleImpl();
+	DateiInformationen data = schnittstelle.getDateiInformationen(VERZEICHNIS);
 	
 	public DateiGUI() throws IOException {
 		Container panel = getContentPane();
-		setSize(400, 300);
+		setSize(350, 150);
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setTitle(getTitel()); 
 		panel.setLayout(new BorderLayout());
-		JFrame.setDefaultLookAndFeelDecorated(true);
-	    setResizable(true);
+		setDefaultLookAndFeelDecorated(true);
+	    setResizable(false);
 	    
-	    panel.addComponentListener(new ComponentAdapter() {
-
-	        @Override
-	        public void componentResized(ComponentEvent e) {
-	        	setSize(new Dimension(400, getHeight()));
-	            super.componentResized(e);
-	        }
-
-	    });
-	    
+	    getContentPane().add(getNorden(), BorderLayout.NORTH);
 	    getContentPane().add(getMitte(), BorderLayout.CENTER);
-//	    removeMinMaxClose(panel);
+	    getContentPane().add(getSueden(), BorderLayout.SOUTH);
 	    setVisible(true);
 	    
 	  }
-	
 	//Laden von Titel mit Name und Datum
 	private String getTitel() throws IOException {
-		DatenSchnittstelle schnittstelle = new DatenSchnittstelleImpl();
-		DateiInformationen data = schnittstelle.getDateiInformationen(VERZEICHNIS);
 		String name = data.getName();
-		String datum = data.getErstellungsDatum().toString();
-		return name + datum;
+		return name;
 	}
-
-	//Laden von ToDOs und Kommentaren
-	private Component getMitte() throws IOException {
-		DatenSchnittstelle schnittstelle = new DatenSchnittstelleImpl();
-		DateiInformationen data = schnittstelle.getDateiInformationen(VERZEICHNIS);
+	
+	private Component getNorden() {
 		Icon icon = data.getIcon();
 		JPanel p = new JPanel();
-		JLabel label = new JLabel(icon);
-		p.add(data.getAenderungsDatum().toString(), label);
-		p.add(label);
-		// TODO - User und Kommentare
-		p.setLayout(new FlowLayout());  
+		JLabel l = new JLabel(icon);
+		p.add(l);
 		return p;
 	}
 
+	
 
-//	//Deaktivierung von Min-Max-Icon
-//	public void removeMinMaxClose(Component comp)
-//	  {
-//		 if(comp instanceof JButton)
-//		  {
-//		    String accName = ((JButton) comp).getAccessibleContext().getAccessibleName();
-//		    System.out.println(accName);
-//		    if(accName.equals("Maximize")|| accName.equals("Iconify")||
-//		       accName.equals("Close")) comp.getParent().remove(comp);
-//		  }
-//		  if (comp instanceof Container)
-//		  {
-//		    Component[] comps = ((Container)comp).getComponents();
-//		    for(int x = 0, y = comps.length; x < y; x++)
-//		    {
-//		      removeMinMaxClose(comps[x]);
-//		    }
-//		  }	
-//	  }
+	//Laden von ToDOs und Kommentaren
+	private Component getMitte() throws IOException {
+		JPanel p = new JPanel();
+		String datum_1 = data.getErstellungsDatum().toString();
+		String datum_2 = data.getAenderungsDatum().toString();
+		JLabel label_1 = new JLabel("Erstellungsdatum: " + datum_1);
+		JLabel label_2 = new JLabel("Aenderungsdatum: " + datum_2);
+		p.add(label_1);
+		p.add(label_2);
+		return p;
+	}
+
+	private Component getSueden(){
+		JPanel p = new JPanel();
+		bInfo = new JButton("ToDo - & Kommenatarliste");
+		bInfo.addActionListener(this);
+		p.add(bInfo);
+		return p;
+	}
+
 	
 	public static void main(String[] args)
 	  {
@@ -113,14 +92,8 @@ public class DateiGUI extends JFrame implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == bTODO) {
-			//TODO: Load TODO-List
-		}
-		if (e.getSource() == bKommentare) {
-			//TODO: Load Kommentare
-		}
-		if (e.getSource() == bLoeschen) {
-			//TODO: Remove TODO-List & Kommentare
+		if (e.getSource() == bInfo) {
+			//TODO: Load TODO-List & Kommenaterliste;
 		}
 	}
 }
