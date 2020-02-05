@@ -2,6 +2,7 @@ package de.verbund.sepp.gui.todo.comment;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
@@ -70,7 +71,12 @@ public class TableAndPopUpMenu {
 					if (text.getInfoText().equals("Hinzufügen")) {
 						popUpFunction.add(toDifferentTables, rowindex, comment);
 					} else {
-						popUpFunction.edit(toDifferentTables, rowindex, comment);
+						try {
+							popUpFunction.edit(toDifferentTables, rowindex, comment);
+						} catch (IOException e) {
+							// TODO #54
+							e.printStackTrace();
+						}
 					}
 					goOn = false;
 				}
