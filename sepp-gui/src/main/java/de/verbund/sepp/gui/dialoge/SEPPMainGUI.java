@@ -18,6 +18,7 @@ import javax.swing.table.DefaultTableModel;
 
 import de.verbund.sepp.gui.controller.ChangeSourceController;
 import de.verbund.sepp.gui.controller.ChangeUserController;
+import de.verbund.sepp.gui.controller.DateiViewController;
 import de.verbund.sepp.gui.controller.StartUpController;
 import de.verbund.sepp.gui.todo.comment.ToDoAndCommentBoxes;
 import de.verbund.sepp.main.daten.DateiInformationen;
@@ -25,14 +26,14 @@ import de.verbund.sepp.main.daten.DatenSchnittstelle;
 import de.verbund.sepp.main.daten.DatenSchnittstelleImpl;
 import de.verbund.sepp.main.utils.DateiInfoHelfer;
 
-public class SEPPMainDlg {
+public class SEPPMainGUI {
 
 	private JPanel mainPanel;
 	private JPanel panel;
 	private JFrame seppMainFrame = new JFrame();
 	private ToDoAndCommentBoxes toDoComments = new ToDoAndCommentBoxes();
 
-	public SEPPMainDlg() {
+	public SEPPMainGUI() {
 		erzeugeSplitLayout();
 		erzeugeMenue();
 		seppMainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -49,7 +50,8 @@ public class SEPPMainDlg {
 		panel = new JPanel(new BorderLayout());
 		erzeugeButtonPanel();
 		panel.add(mainPanel, BorderLayout.CENTER);
-		JPanel dateiPanel = new JPanel();
+		DateiViewController dc = new DateiViewController();
+		JPanel dateiPanel = dc.init();
 		JPanel infoPanel = new JPanel(new BorderLayout());
 		JPanel toDoPanel = new JPanel(new BorderLayout());
 		JScrollPane toDoScroll = toDoComments.getToDoBox();
@@ -88,7 +90,7 @@ public class SEPPMainDlg {
 		DatenSchnittstelle dataSchnittstelle = new DatenSchnittstelleImpl();
 		DateiInformationen daten;
 		daten = dataSchnittstelle.getDateiInformationen(
-				dataSchnittstelle.getEinstellungen().getProjektPfad() + "/" + DatenSchnittstelle.PRIMAER_DATEINAME);
+				dataSchnittstelle.getEinstellungen().getProjektPfad() + "\\" + DatenSchnittstelle.PRIMAER_DATEINAME);
 		String[][] userKommentare = DateiInfoHelfer.getZeilenArray(daten.getKommentare());
 		refreshTableModel(userKommentare, ToDoAndCommentBoxes.spaltenKommentare, toDoComments.getTableComment());
 		String[][] userToDos = DateiInfoHelfer.getZeilenArray(daten.getToDos());
@@ -133,6 +135,6 @@ public class SEPPMainDlg {
 
 	public static void main(String[] args) {
 		new StartUpController();
-		new SEPPMainDlg();
+		new SEPPMainGUI();
 	}
 }

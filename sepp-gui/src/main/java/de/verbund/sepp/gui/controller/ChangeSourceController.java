@@ -9,7 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import de.verbund.sepp.gui.dialoge.ChangeSourceDlg;
-import de.verbund.sepp.gui.dialoge.SEPPMainDlg;
+import de.verbund.sepp.gui.dialoge.SEPPMainGUI;
 import de.verbund.sepp.main.daten.DatenSchnittstelle;
 import de.verbund.sepp.main.daten.DatenSchnittstelleImpl;
 
@@ -17,9 +17,9 @@ public class ChangeSourceController {
 
 	private ChangeSourceDlg changeDlg;
 	private DatenSchnittstelle schnittstelle = new DatenSchnittstelleImpl();
-	private SEPPMainDlg seppMainDlg;
+	private SEPPMainGUI seppMainDlg;
 
-	public ChangeSourceController(JFrame frame, SEPPMainDlg seppMainDlg) {
+	public ChangeSourceController(JFrame frame, SEPPMainGUI seppMainDlg) {
 
 		this.seppMainDlg = seppMainDlg;
 		EventQueue.invokeLater(new Runnable() {
