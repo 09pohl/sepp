@@ -15,7 +15,7 @@ import de.verbund.sepp.main.utils.DateiInfoHelfer;
 public class ToDoAndCommentBoxes {
 
 	public static final String[] spaltenKommentare = { "User", "Kommentar" };
-	public static final String[] spaltenTodos = { "User", "To Do's" };
+	public static final String[] spaltenTodos = { "User", "To-Do's" };
 
 	private DatenSchnittstelleImpl dataSchnittstelle;
 

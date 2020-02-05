@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -80,6 +81,12 @@ public class SEPPMainDlg {
 			}
 
 		});
+
+		buttonPanel.add(new JLabel("DATEINAME"));
+		boolean hautpdatei_platzhaler = false;
+		if (!hautpdatei_platzhaler) {
+			buttonPanel.add(new JButton("Zur Hauptdatei"));
+		}
 		buttonPanel.add(refreshButton);
 		panel.add(buttonPanel, BorderLayout.NORTH);
 	}
@@ -87,8 +94,7 @@ public class SEPPMainDlg {
 	public void refreshMainTables() throws IOException {
 		DatenSchnittstelle dataSchnittstelle = new DatenSchnittstelleImpl();
 		DateiInformationen daten;
-		daten = dataSchnittstelle.getDateiInformationen(
-				dataSchnittstelle.getEinstellungen().getProjektPfad() + "/" + DatenSchnittstelle.PRIMAER_DATEINAME);
+		daten = dataSchnittstelle.getDateiInformationen(dataSchnittstelle.getEinstellungen().getProjektDateiPfad());
 		String[][] userKommentare = DateiInfoHelfer.getZeilenArray(daten.getKommentare());
 		refreshTableModel(userKommentare, ToDoAndCommentBoxes.spaltenKommentare, toDoComments.getTableComment());
 		String[][] userToDos = DateiInfoHelfer.getZeilenArray(daten.getToDos());
