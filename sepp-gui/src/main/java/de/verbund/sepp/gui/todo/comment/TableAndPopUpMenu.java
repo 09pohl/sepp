@@ -34,15 +34,15 @@ public class TableAndPopUpMenu {
 				if (rowindex < 0)
 					return;
 				if (e.isPopupTrigger() && e.getComponent() instanceof JTable) {
-					JPopupMenu popup = createPopUpMenu(new JPopupMenu());
+					JPopupMenu popup = createPopUpMenu(new JPopupMenu(), rowindex);
 					popup.show(e.getComponent(), e.getX(), e.getY());
 				}
 			}
 
-			private JPopupMenu createPopUpMenu(JPopupMenu popup) {
-				popup.add("Hinzufügen").addActionListener(e -> addOrEditJOP(AddOrEdit.ADD));
-				popup.add("Editieren").addActionListener(e -> addOrEditJOP(AddOrEdit.EDIT));
-				popup.add("Löschen").addActionListener(e -> deleteJOP());
+			private JPopupMenu createPopUpMenu(JPopupMenu popup, int rowindex) {
+				popup.add("Hinzufügen").addActionListener(e -> addOrEditJOP(AddOrEdit.ADD, rowindex));
+				popup.add("Editieren").addActionListener(e -> addOrEditJOP(AddOrEdit.EDIT, rowindex));
+				popup.add("Löschen").addActionListener(e -> deleteJOP(rowindex));
 				return popup;
 			}
 		});
@@ -55,7 +55,7 @@ public class TableAndPopUpMenu {
 
 	}
 
-	private void addOrEditJOP(AddOrEdit text) {
+	private void addOrEditJOP(AddOrEdit text, int rowindex) {
 		
 		String comment = "";
 		boolean goOn = true;
@@ -64,7 +64,7 @@ public class TableAndPopUpMenu {
 			comment = JOptionPane.showInputDialog(null, text.getInfoText() + ":", text.getInfoText(), JOptionPane.OK_CANCEL_OPTION);
 			try {
 				if (!comment.replaceAll("\\s+", "").isEmpty()) {
-					System.out.println(comment);
+					System.out.println(rowindex);
 					goOn = false;
 					//-->Funktionen
 				}
@@ -89,12 +89,12 @@ public class TableAndPopUpMenu {
 
 	}
 
-	private void deleteJOP() {
+	private void deleteJOP(int rowindex) {
 		int doDelete = JOptionPane.showConfirmDialog(null, "Wollen Sie diese Zeile wirklich löschen?", "Löschen",
 				JOptionPane.YES_NO_OPTION);
 
 		if (doDelete == JOptionPane.YES_OPTION) {
-			System.out.println("DoDelete");
+			System.out.println(rowindex);
 			//Funktion
 		}
 	}
