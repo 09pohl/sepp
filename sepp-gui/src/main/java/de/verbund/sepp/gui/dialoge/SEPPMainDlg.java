@@ -84,7 +84,7 @@ public class SEPPMainDlg {
 			try {
 				refreshMainTables();
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
+				// TODO #54 Fehlermeldungen überarbeiten
 				e1.printStackTrace();
 			}
 
@@ -96,7 +96,7 @@ public class SEPPMainDlg {
 						.setAktiveDateiPfad(schnittstelle.getEinstellungen().getProjektDateiPfad());
 				this.refreshMainTables();
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
+				// TODO #54 Fehlermeldungen überarbeiten
 				e1.printStackTrace();
 			}
 		});
