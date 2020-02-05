@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import de.verbund.sepp.main.daten.DateiInformationen;
 import de.verbund.sepp.main.daten.DatenSchnittstelle;
 import de.verbund.sepp.main.daten.DatenSchnittstelleImpl;
+import de.verbund.sepp.main.daten.Einstellungen;
 
 public class DateiInfoHelfer {
 
@@ -30,4 +31,11 @@ public class DateiInfoHelfer {
 		}
 		return result;
 	}
+
+	public static String nameMitUnterordner(String pfad) throws IOException {
+		Einstellungen einstellungen = new DatenSchnittstelleImpl().getEinstellungen();
+		String result = pfad.replace(einstellungen.getProjektPfad(), "");
+		return result;
+	}
+
 }
