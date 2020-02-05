@@ -28,7 +28,6 @@ public class StartUpController {
 			Einstellungen settings = schnittstelle.getEinstellungen();
 			try {
 				settings.laden();
-				System.out.println("Einstellungen vorhanden");
 			} catch (FileNotFoundException e) {
 				startDlg = new StartUpDlg();
 				startDlg.getRootPane().setDefaultButton(startDlg.getSaveButton());
