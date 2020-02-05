@@ -8,7 +8,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import de.verbund.sepp.main.daten.DateiInformationen;
-import de.verbund.sepp.main.daten.DatenSchnittstelle;
 import de.verbund.sepp.main.daten.DatenSchnittstelleImpl;
 import de.verbund.sepp.main.utils.DateiInfoHelfer;
 
@@ -24,7 +23,6 @@ public class ToDoAndCommentBoxes {
 	static final int COMMENT = 0;
 	private static final int TODO = 1;
 
-
 	private JScrollPane initCommentBox() {
 		return new JScrollPane(createCommentTable());
 	}
@@ -34,13 +32,13 @@ public class ToDoAndCommentBoxes {
 	}
 
 	private JTable createCommentTable() {
-		dataSchnittstelle = new DatenSchnittstelleImpl();
+		dataSchnittstelle = DatenSchnittstelleImpl.getInstance();
 		DateiInformationen dataComments;
 
 		try {
-			dataComments = dataSchnittstelle.getDateiInformationen(dataSchnittstelle.getEinstellungen().getProjektPfad()
-					+ "\\" + DatenSchnittstelle.PRIMAER_DATEINAME);
-			String[][] userAndComments = DateiInfoHelfer.getZeilenArray(dataComments.getKommentare());		
+			dataComments = dataSchnittstelle
+					.getDateiInformationen(dataSchnittstelle.getEinstellungen().getProjektDateiPfad());
+			String[][] userAndComments = DateiInfoHelfer.getZeilenArray(dataComments.getKommentare());
 			tableComment = gefuellteTabelle(userAndComments, spaltenKommentare, COMMENT);
 			return tableComment;
 		} catch (IOException e) {
@@ -50,12 +48,12 @@ public class ToDoAndCommentBoxes {
 	}
 
 	private JTable createToDoTable() {
-		dataSchnittstelle = new DatenSchnittstelleImpl();
+		dataSchnittstelle = DatenSchnittstelleImpl.getInstance();
 		DateiInformationen dataToDos;
 
 		try {
-			dataToDos = dataSchnittstelle.getDateiInformationen(dataSchnittstelle.getEinstellungen().getProjektPfad()
-					+ "\\" + DatenSchnittstelle.PRIMAER_DATEINAME);
+			dataToDos = dataSchnittstelle
+					.getDateiInformationen(dataSchnittstelle.getEinstellungen().getProjektDateiPfad());
 			String[][] userAndToDos = DateiInfoHelfer.getZeilenArray(dataToDos.getToDos());
 			tableToDo = gefuellteTabelle(userAndToDos, spaltenTodos, TODO);
 			return tableToDo;
@@ -86,5 +84,5 @@ public class ToDoAndCommentBoxes {
 	public JTable getTableToDo() {
 		return tableToDo;
 	}
-	
+
 }

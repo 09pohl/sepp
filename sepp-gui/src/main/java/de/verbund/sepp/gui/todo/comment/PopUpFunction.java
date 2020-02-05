@@ -1,5 +1,7 @@
 package de.verbund.sepp.gui.todo.comment;
 
+import java.io.IOException;
+
 import de.verbund.sepp.main.daten.DateiInformationen;
 import de.verbund.sepp.main.daten.DatenSchnittstelle;
 import de.verbund.sepp.main.daten.DatenSchnittstelleImpl;
@@ -10,14 +12,10 @@ public class PopUpFunction {
 	private DatenSchnittstelleImpl dataSchnittstelle;
 	private StringBuffer contentString;
 
-	
-	
-	
-	
 	void add(int table, int index, String comment) {
-		
+
 		if (table == 0) {
-			dataSchnittstelle = new DatenSchnittstelleImpl();
+			dataSchnittstelle = DatenSchnittstelleImpl.getInstance();
 			DateiInformationen dataComments;
 			try {
 				dataComments = dataSchnittstelle
@@ -28,30 +26,28 @@ public class PopUpFunction {
 				contentString = new StringBuffer();
 				for (int i = 0; i < newContent.length; i++) {
 					for (int j = 0; j <= 1; j++) {
-						if (i != newContent.length-1) {
+						if (i != newContent.length - 1) {
 							newContent[i][j] = userAndComments[i][j];
 							if (j == 0) {
 								contentString.append(userAndComments[i][j] + ":");
-							}
-							else {
+							} else {
 								contentString.append(userAndComments[i][j] + "\n");
 							}
-							
+
 						}
 					}
 				}
 				contentString.append("user:" + comment + "\n");
-				
+
 				dataComments.setKommentare(contentString.toString());
 				dataSchnittstelle.speichereDateiInformationen(dataComments);
-				
 
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
+
 		} else {
-			dataSchnittstelle = new DatenSchnittstelleImpl();
+			dataSchnittstelle = DatenSchnittstelleImpl.getInstance();
 			DateiInformationen dataToDos;
 
 			try {
@@ -63,23 +59,21 @@ public class PopUpFunction {
 				contentString = new StringBuffer();
 				for (int i = 0; i < newContent.length; i++) {
 					for (int j = 0; j <= 1; j++) {
-						if (i != newContent.length-1) {
+						if (i != newContent.length - 1) {
 							newContent[i][j] = userAndToDos[i][j];
 							if (j == 0) {
 								contentString.append(userAndToDos[i][j] + ":");
-							}
-							else {
+							} else {
 								contentString.append(userAndToDos[i][j] + "\n");
 							}
-							
+
 						}
 					}
 				}
 				contentString.append("user:" + comment + "\n");
-				
+
 				dataToDos.setToDos(contentString.toString());
 				dataSchnittstelle.speichereDateiInformationen(dataToDos);
-				
 
 			} catch (Exception e) {
 				System.out.println("nicht funktioniert123");
@@ -89,10 +83,11 @@ public class PopUpFunction {
 
 	}
 
-	void edit(int table, int index, String comment) {
+	void edit(int table, int index, String comment) throws IOException {
+		dataSchnittstelle = DatenSchnittstelleImpl.getInstance();
+		String user = dataSchnittstelle.getEinstellungen().getUsername();
 		if (table == 0) {
 
-			dataSchnittstelle = new DatenSchnittstelleImpl();
 			DateiInformationen dataComments;
 
 			try {
@@ -108,18 +103,15 @@ public class PopUpFunction {
 							newContent[i][j] = userAndComments[i][j];
 							if (j == 0) {
 								contentString.append(userAndComments[i][j] + ":");
-							}
-							else {
+							} else {
 								contentString.append(userAndComments[i][j] + "\n");
 							}
-							
-						}
-						else {
+
+						} else {
 							if (j == 0) {
-								contentString.append(userAndComments[i][j] + ":");  
-								//User muss noch geholt werden!
-							}
-							else {
+								contentString.append(userAndComments[i][j] + ":");
+								// User muss noch geholt werden!
+							} else {
 								contentString.append(comment + "\n");
 								newContent[i][j] = comment;
 							}
@@ -128,14 +120,13 @@ public class PopUpFunction {
 				}
 				dataComments.setKommentare(contentString.toString());
 				dataSchnittstelle.speichereDateiInformationen(dataComments);
-				
 
 			} catch (Exception e) {
 				System.out.println("nicht funktioniert");
 			}
-			
+
 		} else {
-			dataSchnittstelle = new DatenSchnittstelleImpl();
+			dataSchnittstelle = DatenSchnittstelleImpl.getInstance();
 			DateiInformationen dataToDos;
 
 			try {
@@ -151,18 +142,15 @@ public class PopUpFunction {
 							newContent[i][j] = userAndToDos[i][j];
 							if (j == 0) {
 								contentString.append(userAndToDos[i][j] + ":");
-							}
-							else {
+							} else {
 								contentString.append(userAndToDos[i][j] + "\n");
 							}
-							
-						}
-						else {
+
+						} else {
 							if (j == 0) {
-								contentString.append(userAndToDos[i][j] + ":");  
-								//User muss noch geholt werden!
-							}
-							else {
+								contentString.append(userAndToDos[i][j] + ":");
+								// User muss noch geholt werden!
+							} else {
 								contentString.append(comment + "\n");
 								newContent[i][j] = comment;
 							}
@@ -171,7 +159,6 @@ public class PopUpFunction {
 				}
 				dataToDos.setToDos(contentString.toString());
 				dataSchnittstelle.speichereDateiInformationen(dataToDos);
-				
 
 			} catch (Exception e) {
 				System.out.println("nicht funktioniert");
@@ -184,7 +171,7 @@ public class PopUpFunction {
 	void delete(int table, int index) {
 		if (table == 0) {
 
-			dataSchnittstelle = new DatenSchnittstelleImpl();
+			dataSchnittstelle = DatenSchnittstelleImpl.getInstance();
 			DateiInformationen dataComments;
 
 			try {
@@ -200,24 +187,22 @@ public class PopUpFunction {
 							newContent[i][j] = userAndComments[i][j];
 							if (j == 0) {
 								contentString.append(userAndComments[i][j] + ":");
-							}
-							else {
+							} else {
 								contentString.append(userAndComments[i][j] + "\n");
 							}
-							
+
 						}
 					}
 				}
 				dataComments.setKommentare(contentString.toString());
 				dataSchnittstelle.speichereDateiInformationen(dataComments);
-				
 
 			} catch (Exception e) {
 				System.out.println("nicht funktioniert");
 			}
-			
+
 		} else {
-			dataSchnittstelle = new DatenSchnittstelleImpl();
+			dataSchnittstelle = DatenSchnittstelleImpl.getInstance();
 			DateiInformationen dataToDos;
 
 			try {
@@ -233,17 +218,15 @@ public class PopUpFunction {
 							newContent[i][j] = userAndToDos[i][j];
 							if (j == 0) {
 								contentString.append(userAndToDos[i][j] + ":");
-							}
-							else {
+							} else {
 								contentString.append(userAndToDos[i][j] + "\n");
 							}
-							
+
 						}
 					}
 				}
 				dataToDos.setToDos(contentString.toString());
 				dataSchnittstelle.speichereDateiInformationen(dataToDos);
-				
 
 			} catch (Exception e) {
 				System.out.println("nicht funktioniert");

@@ -1,12 +1,13 @@
 package de.verbund.sepp.gui.dialoge;
 
-import javax.swing.JDialog;
 import java.awt.BorderLayout;
-import javax.swing.JPanel;
 import java.awt.FlowLayout;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
+
 import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class StartUpDlg extends JDialog {
 	private JPanel panel;
@@ -25,6 +26,7 @@ public class StartUpDlg extends JDialog {
 		getContentPane().add(getPanel(), BorderLayout.NORTH);
 		getContentPane().add(getPanel_1(), BorderLayout.SOUTH);
 		getContentPane().add(getPanel_2(), BorderLayout.CENTER);
+		// TODO #61 sysout entfernen
 		System.out.println("keine Einstellungen vorhanden");
 
 	}

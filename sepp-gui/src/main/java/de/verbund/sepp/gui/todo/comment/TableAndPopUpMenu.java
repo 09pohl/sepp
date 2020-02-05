@@ -1,7 +1,5 @@
 package de.verbund.sepp.gui.todo.comment;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -20,7 +18,7 @@ public class TableAndPopUpMenu {
 	}
 
 	private JTable createTable(int toDifferentTables) {
-		
+
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -40,8 +38,10 @@ public class TableAndPopUpMenu {
 			}
 
 			private JPopupMenu createPopUpMenu(JPopupMenu popup, int rowindex) {
-				popup.add("Hinzufügen").addActionListener(e -> addOrEditJOP(AddOrEdit.ADD, rowindex, toDifferentTables));
-				popup.add("Editieren").addActionListener(e -> addOrEditJOP(AddOrEdit.EDIT, rowindex, toDifferentTables));
+				popup.add("Hinzufügen")
+						.addActionListener(e -> addOrEditJOP(AddOrEdit.ADD, rowindex, toDifferentTables));
+				popup.add("Editieren")
+						.addActionListener(e -> addOrEditJOP(AddOrEdit.EDIT, rowindex, toDifferentTables));
 				popup.add("Löschen").addActionListener(e -> deleteJOP(rowindex, toDifferentTables));
 				popUpFunction = new PopUpFunction();
 				return popup;
@@ -57,19 +57,19 @@ public class TableAndPopUpMenu {
 	}
 
 	private void addOrEditJOP(AddOrEdit text, int rowindex, int toDifferentTables) {
-		
+
 		String comment = "";
 		boolean goOn = true;
 
 		while (goOn) {
-			comment = JOptionPane.showInputDialog(null, text.getInfoText() + ":", text.getInfoText(), JOptionPane.OK_CANCEL_OPTION);
+			comment = JOptionPane.showInputDialog(null, text.getInfoText() + ":", text.getInfoText(),
+					JOptionPane.OK_CANCEL_OPTION);
 			try {
 				if (!comment.replaceAll("\\s+", "").isEmpty()) {
 					System.out.println(rowindex);
 					if (text.getInfoText().equals("Hinzufügen")) {
 						popUpFunction.add(toDifferentTables, rowindex, comment);
-					}
-					else {
+					} else {
 						popUpFunction.edit(toDifferentTables, rowindex, comment);
 					}
 					goOn = false;
@@ -79,24 +79,24 @@ public class TableAndPopUpMenu {
 			}
 		}
 	}
-	
+
 	enum AddOrEdit {
 		ADD("Hinzufügen"), EDIT("Bearbeiten");
+
 		private String infoText;
-		
-		AddOrEdit(String infoText){
+
+		AddOrEdit(String infoText) {
 			this.infoText = infoText;
 		}
-		
+
 		private String getInfoText() {
 			return infoText;
 		}
 
-
 	}
 
 	private void deleteJOP(int rowindex, int toDifferentTables) {
-		
+
 		int doDelete = JOptionPane.showConfirmDialog(null, "Wollen Sie diese Zeile wirklich löschen?", "Löschen",
 				JOptionPane.YES_NO_OPTION);
 

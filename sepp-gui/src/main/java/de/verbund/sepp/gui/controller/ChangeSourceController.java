@@ -8,15 +8,15 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import de.verbund.sepp.gui.SEPPMainDlg;
 import de.verbund.sepp.gui.dialoge.ChangeSourceDlg;
-import de.verbund.sepp.gui.dialoge.SEPPMainDlg;
 import de.verbund.sepp.main.daten.DatenSchnittstelle;
 import de.verbund.sepp.main.daten.DatenSchnittstelleImpl;
 
 public class ChangeSourceController {
 
 	private ChangeSourceDlg changeDlg;
-	private DatenSchnittstelle schnittstelle = new DatenSchnittstelleImpl();
+	private DatenSchnittstelle schnittstelle = DatenSchnittstelleImpl.getInstance();
 	private SEPPMainDlg seppMainDlg;
 
 	public ChangeSourceController(JFrame frame, SEPPMainDlg seppMainDlg) {
@@ -55,6 +55,9 @@ public class ChangeSourceController {
 		try {
 			schnittstelle.getEinstellungen().setProjektPfad(change);
 			schnittstelle.getEinstellungen().speichern();
+			ActiveFileController.getInstance()
+					.setAktiveDateiPfad(schnittstelle.getEinstellungen().getProjektDateiPfad());
+			ActiveFileController.getInstance().refreshLabel();
 			seppMainDlg.refreshMainTables();
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(changeDlg, "Pfad konnte nicht festgelegt werden!", "FEHLER!",

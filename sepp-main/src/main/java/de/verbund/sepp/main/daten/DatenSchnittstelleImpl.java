@@ -10,6 +10,18 @@ import de.verbund.sepp.main.utils.DateiHelfer;
 
 public class DatenSchnittstelleImpl implements DatenSchnittstelle {
 
+	private static DatenSchnittstelleImpl instance;
+
+	private DatenSchnittstelleImpl() {
+	}
+
+	public static DatenSchnittstelleImpl getInstance() {
+		if (instance == null) {
+			instance = new DatenSchnittstelleImpl();
+		}
+		return instance;
+	}
+
 	@Override
 	public Einstellungen getEinstellungen() throws IOException {
 		return Einstellungen.getInstance();

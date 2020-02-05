@@ -1,6 +1,5 @@
 package de.verbund.sepp.gui.controller;
 
-import java.awt.EventQueue;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
@@ -18,15 +17,10 @@ import de.verbund.sepp.main.daten.Einstellungen;
 public class StartUpController {
 
 	private StartUpDlg startDlg;
-	private DatenSchnittstelle schnittstelle = new DatenSchnittstelleImpl();
+	private DatenSchnittstelle schnittstelle = DatenSchnittstelleImpl.getInstance();
 
 	public StartUpController() {
-		EventQueue.invokeLater(new Runnable() {
-
-			public void run() {
-				initStartUp();
-			}
-		});
+		initStartUp();
 	}
 
 	protected void initStartUp() {
@@ -34,7 +28,6 @@ public class StartUpController {
 			Einstellungen settings = schnittstelle.getEinstellungen();
 			try {
 				settings.laden();
-				System.out.println("Einstellungen vorhanden");
 			} catch (FileNotFoundException e) {
 				startDlg = new StartUpDlg();
 				startDlg.getRootPane().setDefaultButton(startDlg.getSaveButton());
@@ -74,12 +67,17 @@ public class StartUpController {
 		String user = startDlg.getUserNameTf().getText();
 		if (!("".equals(dir) || "".equals(user))) {
 			if (!(user.contains(":"))) {
-			System.out.println("Projektverzeichnis: " + dir);
-			System.out.println("Benutzername: " + user);
-			schnittstelle.getEinstellungen().setProjektPfad(dir);
-			schnittstelle.getEinstellungen().setUsername(user);
-			schnittstelle.getEinstellungen().speichern();
-			startDlg.dispose();
+				// TODO #61 sysout entfernen
+				System.out.println("Projektverzeichnis: " + dir);
+				// TODO #61 sysout entfernen
+				System.out.println("Benutzername: " + user);
+				schnittstelle.getEinstellungen().setProjektPfad(dir);
+				schnittstelle.getEinstellungen().setUsername(user);
+				schnittstelle.getEinstellungen().speichern();
+				startDlg.dispose();
+			} else {
+				JOptionPane.showMessageDialog(startDlg, "Der Benutzername darf keinen Doppelpunkt enthalten!",
+						"FEHLER!", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 	}

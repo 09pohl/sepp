@@ -18,7 +18,7 @@ dependencies {
 jar {
   manifest {
     attributes(
-      'Main-Class': 'de.sepp.main.Application'
+      'Main-Class': 'de.verbund.sepp.gui.SEPPMainDlg'
     )
   }
 }

@@ -8,14 +8,16 @@ import javax.swing.JFrame;
 import de.verbund.sepp.main.daten.DatenSchnittstelleImpl;
 import de.verbund.sepp.main.daten.Einstellungen;
 
+// TODO #61 unbenutzte und Testklassen entfernen
+
 public class DummyFrame extends JFrame {
 
 	ToDoAndCommentBoxes boxes;
 
 	public DummyFrame() throws IOException {
-		Einstellungen einst = new DatenSchnittstelleImpl().getEinstellungen();
+		Einstellungen einst = DatenSchnittstelleImpl.getInstance().getEinstellungen();
 		einst.setUsername("test");
-		einst.setProjektPfad("C:\\Users\\Administrator\\git\\sepp\\TestOrdner");
+		einst.setProjektPfad("C:/Users/Administrator/it/sepp/TestOrdner");
 		System.out.println(einst.getProjektPfad());
 		einst.speichern();
 		setSize(1000, 1000);
