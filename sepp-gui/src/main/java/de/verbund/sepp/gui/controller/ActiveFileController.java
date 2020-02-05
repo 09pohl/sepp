@@ -16,17 +16,17 @@ public class ActiveFileController {
 	private JLabel lAktiveDatei;
 	private JButton bZurHauptdatei;
 
-	private static ActiveFileController instanz;
+	private static ActiveFileController instance;
 
 	private ActiveFileController() throws IOException {
 		aktiveDateiPfad = schnittstelle.getEinstellungen().getProjektDateiPfad();
 	}
 
-	public static ActiveFileController getInstanz() throws IOException {
-		if (ActiveFileController.instanz == null) {
-			ActiveFileController.instanz = new ActiveFileController();
+	public static ActiveFileController getInstance() throws IOException {
+		if (instance == null) {
+			instance = new ActiveFileController();
 		}
-		return ActiveFileController.instanz;
+		return instance;
 	}
 
 	public String getAktiveDateiPfad() {

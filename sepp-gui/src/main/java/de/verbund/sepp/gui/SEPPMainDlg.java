@@ -1,4 +1,4 @@
-package de.verbund.sepp.gui.dialoge;
+package de.verbund.sepp.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;

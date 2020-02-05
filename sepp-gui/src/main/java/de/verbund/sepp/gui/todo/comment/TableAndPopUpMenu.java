@@ -1,7 +1,5 @@
 package de.verbund.sepp.gui.todo.comment;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -56,36 +54,38 @@ public class TableAndPopUpMenu {
 	}
 
 	private void addOrEditJOP(AddOrEdit text) {
-		
+
 		String comment = "";
 		boolean goOn = true;
 
 		while (goOn) {
-			comment = JOptionPane.showInputDialog(null, text.getInfoText() + ":", text.getInfoText(), JOptionPane.OK_CANCEL_OPTION);
+			comment = JOptionPane.showInputDialog(null, text.getInfoText() + ":", text.getInfoText(),
+					JOptionPane.OK_CANCEL_OPTION);
 			try {
 				if (!comment.replaceAll("\\s+", "").isEmpty()) {
+					// TODO #61 sysout entfernen
 					System.out.println(comment);
 					goOn = false;
-					//-->Funktionen
+					// -->Funktionen
 				}
 			} catch (NullPointerException npe) {
 				goOn = false;
 			}
 		}
 	}
-	
+
 	enum AddOrEdit {
 		ADD("Hinzufügen"), EDIT("Bearbeiten");
+
 		private String infoText;
-		
-		AddOrEdit(String infoText){
+
+		AddOrEdit(String infoText) {
 			this.infoText = infoText;
 		}
-		
+
 		private String getInfoText() {
 			return infoText;
 		}
-
 
 	}
 
@@ -95,7 +95,7 @@ public class TableAndPopUpMenu {
 
 		if (doDelete == JOptionPane.YES_OPTION) {
 			System.out.println("DoDelete");
-			//Funktion
+			// Funktion
 		}
 	}
 

@@ -8,8 +8,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import de.verbund.sepp.gui.SEPPMainDlg;
 import de.verbund.sepp.gui.dialoge.ChangeSourceDlg;
-import de.verbund.sepp.gui.dialoge.SEPPMainDlg;
 import de.verbund.sepp.main.daten.DatenSchnittstelle;
 import de.verbund.sepp.main.daten.DatenSchnittstelleImpl;
 
