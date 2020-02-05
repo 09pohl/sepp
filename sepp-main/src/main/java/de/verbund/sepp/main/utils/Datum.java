@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * @author tz
  */
+
 public class Datum {
 
 	public static String toString(LocalDate datum) {
