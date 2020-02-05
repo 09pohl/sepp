@@ -66,7 +66,7 @@ public class DateiGUI extends JFrame implements ActionListener{
 	//Laden von Button mit Verweis auf ToDo - und Kommentarliste
 	private Component getSueden(){
 		JPanel p = new JPanel();
-		bInfo = new JButton("ToDo - & Kommenatarliste");
+		bInfo = new JButton("ToDo - & Kommentarliste");
 		bInfo.addActionListener(this);
 		p.add(bInfo);
 		return p;
