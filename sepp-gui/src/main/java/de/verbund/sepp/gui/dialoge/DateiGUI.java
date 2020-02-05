@@ -21,7 +21,7 @@ import java.time.format.DateTimeFormatter;
 
 public class DateiGUI extends JPanel implements ActionListener{
 	
-	DatenSchnittstelle schnittstelle = new DatenSchnittstelleImpl();
+	DatenSchnittstelle schnittstelle = DatenSchnittstelleImpl.getInstance();
 	Einstellungen einstellungen = schnittstelle.getEinstellungen();
 	private JButton bInfo;
 	private static final DateTimeFormatter DATE_FORMATTER_WITH_TIME = DateTimeFormatter.ofPattern("MMM d, yyyy HH:mm:ss");

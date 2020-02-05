@@ -24,7 +24,7 @@ public class DateiInfoHelfer {
 
 	public static ArrayList<DateiInformationen> dateiInformationenListe(ArrayList<String> dateiPfade)
 			throws IOException {
-		DatenSchnittstelle schnittstelle = new DatenSchnittstelleImpl();
+		DatenSchnittstelle schnittstelle = DatenSchnittstelleImpl.getInstance();
 		ArrayList<DateiInformationen> result = new ArrayList<DateiInformationen>();
 		for (String pfad : dateiPfade) {
 			result.add(schnittstelle.getDateiInformationen(pfad));
@@ -33,7 +33,7 @@ public class DateiInfoHelfer {
 	}
 
 	public static String nameMitUnterordner(String pfad) throws IOException {
-		Einstellungen einstellungen = new DatenSchnittstelleImpl().getEinstellungen();
+		Einstellungen einstellungen = DatenSchnittstelleImpl.getInstance().getEinstellungen();
 		String result = pfad.replace(einstellungen.getProjektPfad(), "");
 		return result;
 	}

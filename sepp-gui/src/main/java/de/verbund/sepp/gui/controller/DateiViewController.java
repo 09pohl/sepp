@@ -13,7 +13,7 @@ import de.verbund.sepp.main.daten.DatenSchnittstelleImpl;
 public class DateiViewController extends JScrollPane{
 	
 	private DummyFileInfoGUI infoGUI;
-	private DatenSchnittstelle data = new DatenSchnittstelleImpl();
+	private DatenSchnittstelle data = DatenSchnittstelleImpl.getInstance();
 	private ArrayList<String> files;
 	
 	public DateiViewController() {

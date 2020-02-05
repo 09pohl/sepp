@@ -12,21 +12,21 @@ public class DatenSchnittstelleImplTest {
 	// 001
 	@Test(expected = Test.None.class)
 	public void testGetDateiInformationen() throws IOException {
-		DatenSchnittstelle schnittstelle = new DatenSchnittstelleImpl();
+		DatenSchnittstelle schnittstelle = DatenSchnittstelleImpl.getInstance();
 		schnittstelle.getDateiInformationen("C:/Java/0-sepp/Dokument.rtf");
 	}
 
 	// 002
 	@Test(expected = NoSuchFileException.class)
 	public void testKeineDatei() throws IOException {
-		DatenSchnittstelle schnittstelle = new DatenSchnittstelleImpl();
+		DatenSchnittstelle schnittstelle = DatenSchnittstelleImpl.getInstance();
 		DateiInformationen data = schnittstelle.getDateiInformationen("C:/Java/0-sepp/Dokument2.rtf");
 	}
 
 	// 003
 	@Test(expected = Test.None.class)
 	public void testSchreiben() throws IOException {
-		DatenSchnittstelle schnittstelle = new DatenSchnittstelleImpl();
+		DatenSchnittstelle schnittstelle = DatenSchnittstelleImpl.getInstance();
 		DateiInformationen data = schnittstelle.getDateiInformationen("C:/Java/0-sepp/Dokument.rtf");
 		data.setKommentare("ich:test");
 		data.setToDos("ich:test");
@@ -38,7 +38,7 @@ public class DatenSchnittstelleImplTest {
 	// 004
 	@Test(expected = Test.None.class)
 	public void testKommentarPfad() throws IOException {
-		DatenSchnittstelle schnittstelle = new DatenSchnittstelleImpl();
+		DatenSchnittstelle schnittstelle = DatenSchnittstelleImpl.getInstance();
 		DateiInformationen data = schnittstelle.getDateiInformationen("C:/Java/0-sepp/Dokument.rtf");
 		data.setKommentare("ich:test");
 		data.setToDos("ich:test");
@@ -53,7 +53,7 @@ public class DatenSchnittstelleImplTest {
 		Einstellungen test = Einstellungen.getInstance();
 		Einstellungen.resetInstance();
 		test.projektPfad = "C:/Java/0-sepp/0-sepp/";
-		DatenSchnittstelle schnittstelle = new DatenSchnittstelleImpl();
+		DatenSchnittstelle schnittstelle = DatenSchnittstelleImpl.getInstance();
 		for (String string : schnittstelle.getDateiPfade(test)) {
 			System.out.println(string);
 		}
