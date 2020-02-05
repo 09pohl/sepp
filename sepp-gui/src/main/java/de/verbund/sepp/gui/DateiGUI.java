@@ -36,9 +36,9 @@ public class DateiGUI extends JFrame implements ActionListener{
 	    getContentPane().add(getNorden(), BorderLayout.NORTH);
 	    getContentPane().add(getMitte(), BorderLayout.CENTER);
 	    getContentPane().add(getSueden(), BorderLayout.SOUTH);
-	    setVisible(true);
-	    
+	    setVisible(true); 
 	  }
+	
 	//Laden von Icon und Namen
 	private Component getNorden() {
 		Icon icon = data.getIcon();
@@ -50,8 +50,6 @@ public class DateiGUI extends JFrame implements ActionListener{
 		p.add(n);
 		return p;
 	}
-
-	
 
 	//Laden von Datum
 	private Component getMitte() throws IOException {
@@ -74,7 +72,6 @@ public class DateiGUI extends JFrame implements ActionListener{
 		return p;
 	}
 
-	
 	public static void main(String[] args)
 	  {
 	    SwingUtilities.invokeLater(new Runnable(){
