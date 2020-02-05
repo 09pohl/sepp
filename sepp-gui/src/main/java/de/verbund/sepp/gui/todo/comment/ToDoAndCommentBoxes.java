@@ -35,8 +35,8 @@ public class ToDoAndCommentBoxes {
 		DateiInformationen dataComments;
 
 		try {
-			dataComments = dataSchnittstelle.getDateiInformationen(dataSchnittstelle.getEinstellungen().getProjektPfad()
-					+ "\\" + DatenSchnittstelle.PRIMAER_DATEINAME);
+			dataComments = dataSchnittstelle.getDateiInformationen(
+					dataSchnittstelle.getEinstellungen().getProjektPfad() + "/" + DatenSchnittstelle.PRIMAER_DATEINAME);
 			String[][] userAndComments = DateiInfoHelfer.getZeilenArray(dataComments.getKommentare());
 			tableComment = gefuellteTabelle(userAndComments, spaltenKommentare);
 			return tableComment;

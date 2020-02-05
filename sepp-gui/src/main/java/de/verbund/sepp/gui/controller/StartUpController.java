@@ -1,6 +1,5 @@
 package de.verbund.sepp.gui.controller;
 
-import java.awt.EventQueue;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
@@ -21,12 +20,7 @@ public class StartUpController {
 	private DatenSchnittstelle schnittstelle = new DatenSchnittstelleImpl();
 
 	public StartUpController() {
-		EventQueue.invokeLater(new Runnable() {
-
-			public void run() {
-				initStartUp();
-			}
-		});
+		initStartUp();
 	}
 
 	protected void initStartUp() {
@@ -74,12 +68,12 @@ public class StartUpController {
 		String user = startDlg.getUserNameTf().getText();
 		if (!("".equals(dir) || "".equals(user))) {
 			if (!(user.contains(":"))) {
-			System.out.println("Projektverzeichnis: " + dir);
-			System.out.println("Benutzername: " + user);
-			schnittstelle.getEinstellungen().setProjektPfad(dir);
-			schnittstelle.getEinstellungen().setUsername(user);
-			schnittstelle.getEinstellungen().speichern();
-			startDlg.dispose();
+				System.out.println("Projektverzeichnis: " + dir);
+				System.out.println("Benutzername: " + user);
+				schnittstelle.getEinstellungen().setProjektPfad(dir);
+				schnittstelle.getEinstellungen().setUsername(user);
+				schnittstelle.getEinstellungen().speichern();
+				startDlg.dispose();
 			}
 		}
 	}
