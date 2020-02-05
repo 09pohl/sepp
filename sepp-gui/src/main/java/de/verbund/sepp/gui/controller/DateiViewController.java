@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import de.verbund.sepp.gui.DummyFileInfoGUI;
 import de.verbund.sepp.main.daten.DatenSchnittstelle;
@@ -26,7 +27,7 @@ public class DateiViewController {
 		});
 	}
 
-	public JPanel init(){
+	public JScrollPane init(){
 		try {
 			directory = new File(data.getEinstellungen().getProjektPfad());
 		} catch (IOException e) {
@@ -34,9 +35,8 @@ public class DateiViewController {
 			e.printStackTrace();
 		}
 		int filecount = directory.list().length;
-		infoGUI = new DummyFileInfoGUI(filecount);
-		infoGUI.setVisible(true);
-		return infoGUI;
+		infoGUI = new DummyFileInfoGUI(50);
+		return new JScrollPane(infoGUI);
 	}
 
 }

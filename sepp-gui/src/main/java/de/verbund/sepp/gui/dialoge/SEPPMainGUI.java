@@ -1,9 +1,12 @@
 package de.verbund.sepp.gui.dialoge;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.io.IOException;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -40,7 +43,7 @@ public class SEPPMainGUI {
 		seppMainFrame.setTitle("SuperEffectiveProjectPlanning (SEPP)");
 		seppMainFrame.setContentPane(panel);
 		seppMainFrame.setSize(1000, 800);
-		seppMainFrame.setResizable(false);
+		seppMainFrame.setResizable(true);
 		seppMainFrame.setLocationRelativeTo(null);
 		seppMainFrame.setVisible(true);
 	}
@@ -51,20 +54,25 @@ public class SEPPMainGUI {
 		erzeugeButtonPanel();
 		panel.add(mainPanel, BorderLayout.CENTER);
 		DateiViewController dc = new DateiViewController();
-		JPanel dateiPanel = dc.init();
+		//JPanel dateiPanel = new JPanel();
+		JScrollPane dateiScroll = dc.init();
+		dateiScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		dateiScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		//dateiPanel.add(dateiScroll);
 		JPanel infoPanel = new JPanel(new BorderLayout());
 		JPanel toDoPanel = new JPanel(new BorderLayout());
 		JScrollPane toDoScroll = toDoComments.getToDoBox();
-		toDoScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		toDoScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		toDoPanel.add(toDoScroll);
 		JPanel commentsPanel = new JPanel(new BorderLayout());
 		JScrollPane commentScroll = toDoComments.getCommentBox();
-		commentScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		commentScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		commentsPanel.add(commentScroll);
 		JSplitPane infoSplitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, toDoPanel, commentsPanel);
 		infoSplitPane.setDividerLocation(360);
 		infoPanel.add(infoSplitPane, BorderLayout.CENTER);
-		JSplitPane frameSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, dateiPanel, infoPanel);
+		JSplitPane frameSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, dateiScroll, infoPanel);
+		frameSplitPane.resetToPreferredSizes();
 		frameSplitPane.setDividerLocation(485);
 		mainPanel.add(frameSplitPane, BorderLayout.CENTER);
 	}
