@@ -95,7 +95,7 @@ public class SEPPMainDlg {
 		refreshTableModel(userToDos, ToDoAndCommentBoxes.spaltenTodos, toDoComments.getTableToDo());
 	}
 
-	private void refreshTableModel(String[][] inhalte, String[] spaltenTitel, JTable table) {
+	public void refreshTableModel(String[][] inhalte, String[] spaltenTitel, JTable table) {
 		if (table != null) {
 			table.setModel(new DefaultTableModel(inhalte, spaltenTitel));
 			AbstractTableModel absz = (AbstractTableModel) toDoComments.getTableComment().getModel();

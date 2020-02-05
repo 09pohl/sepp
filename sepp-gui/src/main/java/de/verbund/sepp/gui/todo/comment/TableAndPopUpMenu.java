@@ -13,6 +13,7 @@ import javax.swing.table.TableModel;
 public class TableAndPopUpMenu {
 
 	private JTable table;
+	private PopUpFunction popUpFunction;
 
 	public TableAndPopUpMenu(TableModel model) {
 		table = new JTable(model);
@@ -42,6 +43,7 @@ public class TableAndPopUpMenu {
 				popup.add("Hinzufügen").addActionListener(e -> addOrEditJOP(AddOrEdit.ADD, rowindex, toDifferentTables));
 				popup.add("Editieren").addActionListener(e -> addOrEditJOP(AddOrEdit.EDIT, rowindex, toDifferentTables));
 				popup.add("Löschen").addActionListener(e -> deleteJOP(rowindex, toDifferentTables));
+				popUpFunction = new PopUpFunction();
 				return popup;
 			}
 		});
@@ -64,8 +66,13 @@ public class TableAndPopUpMenu {
 			try {
 				if (!comment.replaceAll("\\s+", "").isEmpty()) {
 					System.out.println(rowindex);
+					if (text.getInfoText().equals("Hinzufügen")) {
+						popUpFunction.add(toDifferentTables, rowindex, comment);
+					}
+					else {
+						popUpFunction.edit(toDifferentTables, rowindex, comment);
+					}
 					goOn = false;
-					//-->Funktionen
 				}
 			} catch (NullPointerException npe) {
 				goOn = false;
@@ -90,13 +97,12 @@ public class TableAndPopUpMenu {
 
 	private void deleteJOP(int rowindex, int toDifferentTables) {
 		
-		System.out.println(toDifferentTables + "dT");
 		int doDelete = JOptionPane.showConfirmDialog(null, "Wollen Sie diese Zeile wirklich löschen?", "Löschen",
 				JOptionPane.YES_NO_OPTION);
 
 		if (doDelete == JOptionPane.YES_OPTION) {
 			System.out.println(rowindex + " " + toDifferentTables);
-			//Funktion
+			popUpFunction.delete(toDifferentTables, rowindex);
 		}
 	}
 
