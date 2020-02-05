@@ -80,6 +80,11 @@ public class DateiHelfer {
 		return icon;
 	}
 
+	public String nameMitEndung() {
+		String name = Paths.get(dateiName).getFileName().toString();
+		return name;
+	}
+
 	public boolean existiert() {
 		File datei = new File(dateiName);
 		return datei.exists() && !datei.isDirectory();
