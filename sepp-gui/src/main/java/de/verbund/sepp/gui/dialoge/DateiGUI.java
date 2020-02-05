@@ -25,10 +25,14 @@ public class DateiGUI extends JPanel implements ActionListener{
 	Einstellungen einstellungen = schnittstelle.getEinstellungen();
 	private JButton bInfo;
 	private static final DateTimeFormatter DATE_FORMATTER_WITH_TIME = DateTimeFormatter.ofPattern("MMM d, yyyy HH:mm:ss");
-	private String verzeichnis = einstellungen.getProjektDateiPfad(); //TODO - Dateiaufruf
-	DateiInformationen data = schnittstelle.getDateiInformationen(verzeichnis);
+	private String verzeichnis;
+	private String name;
+	DateiInformationen data;
 	
-	public DateiGUI() throws IOException {
+	public DateiGUI(String verzeichnis, String name) throws IOException {
+		this.name = name;
+		this.verzeichnis = verzeichnis;
+		data = schnittstelle.getDateiInformationen(verzeichnis);
 		//Container panel = getContentPane();
 		setSize(350, 150);
 		//setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -47,7 +51,6 @@ public class DateiGUI extends JPanel implements ActionListener{
 	//Laden von Icon und Namen
 	private Component getNorden() {
 		Icon icon = data.getIcon();
-		String name = data.getName();
 		JPanel p = new JPanel();
 		JLabel i = new JLabel(icon);
 		JLabel n = new JLabel(name);
@@ -64,7 +67,7 @@ public class DateiGUI extends JPanel implements ActionListener{
 		String s = fileTimeToString(datum_1);
 		JLabel label_1 = new JLabel("Erstellungsdatum: " + s);
 		String s1 = fileTimeToString(datum_2);
-		JLabel label_2 = new JLabel("Aenderungsdatum: " + s1);
+		JLabel label_2 = new JLabel("Änderungsdatum: " + s1);
 		p.add(label_1);
 		p.add(label_2);
 		return p;

@@ -2,6 +2,7 @@ package de.verbund.sepp.gui.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.JScrollPane;
 
@@ -13,20 +14,19 @@ public class DateiViewController extends JScrollPane{
 	
 	private DummyFileInfoGUI infoGUI;
 	private DatenSchnittstelle data = new DatenSchnittstelleImpl();
-	private File directory;
+	private ArrayList<String> files;
 	
 	public DateiViewController() {
 	}
 
 	public JScrollPane init(){
 		try {
-			directory = new File(data.getEinstellungen().getProjektPfad());
+			files = data.getDateiPfade(data.getEinstellungen());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		int filecount = directory.list().length;
-		infoGUI = new DummyFileInfoGUI(filecount);
+		infoGUI = new DummyFileInfoGUI(files);
 		return new JScrollPane(infoGUI);
 	}
 
