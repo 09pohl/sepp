@@ -17,7 +17,7 @@ import de.verbund.sepp.main.daten.Einstellungen;
 public class StartUpController {
 
 	private StartUpDlg startDlg;
-	private DatenSchnittstelle schnittstelle = new DatenSchnittstelleImpl();
+	private DatenSchnittstelle schnittstelle = DatenSchnittstelleImpl.getInstance();
 
 	public StartUpController() {
 		initStartUp();

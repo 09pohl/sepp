@@ -30,7 +30,7 @@ public class ToDoAndCommentBoxes {
 	}
 
 	private JTable createCommentTable() {
-		dataSchnittstelle = new DatenSchnittstelleImpl();
+		dataSchnittstelle = DatenSchnittstelleImpl.getInstance();
 		DateiInformationen dataComments;
 
 		try {
@@ -47,7 +47,7 @@ public class ToDoAndCommentBoxes {
 	}
 
 	private JTable createToDoTable() {
-		dataSchnittstelle = new DatenSchnittstelleImpl();
+		dataSchnittstelle = DatenSchnittstelleImpl.getInstance();
 		DateiInformationen dataToDos;
 
 		try {

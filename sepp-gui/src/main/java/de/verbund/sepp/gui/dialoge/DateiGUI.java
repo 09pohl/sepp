@@ -6,28 +6,32 @@ import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.nio.file.attribute.FileTime;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 
 import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import de.verbund.sepp.main.daten.*;
 
-import java.nio.file.attribute.FileTime;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
+import de.verbund.sepp.main.daten.DateiInformationen;
+import de.verbund.sepp.main.daten.DatenSchnittstelle;
+import de.verbund.sepp.main.daten.DatenSchnittstelleImpl;
+import de.verbund.sepp.main.daten.Einstellungen;
 
-public class DateiGUI extends JFrame implements ActionListener{
-	
+public class DateiGUI extends JFrame implements ActionListener {
+
 	Einstellungen einstellungen;
 	private JButton bInfo;
-	private static final DateTimeFormatter DATE_FORMATTER_WITH_TIME = DateTimeFormatter.ofPattern("MMM d, yyyy HH:mm:ss");
-	private String verzeichnis = einstellungen.getProjektDateiPfad(); //TODO - Dateiaufruf
-	DatenSchnittstelle schnittstelle = new DatenSchnittstelleImpl();
+	private static final DateTimeFormatter DATE_FORMATTER_WITH_TIME = DateTimeFormatter
+			.ofPattern("MMM d, yyyy HH:mm:ss");
+	private String verzeichnis = einstellungen.getProjektDateiPfad(); // TODO - Dateiaufruf
+	DatenSchnittstelle schnittstelle = DatenSchnittstelleImpl.getInstance();
 	DateiInformationen data = schnittstelle.getDateiInformationen(verzeichnis);
-	
+
 	public DateiGUI() throws IOException {
 		Container panel = getContentPane();
 		setSize(350, 150);
@@ -35,16 +39,15 @@ public class DateiGUI extends JFrame implements ActionListener{
 		setLocationRelativeTo(null);
 		panel.setLayout(new BorderLayout());
 		setDefaultLookAndFeelDecorated(true);
-	    setResizable(false);
-	    
-	    getContentPane().add(getNorden(), BorderLayout.NORTH);
-	    getContentPane().add(getMitte(), BorderLayout.CENTER);
-	    getContentPane().add(getSueden(), BorderLayout.SOUTH);
-	    setVisible(true); 
-	  }
+		setResizable(false);
 
+		getContentPane().add(getNorden(), BorderLayout.NORTH);
+		getContentPane().add(getMitte(), BorderLayout.CENTER);
+		getContentPane().add(getSueden(), BorderLayout.SOUTH);
+		setVisible(true);
+	}
 
-	//Laden von Icon und Namen
+	// Laden von Icon und Namen
 	private Component getNorden() {
 		Icon icon = data.getIcon();
 		String name = data.getName();
@@ -56,7 +59,7 @@ public class DateiGUI extends JFrame implements ActionListener{
 		return p;
 	}
 
-	//Laden von Datum
+	// Laden von Datum
 	private Component getMitte() throws IOException {
 		JPanel p = new JPanel();
 		FileTime datum_1 = data.getErstellungsDatum();
@@ -69,42 +72,40 @@ public class DateiGUI extends JFrame implements ActionListener{
 		p.add(label_2);
 		return p;
 	}
-	
-	//Laden von Button mit Verweis auf ToDo - und Kommentarliste
-	private Component getSueden(){
+
+	// Laden von Button mit Verweis auf ToDo - und Kommentarliste
+	private Component getSueden() {
 		JPanel p = new JPanel();
 		bInfo = new JButton("ToDo - & Kommentarliste");
 		bInfo.addActionListener(this);
 		p.add(bInfo);
 		return p;
 	}
-	
-	//DateTimeFormatter
+
+	// DateTimeFormatter
 	public static String fileTimeToString(FileTime fileTime) {
-	      String s = parseToString(
-	              fileTime.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
-	      return s;
+		String s = parseToString(fileTime.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
+		return s;
 	}
 
 	public static FileTime fileTimeFromString(String dateTimeString) {
-	      LocalDateTime localDateTime = parseFromString(dateTimeString);
-	      return FileTime.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
+		LocalDateTime localDateTime = parseFromString(dateTimeString);
+		return FileTime.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
 	}
-	
+
 	public static String parseToString(LocalDateTime localDateTime) {
-	      return localDateTime.format(DATE_FORMATTER_WITH_TIME);
+		return localDateTime.format(DATE_FORMATTER_WITH_TIME);
 	}
 
 	public static LocalDateTime parseFromString(String date) {
-	      return LocalDateTime.parse(date, DATE_FORMATTER_WITH_TIME);
+		return LocalDateTime.parse(date, DATE_FORMATTER_WITH_TIME);
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == bInfo) {
-			//TODO: Load TODO-List & Kommentarliste;
+			// TODO: Load TODO-List & Kommentarliste;
 		}
 	}
-	
-	
+
 }

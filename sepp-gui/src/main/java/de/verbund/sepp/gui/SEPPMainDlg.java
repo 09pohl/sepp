@@ -81,7 +81,7 @@ public class SEPPMainDlg {
 	}
 
 	private void erzeugeButtonPanel() throws IOException {
-		DatenSchnittstelle schnittstelle = new DatenSchnittstelleImpl();
+		DatenSchnittstelle schnittstelle = DatenSchnittstelleImpl.getInstance();
 		JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		JButton refreshButton = new JButton("Aktualisieren");
 		refreshButton.addActionListener(e -> {
@@ -117,7 +117,7 @@ public class SEPPMainDlg {
 	}
 
 	public void refreshMainTables() throws IOException {
-		DatenSchnittstelle dataSchnittstelle = new DatenSchnittstelleImpl();
+		DatenSchnittstelle dataSchnittstelle = DatenSchnittstelleImpl.getInstance();
 		DateiInformationen daten;
 		String dateiPfad = ActiveFileController.getInstance().getAktiveDateiPfad();
 		daten = dataSchnittstelle.getDateiInformationen(dateiPfad);
