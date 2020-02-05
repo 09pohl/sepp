@@ -88,7 +88,7 @@ public class SEPPMainDlg {
 		DatenSchnittstelle dataSchnittstelle = new DatenSchnittstelleImpl();
 		DateiInformationen daten;
 		daten = dataSchnittstelle.getDateiInformationen(
-				dataSchnittstelle.getEinstellungen().getProjektPfad() + "\\" + DatenSchnittstelle.PRIMAER_DATEINAME);
+				dataSchnittstelle.getEinstellungen().getProjektPfad() + "/" + DatenSchnittstelle.PRIMAER_DATEINAME);
 		String[][] userKommentare = DateiInfoHelfer.getZeilenArray(daten.getKommentare());
 		refreshTableModel(userKommentare, ToDoAndCommentBoxes.spaltenKommentare, toDoComments.getTableComment());
 		String[][] userToDos = DateiInfoHelfer.getZeilenArray(daten.getToDos());
