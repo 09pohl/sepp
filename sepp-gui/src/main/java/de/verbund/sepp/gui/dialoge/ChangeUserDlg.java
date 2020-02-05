@@ -5,7 +5,6 @@ import javax.swing.JFrame;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
-import javax.swing.SwingConstants;
 import java.awt.Insets;
 import javax.swing.JTextField;
 import javax.swing.JButton;

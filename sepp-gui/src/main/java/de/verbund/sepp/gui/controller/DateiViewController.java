@@ -1,10 +1,8 @@
 package de.verbund.sepp.gui.controller;
 
-import java.awt.EventQueue;
 import java.io.File;
 import java.io.IOException;
 
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import de.verbund.sepp.gui.DummyFileInfoGUI;
