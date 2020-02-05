@@ -35,7 +35,7 @@ public class DateiViewController {
 			e.printStackTrace();
 		}
 		int filecount = directory.list().length;
-		infoGUI = new DummyFileInfoGUI(50);
+		infoGUI = new DummyFileInfoGUI(filecount);
 		return new JScrollPane(infoGUI);
 	}
 
