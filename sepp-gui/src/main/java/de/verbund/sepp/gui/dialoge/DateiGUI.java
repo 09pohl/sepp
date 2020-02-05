@@ -24,11 +24,11 @@ import java.time.format.DateTimeFormatter;
 public class DateiGUI extends JFrame implements ActionListener{
 
 	private JButton bInfo;
-	private static final String VERZEICHNIS = "C:\\java\\git\\sepp\\TestOrdner\\Aufgaben.rtf"; //TODO - Verzeichnis als Parameter
+	private String verzeichnis = "C:\\java\\git\\sepp\\TestOrdner\\Aufgaben.rtf"; //TODO - Verzeichnis als Parameter
 	private static final DateTimeFormatter DATE_FORMATTER_WITH_TIME = DateTimeFormatter.ofPattern("MMM d, yyyy HH:mm:ss");
 	
 	DatenSchnittstelle schnittstelle = new DatenSchnittstelleImpl();
-	DateiInformationen data = schnittstelle.getDateiInformationen(VERZEICHNIS);
+	DateiInformationen data = schnittstelle.getDateiInformationen(verzeichnis);
 	
 	public DateiGUI() throws IOException {
 		Container panel = getContentPane();
