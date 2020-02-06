@@ -19,7 +19,6 @@ public class ChangeSourceController {
 	private ChangeSourceDlg changeDlg;
 	private DatenSchnittstelle schnittstelle = DatenSchnittstelleImpl.getInstance();
 	private SEPPMainDlg seppMainDlg;
-	private StringHelfer helferlein;
 
 	public ChangeSourceController(JFrame frame, SEPPMainDlg seppMainDlg) {
 
@@ -54,7 +53,7 @@ public class ChangeSourceController {
 
 	protected void saveSelection() {
 		String change = changeDlg.getNewDirectoryTf().getText();
-		if (!(helferlein.isNullEmptyOrWhitespace(change) || helferlein.isNullOrEmpty(change))) {
+		if (!(StringHelfer.isNullEmptyOrWhitespace(change) || StringHelfer.isNullOrEmpty(change))) {
 			try {
 				schnittstelle.getEinstellungen().setProjektPfad(change);
 				schnittstelle.getEinstellungen().speichern();

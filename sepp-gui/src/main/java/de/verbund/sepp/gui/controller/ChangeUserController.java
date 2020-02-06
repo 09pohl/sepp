@@ -16,7 +16,6 @@ public class ChangeUserController {
 
 	private ChangeUserDlg changeDlg;
 	private DatenSchnittstelle schnittstelle = DatenSchnittstelleImpl.getInstance();
-	private StringHelfer helferlein;
 
 	public ChangeUserController(JFrame frame) {
 		EventQueue.invokeLater(new Runnable() {
@@ -47,7 +46,7 @@ public class ChangeUserController {
 
 	protected void saveUserName() {
 		String change = changeDlg.getNewUserNameTf().getText();
-		if (!(helferlein.isNullEmptyOrWhitespace(change) || helferlein.isNullOrEmpty(change))) {
+		if (!(StringHelfer.isNullEmptyOrWhitespace(change) || StringHelfer.isNullOrEmpty(change))) {
 			if (!(change.contains(":"))) {
 				try {
 					schnittstelle.getEinstellungen().setUsername(change);
