@@ -12,6 +12,7 @@ import java.nio.file.attribute.FileTime;
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.CompoundBorder;
@@ -19,12 +20,13 @@ import javax.swing.border.EmptyBorder;
 
 import de.verbund.sepp.gui.SEPPMainDlg;
 import de.verbund.sepp.gui.controller.ActiveFileController;
-import de.verbund.sepp.gui.controller.TestDateioeffnerController;
+import de.verbund.sepp.gui.controller.DateioeffnerController;
 import de.verbund.sepp.main.daten.DateiInformationen;
 import de.verbund.sepp.main.daten.DatenSchnittstelle;
 import de.verbund.sepp.main.daten.DatenSchnittstelleImpl;
 import de.verbund.sepp.main.daten.Einstellungen;
 import de.verbund.sepp.main.utils.DateiHelfer;
+import de.verbund.sepp.main.utils.DateiInfoHelfer;
 import de.verbund.sepp.main.utils.DatumHelfer;
 import de.verbund.sepp.main.utils.HTMLHelfer;
 
@@ -35,6 +37,8 @@ public class DateiGUI extends JPanel implements ActionListener {
 	private JButton bDatei;
 	private JButton bInfo;
 	private String name;
+	private JFileChooser fc;
+	DateioeffnerController controller = new DateioeffnerController();
 	DatenSchnittstelle schnittstelle = DatenSchnittstelleImpl.getInstance();
 	DateiInformationen data;
 
@@ -52,13 +56,19 @@ public class DateiGUI extends JPanel implements ActionListener {
 	}
 
 	// Laden von Icon und Endung
-	private Component getNorden() {
-		Icon icon = data.getIcon();
+	private Component getNorden() throws IOException {
+		Icon fileimg = data.getIcon();
+		fc = new JFileChooser();
+		String file = schnittstelle.getEinstellungen().getProjektPfad();
+		File fileconv = new File(file);
+		Icon folderimg = fc.getUI().getFileView(fc).getIcon(fileconv);
 		JPanel p = new JPanel();
-		bDatei = new JButton(icon);
+		bOrdner = new JButton(folderimg);
+		bDatei = new JButton(fileimg);
 		JLabel n = new JLabel("[" + DateiHelfer.dateiEndung(name) + "]");
-		
+		bOrdner.addActionListener(this);
 		bDatei.addActionListener(this);
+		p.add(bOrdner);
 		p.add(bDatei);
 		p.add(n);
 		return p;
@@ -80,11 +90,8 @@ public class DateiGUI extends JPanel implements ActionListener {
 	// Laden von Button mit Verweis auf ToDo - und Kommentarliste
 	private Component getSueden() {
 		JPanel p = new JPanel();
-		bOrdner = new JButton();
 		bInfo = new JButton("To-Do & Kommentarliste");
-		bOrdner.addActionListener(this);
 		bInfo.addActionListener(this);
-		p.add(bOrdner);
 		p.add(bInfo);
 		return p;
 	}
@@ -105,11 +112,22 @@ public class DateiGUI extends JPanel implements ActionListener {
 			System.out.println(data.getPfad());
 		}
 		
-		if (e.getSource() == bDatei) {
-			TestDateioeffnerController controller = new TestDateioeffnerController();
+		if (e.getSource() == bOrdner) {
 			String file;
 			try {
-				file = schnittstelle.getEinstellungen().getProjektDateiPfad();
+				file = schnittstelle.getEinstellungen().getProjektPfad();
+				File file_conv = new File(file);
+				controller.open(file_conv);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		
+		if (e.getSource() == bDatei) {
+			try {
+				String file;
+				file = schnittstelle.getEinstellungen().getProjektPfad() + "/" + name;
 				File file_conv = new File(file);
 				controller.open(file_conv);
 			} catch (IOException e1) {

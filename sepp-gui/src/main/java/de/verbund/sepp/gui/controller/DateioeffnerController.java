@@ -3,72 +3,69 @@ package de.verbund.sepp.gui.controller;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.verbund.sepp.main.daten.*;
-
 public class DateioeffnerController {
-	DatenSchnittstelle schnittstelle = DatenSchnittstelleImpl.getInstance();
-	Einstellungen einstellungen = schnittstelle.getEinstellungen();	
-	private String pfad;
-	static DateiInformationen data;
-	
-	public DateioeffnerController() throws IOException {
-	}
-	
-	public void getOrdner() throws IOException {
-		pfad = schnittstelle.getEinstellungen().getProjektPfad();
-//		Desktop desktop = Desktop.getDesktop();
-//		File dirToOpen = null;
-//		try {
-//			dirToOpen = new File(data.toString());
-//			desktop.open(dirToOpen);
-//		} catch (IllegalArgumentException e) {
-//			System.out.println("File Not Found");
-//		}
-	}
-	
-	public void getDatei() throws IOException {
-		pfad = schnittstelle.getEinstellungen().getProjektDateiPfad();
-	}
-		
 
-	public static boolean open(File pfad2) {
+    public static boolean open(File file) {
 
-        if (openSystemSpecific(pfad2.toString())) return true;
+        if (openSystemSpecific(file.toString())) return true;
 
-        if (openDESKTOP(pfad2)) return true;
+        if (openDESKTOP(file)) return true;
 
         return false;
     }
 
-	public static boolean openSystemSpecific(String what) {
-		 EnumOS os = getOs();
+    private static boolean openSystemSpecific(String what) {
 
-	        if (os.isLinux()) {
-	            if (runCommand("kde-open", "%s", what)) return true;
-	            if (runCommand("gnome-open", "%s", what)) return true;
-	            if (runCommand("xdg-open", "%s", what)) return true;
-	        }
+        EnumOS os = getOs();
 
-	        if (os.isMac()) {
-	            if (runCommand("open", "%s", what)) return true;
-	        }
+        if (os.isLinux()) {
+            if (runCommand("kde-open", "%s", what)) return true;
+            if (runCommand("gnome-open", "%s", what)) return true;
+            if (runCommand("xdg-open", "%s", what)) return true;
+        }
 
-	        if (os.isWindows()) {
-	            if (runCommand("explorer", "%s", what)) return true;
-	        }
+        if (os.isMac()) {
+            if (runCommand("open", "%s", what)) return true;
+        }
 
-	        return false;
-	    }
-	
+        if (os.isWindows()) {
+            if (runCommand("explorer", "%s", what)) return true;
+        }
 
-	private static boolean runCommand(String command, String args, String pfad) {
-		logOut("Trying to exec:\n   cmd = " + command + "\n   args = " + args + "\n   %s = " + pfad);
+        return false;
+    }
 
-        String[] parts = prepareCommand(command, args, pfad);
+    private static boolean openDESKTOP(File file) {
+
+        logOut("Trying to use Desktop.getDesktop().open() with " + file.toString());
+        try {
+            if (!Desktop.isDesktopSupported()) {
+                logErr("Platform is not supported.");
+                return false;
+            }
+
+            if (!Desktop.getDesktop().isSupported(Desktop.Action.OPEN)) {
+                logErr("OPEN is not supported.");
+                return false;
+            }
+            
+            Desktop.getDesktop().open(file);
+
+            return true;
+        } catch (Throwable t) {
+            logErr("Error using desktop open.", t);
+            return false;
+        }
+    }
+
+    private static boolean runCommand(String command, String args, String file) {
+
+        logOut("Trying to exec:\n   cmd = " + command + "\n   args = " + args + "\n   %s = " + file);
+
+        String[] parts = prepareCommand(command, args, file);
 
         try {
             Process p = Runtime.getRuntime().exec(parts);
@@ -91,44 +88,24 @@ public class DateioeffnerController {
             logErr("Error running command.", e);
             return false;
         }
-	}
-	
-	private static boolean openDESKTOP(File pfad2) {
-		 logOut("Trying to use Desktop.getDesktop().open() with " + pfad2.toString());
-	        try {
-	            if (!Desktop.isDesktopSupported()) {
-	                logErr("Platform is not supported.");
-	                return false;
-	            }
+    }
 
-	            if (!Desktop.getDesktop().isSupported(Desktop.Action.OPEN)) {
-	                logErr("OPEN is not supported.");
-	                return false;
-	            }
 
-	            Desktop.getDesktop().open(pfad2);
+    private static String[] prepareCommand(String command, String args, String file) {
 
-	            return true;
-	        } catch (Throwable t) {
-	            logErr("Error using desktop open.", t);
-	            return false;
-	        }
-	    }
-
-	private static String[] prepareCommand(String command, String args, String pfad) {
         List<String> parts = new ArrayList<String>();
         parts.add(command);
-
+        
         if (args != null) {
             for (String s : args.split(" ")) {
-                s = String.format(s, pfad); // put in the filename thing
+                s = String.format(s, file);
                 parts.add(s.trim());
             }
         }
+
         return parts.toArray(new String[parts.size()]);
     }
 
-	
     private static void logErr(String msg, Throwable t) {
         System.err.println(msg);
         t.printStackTrace();
@@ -142,39 +119,52 @@ public class DateioeffnerController {
         System.out.println(msg);
     }
 
-
-	public static enum EnumOS {
+    public static enum EnumOS {
         linux, macos, solaris, unknown, windows;
 
         public boolean isLinux() {
+
             return this == linux || this == solaris;
         }
+
+
         public boolean isMac() {
+
             return this == macos;
         }
+
+
         public boolean isWindows() {
+
             return this == windows;
         }
     }
 
 
     public static EnumOS getOs() {
+
         String s = System.getProperty("os.name").toLowerCase();
+
         if (s.contains("win")) {
             return EnumOS.windows;
         }
+
         if (s.contains("mac")) {
             return EnumOS.macos;
         }
+
         if (s.contains("solaris")) {
             return EnumOS.solaris;
         }
+
         if (s.contains("sunos")) {
             return EnumOS.solaris;
         }
+
         if (s.contains("linux")) {
             return EnumOS.linux;
         }
+
         if (s.contains("unix")) {
             return EnumOS.linux;
         } else {
