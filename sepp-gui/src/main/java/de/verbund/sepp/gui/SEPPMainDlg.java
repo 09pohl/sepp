@@ -1,6 +1,7 @@
 package de.verbund.sepp.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.FlowLayout;
 import java.io.IOException;
 
@@ -75,9 +76,7 @@ public class SEPPMainDlg {
 		}
 		panel.add(mainPanel, BorderLayout.CENTER);
 		JScrollPane dateiScroll = dc.init();
-		dateiScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		dateiScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		dateiScroll.getVerticalScrollBar().setUnitIncrement(25);
+		setFilePanelSettings(dateiScroll);
 		JPanel infoPanel = new JPanel(new BorderLayout());
 		JPanel toDoPanel = new JPanel(new BorderLayout());
 		JScrollPane toDoScroll = toDoComments.getToDoBox();
@@ -136,6 +135,7 @@ public class SEPPMainDlg {
 		frameSplitPane.remove(frameSplitPane.getLeftComponent());
 		frameSplitPane.setLeftComponent(dc.init());
 		frameSplitPane.setDividerLocation(485);
+		setFilePanelSettings((JScrollPane) frameSplitPane.getLeftComponent());
 		DatenSchnittstelle dataSchnittstelle = DatenSchnittstelleImpl.getInstance();
 		DateiInformationen daten;
 		String dateiPfad = ActiveFileController.getInstance().getAktiveDateiPfad();
@@ -144,6 +144,12 @@ public class SEPPMainDlg {
 		refreshTableModel(userKommentare, ToDoAndCommentBoxes.spaltenKommentare, toDoComments.getTableComment());
 		String[][] userToDos = DateiInfoHelfer.getZeilenArray(daten.getToDos());
 		refreshTableModel(userToDos, ToDoAndCommentBoxes.spaltenTodos, toDoComments.getTableToDo());
+	}
+
+	private void setFilePanelSettings(JScrollPane component) {
+		component.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		component.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		component.getVerticalScrollBar().setUnitIncrement(25);
 	}
 
 	private void refreshTableModel(String[][] inhalte, String[] spaltenTitel, JTable table) {
