@@ -23,6 +23,7 @@ import de.verbund.sepp.gui.controller.ChangeSourceController;
 import de.verbund.sepp.gui.controller.ChangeUserController;
 import de.verbund.sepp.gui.controller.DateiViewController;
 import de.verbund.sepp.gui.controller.StartUpController;
+import de.verbund.sepp.gui.icon.IconLoader;
 import de.verbund.sepp.gui.todo.comment.ToDoAndCommentBoxes;
 import de.verbund.sepp.main.daten.DateiInformationen;
 import de.verbund.sepp.main.daten.DatenSchnittstelle;
@@ -36,7 +37,16 @@ public class SEPPMainDlg {
 	private JFrame seppMainFrame = new JFrame();
 	private ToDoAndCommentBoxes toDoComments = new ToDoAndCommentBoxes();
 
-	public SEPPMainDlg() {
+	private static SEPPMainDlg instance;
+
+	public static SEPPMainDlg getInstance() throws IOException {
+		if (instance == null) {
+			instance = new SEPPMainDlg();
+		}
+		return instance;
+	}
+
+	private SEPPMainDlg() {
 		erzeugeSplitLayout();
 		erzeugeMenue();
 		seppMainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -45,6 +55,8 @@ public class SEPPMainDlg {
 		seppMainFrame.setSize(1000, 800);
 		seppMainFrame.setResizable(true);
 		seppMainFrame.setLocationRelativeTo(null);
+		IconLoader iconLoader = new IconLoader();
+		seppMainFrame.setIconImages(iconLoader.laden());
 		seppMainFrame.setVisible(true);
 	}
 
@@ -62,6 +74,7 @@ public class SEPPMainDlg {
 		JScrollPane dateiScroll = dc.init();
 		dateiScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		dateiScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		dateiScroll.getVerticalScrollBar().setUnitIncrement(25);
 		JPanel infoPanel = new JPanel(new BorderLayout());
 		JPanel toDoPanel = new JPanel(new BorderLayout());
 		JScrollPane toDoScroll = toDoComments.getToDoBox();
