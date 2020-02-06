@@ -9,13 +9,13 @@ import java.util.List;
 
 import de.verbund.sepp.main.daten.*;
 
-public class Dateioeffner {
+public class DateioeffnerController {
 	DatenSchnittstelle schnittstelle = DatenSchnittstelleImpl.getInstance();
 	Einstellungen einstellungen = schnittstelle.getEinstellungen();	
 	private String pfad;
 	static DateiInformationen data;
 	
-	public Dateioeffner(String pfad) throws IOException {
+	public DateioeffnerController(String pfad) throws IOException {
 		this.pfad = pfad;
 	}
 	
