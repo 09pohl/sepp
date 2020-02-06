@@ -16,9 +16,9 @@ public class FileInfoGUI extends JPanel {
 	private Dimension dimension = new Dimension(200, 135);
 	private DateiInfoHelfer helferlein = new DateiInfoHelfer();
 	private String name;
-	
+
 	private static FileInfoGUI instance;
-	
+
 	public static FileInfoGUI getInstance() {
 		DateiViewController dc = new DateiViewController();
 		if (instance == null) {

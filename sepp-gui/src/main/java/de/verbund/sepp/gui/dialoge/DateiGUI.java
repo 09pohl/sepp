@@ -86,7 +86,6 @@ public class DateiGUI extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == bInfo) {
-			
 
 			try {
 				ActiveFileController.getInstance().setAktiveDateiPfad(data.getPfad().toString());

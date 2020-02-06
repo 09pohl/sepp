@@ -129,7 +129,7 @@ public class SEPPMainDlg {
 		buttonPanel.add(refreshButton);
 		panel.add(buttonPanel, BorderLayout.NORTH);
 	}
-	
+
 	public void refreshMainTables() throws IOException {
 		frameSplitPane.remove(frameSplitPane.getLeftComponent());
 		frameSplitPane.setLeftComponent(dc.init());
