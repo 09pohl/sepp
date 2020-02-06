@@ -15,7 +15,7 @@ public class Einstellungen {
 	private final String BENUTZER_PROPERTY = "benutzer";
 	private final String PROJEKT_PROPERTY = "projekt";
 
-	private static Einstellungen instanz;
+	private static Einstellungen instance;
 	String einstellungenPfad = System.getProperty("user.home") + EINSTELLUNGEN_DATEINAME;
 
 	String projektPfad;
@@ -25,14 +25,14 @@ public class Einstellungen {
 	}
 
 	public static Einstellungen getInstance() throws IOException {
-		if (instanz == null) {
-			instanz = new Einstellungen();
+		if (instance == null) {
+			instance = new Einstellungen();
 		}
-		return instanz;
+		return instance;
 	}
 
 	static void resetInstance() throws IOException {
-		instanz = new Einstellungen();
+		instance = new Einstellungen();
 	}
 
 	public void speichern() throws IOException {
