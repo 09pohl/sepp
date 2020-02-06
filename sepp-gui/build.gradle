@@ -11,7 +11,6 @@ repositories {
 dependencies {
 	compile project(':sepp-main')
 
-	
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 
@@ -21,4 +20,7 @@ jar {
       'Main-Class': 'de.verbund.sepp.gui.SEPPMainDlg'
     )
   }
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
 }
