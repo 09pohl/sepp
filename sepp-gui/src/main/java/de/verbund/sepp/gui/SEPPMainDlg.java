@@ -37,7 +37,16 @@ public class SEPPMainDlg {
 	private JFrame seppMainFrame = new JFrame();
 	private ToDoAndCommentBoxes toDoComments = new ToDoAndCommentBoxes();
 
-	public SEPPMainDlg() {
+	private static SEPPMainDlg instance;
+
+	public static SEPPMainDlg getInstance() throws IOException {
+		if (instance == null) {
+			instance = new SEPPMainDlg();
+		}
+		return instance;
+	}
+
+	private SEPPMainDlg() {
 		erzeugeSplitLayout();
 		erzeugeMenue();
 		seppMainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
