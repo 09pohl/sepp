@@ -10,8 +10,10 @@ import java.nio.file.attribute.FileTime;
 import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import de.verbund.sepp.gui.SEPPMainDlg;
 import de.verbund.sepp.main.daten.DateiInformationen;
 import de.verbund.sepp.main.daten.DatenSchnittstelle;
 import de.verbund.sepp.main.daten.DatenSchnittstelleImpl;
@@ -57,7 +59,7 @@ public class DateiGUI extends JPanel implements ActionListener {
 		String s = DatumHelfer.fileTimeToString(datum_1);
 		JLabel label_1 = new JLabel("Erstellungsdatum: " + s);
 		String s1 = DatumHelfer.fileTimeToString(datum_2);
-		JLabel label_2 = new JLabel("Aenderungsdatum: " + s1);
+		JLabel label_2 = new JLabel("Änderungsdatum: " + s1);
 		p.add(label_1);
 		p.add(label_2);
 		return p;
@@ -75,7 +77,7 @@ public class DateiGUI extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == bInfo) {
-			// TODO: Load TODO-List & Kommentarliste;
+			System.out.println(name);
 		}
 	}
 

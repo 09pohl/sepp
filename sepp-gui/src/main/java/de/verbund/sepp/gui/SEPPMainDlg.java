@@ -36,11 +36,13 @@ public class SEPPMainDlg {
 	private JPanel panel;
 	private JFrame seppMainFrame = new JFrame();
 	private ToDoAndCommentBoxes toDoComments = new ToDoAndCommentBoxes();
+	private DateiViewController dc = new DateiViewController();
+	private DatenSchnittstelle schnittstelle = DatenSchnittstelleImpl.getInstance();
 
 	public SEPPMainDlg() {
 		erzeugeSplitLayout();
 		erzeugeMenue();
-		seppMainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		seppMainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		seppMainFrame.setTitle("SuperEffectiveProjectPlanning (SEPP)");
 		seppMainFrame.setContentPane(panel);
 		seppMainFrame.setSize(1000, 800);
@@ -61,7 +63,6 @@ public class SEPPMainDlg {
 					JOptionPane.ERROR_MESSAGE);
 		}
 		panel.add(mainPanel, BorderLayout.CENTER);
-		DateiViewController dc = new DateiViewController();
 		JScrollPane dateiScroll = dc.init();
 		dateiScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		dateiScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -85,13 +86,13 @@ public class SEPPMainDlg {
 	}
 
 	private void erzeugeButtonPanel() throws IOException {
-		DatenSchnittstelle schnittstelle = DatenSchnittstelleImpl.getInstance();
 		JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		JButton refreshButton = new JButton("Aktualisieren");
 		refreshButton.addActionListener(e -> {
 
 			try {
 				refreshMainTables();
+				refreshFileGUI();
 			} catch (IOException e1) {
 				// TODO #54 Fehlermeldungen überarbeiten
 				e1.printStackTrace();
@@ -120,6 +121,12 @@ public class SEPPMainDlg {
 		panel.add(buttonPanel, BorderLayout.NORTH);
 	}
 
+	public void refreshFileGUI() {
+		System.out.println("DateiGUI erneuern");
+		seppMainFrame.dispose();
+		new SEPPMainDlg();
+	}
+	
 	public void refreshMainTables() throws IOException {
 		DatenSchnittstelle dataSchnittstelle = DatenSchnittstelleImpl.getInstance();
 		DateiInformationen daten;
