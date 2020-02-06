@@ -19,14 +19,18 @@ public class DateiViewController extends JScrollPane{
 	}
 
 	public JScrollPane init(){
+		infoGUI = new FileInfoGUI(getFiles());
+		return new JScrollPane(infoGUI);
+	}
+
+	public List<String> getFiles() {
 		try {
 			files = data.getDateiPfade(data.getEinstellungen());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		infoGUI = new FileInfoGUI(files);
-		return new JScrollPane(infoGUI);
+		return files;
 	}
 
 }

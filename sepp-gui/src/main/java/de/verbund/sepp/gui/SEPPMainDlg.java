@@ -38,6 +38,7 @@ public class SEPPMainDlg {
 	private ToDoAndCommentBoxes toDoComments = new ToDoAndCommentBoxes();
 	private DateiViewController dc = new DateiViewController();
 	private DatenSchnittstelle schnittstelle = DatenSchnittstelleImpl.getInstance();
+	private JSplitPane frameSplitPane;
 
 	private static SEPPMainDlg instance;
 
@@ -88,7 +89,7 @@ public class SEPPMainDlg {
 		JSplitPane infoSplitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, toDoPanel, commentsPanel);
 		infoSplitPane.setDividerLocation(360);
 		infoPanel.add(infoSplitPane, BorderLayout.CENTER);
-		JSplitPane frameSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, dateiScroll, infoPanel);
+		frameSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, dateiScroll, infoPanel);
 		frameSplitPane.resetToPreferredSizes();
 		frameSplitPane.setDividerLocation(485);
 		mainPanel.add(frameSplitPane, BorderLayout.CENTER);
@@ -128,14 +129,11 @@ public class SEPPMainDlg {
 		buttonPanel.add(refreshButton);
 		panel.add(buttonPanel, BorderLayout.NORTH);
 	}
-
-	public void refreshFileGUI() {
-		System.out.println("DateiGUI erneuern");
-		seppMainFrame.dispose();
-		new SEPPMainDlg();
-	}
 	
 	public void refreshMainTables() throws IOException {
+		frameSplitPane.remove(frameSplitPane.getLeftComponent());
+		frameSplitPane.setLeftComponent(dc.init());
+		frameSplitPane.setDividerLocation(485);
 		DatenSchnittstelle dataSchnittstelle = DatenSchnittstelleImpl.getInstance();
 		DateiInformationen daten;
 		String dateiPfad = ActiveFileController.getInstance().getAktiveDateiPfad();

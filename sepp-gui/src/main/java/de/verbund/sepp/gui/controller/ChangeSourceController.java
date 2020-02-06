@@ -59,7 +59,6 @@ public class ChangeSourceController {
 					.setAktiveDateiPfad(schnittstelle.getEinstellungen().getProjektDateiPfad());
 			ActiveFileController.getInstance().refreshLabel();
 			seppMainDlg.refreshMainTables();
-			seppMainDlg.refreshFileGUI();
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(changeDlg, "Pfad konnte nicht festgelegt werden!", "FEHLER!",
 					JOptionPane.ERROR_MESSAGE);
