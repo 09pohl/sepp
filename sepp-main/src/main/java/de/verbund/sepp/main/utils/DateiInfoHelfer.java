@@ -1,5 +1,13 @@
 package de.verbund.sepp.main.utils;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
+import de.verbund.sepp.main.daten.DateiInformationen;
+import de.verbund.sepp.main.daten.DatenSchnittstelle;
+import de.verbund.sepp.main.daten.DatenSchnittstelleImpl;
+import de.verbund.sepp.main.daten.Einstellungen;
+
 public class DateiInfoHelfer {
 
 	public static String[][] getZeilenArray(String text) {
@@ -13,4 +21,21 @@ public class DateiInfoHelfer {
 		}
 		return result;
 	}
+
+	public static ArrayList<DateiInformationen> dateiInformationenListe(ArrayList<String> dateiPfade)
+			throws IOException {
+		DatenSchnittstelle schnittstelle = DatenSchnittstelleImpl.getInstance();
+		ArrayList<DateiInformationen> result = new ArrayList<DateiInformationen>();
+		for (String pfad : dateiPfade) {
+			result.add(schnittstelle.getDateiInformationen(pfad));
+		}
+		return result;
+	}
+
+	public static String nameMitUnterordner(String pfad) throws IOException {
+		Einstellungen einstellungen = DatenSchnittstelleImpl.getInstance().getEinstellungen();
+		String result = pfad.replace(einstellungen.getProjektPfad(), "");
+		return result;
+	}
+
 }
