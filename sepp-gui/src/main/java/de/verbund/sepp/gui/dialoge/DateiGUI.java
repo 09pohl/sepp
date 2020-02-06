@@ -34,8 +34,6 @@ import de.verbund.sepp.main.utils.HTMLHelfer;
 public class DateiGUI extends JPanel implements ActionListener {
 
 	Einstellungen einstellungen;
-	private JLabel lOrdner;
-	private JLabel lDatei;
 	private JButton bInfo;
 	private String name;
 	private JFileChooser fc;
@@ -66,7 +64,7 @@ public class DateiGUI extends JPanel implements ActionListener {
 		JPanel p = new JPanel();
 		JLabel lOrdner = new JLabel(folderimg);
 		JLabel lDatei = new JLabel(fileimg);
-		JLabel n = new JLabel("[" + DateiHelfer.dateiEndung(name) + "]");
+		
 		lOrdner.addMouseListener(new MouseAdapter()
 		{
 			@Override
@@ -100,7 +98,6 @@ public class DateiGUI extends JPanel implements ActionListener {
 		});
 		p.add(lOrdner);
 		p.add(lDatei);
-		p.add(n);
 		return p;
 	}
 
