@@ -62,7 +62,6 @@ public class TableAndPopUpMenu {
 	}
 
 	private void addOrEditJOP(AddOrEdit text, int rowindex, int toDifferentTables) {
-
 		String comment = "";
 		boolean goOn = true;
 
@@ -71,9 +70,14 @@ public class TableAndPopUpMenu {
 					JOptionPane.OK_CANCEL_OPTION);
 			try {
 				if (!comment.replaceAll("\\s+", "").isEmpty()) {
-					System.out.println(rowindex);
 					if (text.getInfoText().equals("Hinzufügen")) {
-						popUpFunction.add(toDifferentTables, rowindex, comment, seppMainDlg);
+						try {
+							popUpFunction.add(toDifferentTables, rowindex, comment, seppMainDlg);
+							System.out.println("geht");
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 					} else {
 						try {
 							popUpFunction.edit(toDifferentTables, rowindex, comment, seppMainDlg);
