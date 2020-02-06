@@ -38,7 +38,7 @@ public class SEPPMainDlg {
 
 	private static SEPPMainDlg instance;
 
-	public static SEPPMainDlg getInstance() throws IOException {
+	public static SEPPMainDlg getInstance(){
 		if (instance == null) {
 			instance = new SEPPMainDlg();
 		}
@@ -75,12 +75,10 @@ public class SEPPMainDlg {
 		JPanel toDoPanel = new JPanel(new BorderLayout());
 		JScrollPane toDoScroll = toDoComments.getToDoBox();
 		toDoScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		toDoScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		toDoPanel.add(toDoScroll);
 		JPanel commentsPanel = new JPanel(new BorderLayout());
 		JScrollPane commentScroll = toDoComments.getCommentBox();
 		commentScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		commentScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		commentsPanel.add(commentScroll);
 		JSplitPane infoSplitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, toDoPanel, commentsPanel);
 		infoSplitPane.setDividerLocation(360);
@@ -100,8 +98,7 @@ public class SEPPMainDlg {
 			try {
 				refreshMainTables();
 			} catch (IOException e1) {
-				// TODO #54 Fehlermeldungen überarbeiten
-				e1.printStackTrace();
+				SEPPMainDlg.getInstance().getIOException("Fehler: Aktualisierung nicht möglich!");
 			}
 
 		});
@@ -112,8 +109,7 @@ public class SEPPMainDlg {
 						.setAktiveDateiPfad(schnittstelle.getEinstellungen().getProjektDateiPfad());
 				this.refreshMainTables();
 			} catch (IOException e1) {
-				// TODO #54 Fehlermeldungen überarbeiten
-				e1.printStackTrace();
+				SEPPMainDlg.getInstance().getIOException("Fehler: Laden nicht möglich");
 			}
 		});
 		JLabel lAktiveDatei = new JLabel("");
@@ -176,6 +172,10 @@ public class SEPPMainDlg {
 		settings.add(user);
 	}
 
+	private void getIOException(String message) {
+		JOptionPane.showMessageDialog(seppMainFrame, message, "ERROR", JOptionPane.ERROR_MESSAGE);
+	}
+	
 	private void showUserDlg() {
 		new ChangeUserController(seppMainFrame);
 	}
@@ -186,11 +186,6 @@ public class SEPPMainDlg {
 
 	public static void main(String[] args) {
 		new StartUpController();
-		try {
 			SEPPMainDlg.getInstance();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 }
