@@ -17,8 +17,8 @@ import de.verbund.sepp.main.utils.StringHelfer;
 public class ChangeSourceController {
 
 	private ChangeSourceDlg changeDlg;
-	private DatenSchnittstelle schnittstelle = DatenSchnittstelleImpl.getInstance();
 	private SEPPMainDlg seppMainDlg;
+	private DatenSchnittstelle schnittstelle = DatenSchnittstelleImpl.getInstance();
 
 	public ChangeSourceController(JFrame frame, SEPPMainDlg seppMainDlg) {
 

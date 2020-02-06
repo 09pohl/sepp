@@ -18,17 +18,13 @@ import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 
-import de.verbund.sepp.gui.controller.ActiveFileController;
-import de.verbund.sepp.gui.controller.ChangeSourceController;
-import de.verbund.sepp.gui.controller.ChangeUserController;
-import de.verbund.sepp.gui.controller.DateiViewController;
-import de.verbund.sepp.gui.controller.StartUpController;
+import de.verbund.sepp.main.daten.*;
+import de.verbund.sepp.main.utils.DateiInfoHelfer;
+import de.verbund.sepp.gui.controller.*;
 import de.verbund.sepp.gui.icon.IconLoader;
 import de.verbund.sepp.gui.todo.comment.ToDoAndCommentBoxes;
-import de.verbund.sepp.main.daten.DateiInformationen;
-import de.verbund.sepp.main.daten.DatenSchnittstelle;
-import de.verbund.sepp.main.daten.DatenSchnittstelleImpl;
-import de.verbund.sepp.main.utils.DateiInfoHelfer;
+
+
 
 public class SEPPMainDlg {
 
