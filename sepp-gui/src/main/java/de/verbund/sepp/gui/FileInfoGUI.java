@@ -12,7 +12,7 @@ import de.verbund.sepp.main.utils.DateiInfoHelfer;
 
 public class FileInfoGUI extends JPanel {
 
-	private Dimension dimension = new Dimension(200, 130);
+	private Dimension dimension = new Dimension(200, 135);
 	private DateiInfoHelfer helferlein = new DateiInfoHelfer();
 	private String name;
 
