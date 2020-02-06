@@ -12,6 +12,7 @@ import de.verbund.sepp.gui.SEPPMainDlg;
 import de.verbund.sepp.gui.dialoge.ChangeSourceDlg;
 import de.verbund.sepp.main.daten.DatenSchnittstelle;
 import de.verbund.sepp.main.daten.DatenSchnittstelleImpl;
+import de.verbund.sepp.main.utils.StringHelfer;
 
 public class ChangeSourceController {
 
@@ -52,18 +53,22 @@ public class ChangeSourceController {
 
 	protected void saveSelection() {
 		String change = changeDlg.getNewDirectoryTf().getText();
-		try {
-			schnittstelle.getEinstellungen().setProjektPfad(change);
-			schnittstelle.getEinstellungen().speichern();
-			ActiveFileController.getInstance()
+		if (!(StringHelfer.isNullEmptyOrWhitespace(change) || StringHelfer.isNullOrEmpty(change))) {
+			try {
+				schnittstelle.getEinstellungen().setProjektPfad(change);
+				schnittstelle.getEinstellungen().speichern();
+				ActiveFileController.getInstance()
 					.setAktiveDateiPfad(schnittstelle.getEinstellungen().getProjektDateiPfad());
-			ActiveFileController.getInstance().refreshLabel();
-			seppMainDlg.refreshMainTables();
-		} catch (IOException e) {
-			JOptionPane.showMessageDialog(changeDlg, "Pfad konnte nicht festgelegt werden!", "FEHLER!",
-					JOptionPane.ERROR_MESSAGE);
+				ActiveFileController.getInstance().refreshLabel();
+				seppMainDlg.refreshMainTables();
+			} catch (IOException e) {
+				JOptionPane.showMessageDialog(changeDlg, "Pfad konnte nicht festgelegt werden!", "FEHLER!",
+						JOptionPane.ERROR_MESSAGE);
+			}
+			changeDlg.dispose();
+		} else {
+			changeDlg.getNewDirectoryTf().setText("");
 		}
-		changeDlg.dispose();
 	}
 
 	private void chooseFolder() {
