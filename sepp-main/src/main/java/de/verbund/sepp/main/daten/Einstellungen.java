@@ -68,6 +68,10 @@ public class Einstellungen {
 		input.close();
 	}
 
+	public boolean isPropertyEmpty() {
+		return username == null || projektPfad == null;
+	}
+
 	public String getProjektPfad() {
 		return projektPfad;
 	}
