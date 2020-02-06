@@ -2,6 +2,7 @@ package de.verbund.sepp.gui.todo.comment;
 
 import java.io.IOException;
 
+import de.verbund.sepp.gui.SEPPMainDlg;
 import de.verbund.sepp.main.daten.DateiInformationen;
 import de.verbund.sepp.main.daten.DatenSchnittstelle;
 import de.verbund.sepp.main.daten.DatenSchnittstelleImpl;
@@ -11,9 +12,9 @@ public class PopUpFunction {
 
 	private DatenSchnittstelleImpl dataSchnittstelle;
 	private StringBuffer contentString;
-	private String[][] newContent;
+	private SEPPMainDlg seppMainDlg;
 
-	void add(int table, int index, String comment) { // funktioniert, aber User muss noch geholt werden 
+	void add(int table, int index, String comment, SEPPMainDlg seppMainDlg) { // funktioniert, aber User muss noch geholt werden 
 
 		if (table == 0) {
 			dataSchnittstelle = DatenSchnittstelleImpl.getInstance();
@@ -80,10 +81,16 @@ public class PopUpFunction {
 			}
 
 		}
-
+		try {
+			seppMainDlg.refreshMainTables();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
-	void edit(int table, int index, String comment) throws IOException { // funktioniert, aber User muss geholt werden
+	void edit(int table, int index, String comment, SEPPMainDlg seppMainDlg) throws IOException { // funktioniert, aber User muss geholt werden
 		dataSchnittstelle = DatenSchnittstelleImpl.getInstance();
 		String user = dataSchnittstelle.getEinstellungen().getUsername();
 		if (table == 0) {
@@ -163,10 +170,16 @@ public class PopUpFunction {
 			}
 
 		}
+		try {
+			seppMainDlg.refreshMainTables();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
-	void delete(int table, int index) { // funktioniert
+	void delete(int table, int index, SEPPMainDlg seppMainDlg) { // funktioniert
 		if (table == 0) {
 
 			dataSchnittstelle = DatenSchnittstelleImpl.getInstance();
@@ -223,6 +236,11 @@ public class PopUpFunction {
 			}
 
 		}
-
+		try {
+			seppMainDlg.refreshMainTables();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

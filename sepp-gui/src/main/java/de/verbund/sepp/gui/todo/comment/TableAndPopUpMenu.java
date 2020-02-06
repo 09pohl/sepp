@@ -9,12 +9,16 @@ import javax.swing.JPopupMenu;
 import javax.swing.JTable;
 import javax.swing.table.TableModel;
 
+import de.verbund.sepp.gui.SEPPMainDlg;
+
 public class TableAndPopUpMenu {
 
 	private JTable table;
 	private PopUpFunction popUpFunction;
+	private SEPPMainDlg seppMainDlg;
 
-	public TableAndPopUpMenu(TableModel model) {
+	public TableAndPopUpMenu(TableModel model, SEPPMainDlg seppMainDlg) {
+		this.seppMainDlg = seppMainDlg;
 		table = new JTable(model);
 	}
 
@@ -69,10 +73,10 @@ public class TableAndPopUpMenu {
 				if (!comment.replaceAll("\\s+", "").isEmpty()) {
 					System.out.println(rowindex);
 					if (text.getInfoText().equals("Hinzufügen")) {
-						popUpFunction.add(toDifferentTables, rowindex, comment);
+						popUpFunction.add(toDifferentTables, rowindex, comment, seppMainDlg);
 					} else {
 						try {
-							popUpFunction.edit(toDifferentTables, rowindex, comment);
+							popUpFunction.edit(toDifferentTables, rowindex, comment, seppMainDlg);
 						} catch (IOException e) {
 							// TODO #54
 							e.printStackTrace();
@@ -108,7 +112,7 @@ public class TableAndPopUpMenu {
 
 		if (doDelete == JOptionPane.YES_OPTION) {
 			System.out.println(rowindex + " " + toDifferentTables);
-			popUpFunction.delete(toDifferentTables, rowindex);
+			popUpFunction.delete(toDifferentTables, rowindex, seppMainDlg);
 		}
 	}
 

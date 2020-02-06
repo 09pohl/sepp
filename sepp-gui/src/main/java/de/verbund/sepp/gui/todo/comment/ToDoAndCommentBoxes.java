@@ -7,6 +7,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
+import de.verbund.sepp.gui.SEPPMainDlg;
 import de.verbund.sepp.main.daten.DateiInformationen;
 import de.verbund.sepp.main.daten.DatenSchnittstelleImpl;
 import de.verbund.sepp.main.utils.DateiInfoHelfer;
@@ -22,6 +23,11 @@ public class ToDoAndCommentBoxes {
 	private JTable tableToDo;
 	static final int COMMENT = 0;
 	private static final int TODO = 1;
+	private SEPPMainDlg seppMainDlg;
+
+	public ToDoAndCommentBoxes(SEPPMainDlg seppMainDlg) {
+		this.seppMainDlg = seppMainDlg;
+	}
 
 	private JScrollPane initCommentBox() {
 		return new JScrollPane(createCommentTable());
@@ -65,7 +71,7 @@ public class ToDoAndCommentBoxes {
 
 	JTable gefuellteTabelle(String[][] inhalte, String[] spaltenTitel, int toDifferentTables) {
 		TableModel model = new DefaultTableModel(inhalte, spaltenTitel);
-		JTable doneTable = new TableAndPopUpMenu(model).getTable(toDifferentTables);
+		JTable doneTable = new TableAndPopUpMenu(model, seppMainDlg).getTable(toDifferentTables);
 		return doneTable;
 	}
 
