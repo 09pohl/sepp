@@ -10,11 +10,13 @@ import javax.swing.JOptionPane;
 import de.verbund.sepp.gui.dialoge.ChangeUserDlg;
 import de.verbund.sepp.main.daten.DatenSchnittstelle;
 import de.verbund.sepp.main.daten.DatenSchnittstelleImpl;
+import de.verbund.sepp.main.utils.StringHelfer;
 
 public class ChangeUserController {
 
 	private ChangeUserDlg changeDlg;
 	private DatenSchnittstelle schnittstelle = DatenSchnittstelleImpl.getInstance();
+	private StringHelfer helferlein;
 
 	public ChangeUserController(JFrame frame) {
 		EventQueue.invokeLater(new Runnable() {
@@ -45,19 +47,20 @@ public class ChangeUserController {
 
 	protected void saveUserName() {
 		String change = changeDlg.getNewUserNameTf().getText();
-		if (!(change.contains(":"))) {
-			try {
-				schnittstelle.getEinstellungen().setUsername(change);
-				schnittstelle.getEinstellungen().speichern();
-			} catch (IOException e) {
-				JOptionPane.showMessageDialog(changeDlg, "Benutzername konnte nicht festgelegt werden!", "FEHLER!",
+		if (!(helferlein.isNullEmptyOrWhitespace(change) || helferlein.isNullOrEmpty(change))) {
+			if (!(change.contains(":"))) {
+				try {
+					schnittstelle.getEinstellungen().setUsername(change);
+					schnittstelle.getEinstellungen().speichern();
+				} catch (IOException e) {
+					JOptionPane.showMessageDialog(changeDlg, "Benutzername konnte nicht festgelegt werden!", "FEHLER!",
+							JOptionPane.ERROR_MESSAGE);
+				}
+				changeDlg.dispose();
+			} else {
+				JOptionPane.showMessageDialog(changeDlg, "Der Benutzername darf keinen Doppelpunkt enthalten!", "FEHLER!",
 						JOptionPane.ERROR_MESSAGE);
 			}
-			changeDlg.dispose();
-		} else {
-			JOptionPane.showMessageDialog(changeDlg, "Der Benutzername darf keinen Doppelpunkt enthalten!", "FEHLER!",
-					JOptionPane.ERROR_MESSAGE);
 		}
 	}
-
 }
