@@ -20,7 +20,7 @@ import javax.swing.JPanel;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 
-import de.verbund.sepp.gui.SEPPMainDlg;
+import de.verbund.sepp.gui.*;
 import de.verbund.sepp.gui.controller.ActiveFileController;
 import de.verbund.sepp.gui.controller.DateioeffnerController;
 import de.verbund.sepp.main.utils.DatumHelfer;
