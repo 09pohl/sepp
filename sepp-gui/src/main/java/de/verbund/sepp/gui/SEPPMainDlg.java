@@ -35,7 +35,7 @@ public class SEPPMainDlg {
 	private JPanel mainPanel;
 	private JPanel panel;
 	private JFrame seppMainFrame = new JFrame();
-	private ToDoAndCommentBoxes toDoComments = new ToDoAndCommentBoxes();
+	private ToDoAndCommentBoxes toDoComments = new ToDoAndCommentBoxes(this);
 
 	private static SEPPMainDlg instance;
 
