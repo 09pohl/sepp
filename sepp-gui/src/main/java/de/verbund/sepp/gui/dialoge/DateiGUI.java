@@ -1,6 +1,7 @@
 package de.verbund.sepp.gui.dialoge;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,7 +14,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.border.EtchedBorder;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
 
 import de.verbund.sepp.gui.SEPPMainDlg;
 
@@ -23,6 +25,7 @@ import de.verbund.sepp.main.daten.DateiInformationen;
 import de.verbund.sepp.main.daten.DatenSchnittstelle;
 import de.verbund.sepp.main.daten.DatenSchnittstelleImpl;
 import de.verbund.sepp.main.daten.Einstellungen;
+import de.verbund.sepp.main.utils.DateiHelfer;
 import de.verbund.sepp.main.utils.DatumHelfer;
 import de.verbund.sepp.main.utils.HTMLHelfer;
 
@@ -37,22 +40,22 @@ public class DateiGUI extends JPanel implements ActionListener {
 	public DateiGUI(String verzeichnis, String name) throws IOException {
 		this.name = name;
 		data = schnittstelle.getDateiInformationen(verzeichnis);
-		setSize(350, 150);
 		setLayout(new BorderLayout());
-
 		add(getNorden(), BorderLayout.NORTH);
 		add(getMitte(), BorderLayout.CENTER);
 		add(getSueden(), BorderLayout.SOUTH);
-		setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
+		setBorder(new CompoundBorder(new EmptyBorder(5, 5, 5, 5),
+				BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLACK), name)));
+
 		setVisible(true);
 	}
 
-	// Laden von Icon und Namen
+	// Laden von Icon und Endung
 	private Component getNorden() {
 		Icon icon = data.getIcon();
 		JPanel p = new JPanel();
 		JLabel i = new JLabel(icon);
-		JLabel n = new JLabel(name);
+		JLabel n = new JLabel("[" + DateiHelfer.dateiEndung(name) + "]");
 		p.add(i);
 		p.add(n);
 		return p;
@@ -75,7 +78,7 @@ public class DateiGUI extends JPanel implements ActionListener {
 	// Laden von Button mit Verweis auf ToDo - und Kommentarliste
 	private Component getSueden() {
 		JPanel p = new JPanel();
-		bInfo = new JButton("ToDo - & Kommentarliste");
+		bInfo = new JButton("To-Do & Kommentarliste");
 		bInfo.addActionListener(this);
 		p.add(bInfo);
 		return p;

@@ -184,6 +184,11 @@ public class SEPPMainDlg {
 
 	public static void main(String[] args) {
 		new StartUpController();
-		new SEPPMainDlg();
+		try {
+			SEPPMainDlg.getInstance();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
