@@ -4,3 +4,11 @@
 **/.settings/*
 
 **/build/*
+
+*/.idea/*
+*/gradle/*
+*/*.iml
+/.idea/*
+/gradle/*
+/gradlew
+/gradlew.bat

@@ -35,10 +35,11 @@ public class SEPPMainDlg {
 	private JPanel mainPanel;
 	private JPanel panel;
 	private JFrame seppMainFrame = new JFrame();
-	private ToDoAndCommentBoxes toDoComments = new ToDoAndCommentBoxes();
+
 	private DateiViewController dc = new DateiViewController();
 	private DatenSchnittstelle schnittstelle = DatenSchnittstelleImpl.getInstance();
 	private JSplitPane frameSplitPane;
+	private ToDoAndCommentBoxes toDoComments = new ToDoAndCommentBoxes(this);
 
 	private static SEPPMainDlg instance;
 
@@ -96,6 +97,7 @@ public class SEPPMainDlg {
 	}
 
 	private void erzeugeButtonPanel() throws IOException {
+		DatenSchnittstelle schnittstelle = DatenSchnittstelleImpl.getInstance();
 		JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		JButton refreshButton = new JButton("Aktualisieren");
 		refreshButton.addActionListener(e -> {
