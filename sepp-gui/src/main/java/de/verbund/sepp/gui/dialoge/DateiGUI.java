@@ -27,11 +27,12 @@ public class DateiGUI extends JPanel implements ActionListener {
 	private String verzeichnis; // TODO - Dateiaufruf
 	private String name;
 	DatenSchnittstelle schnittstelle = DatenSchnittstelleImpl.getInstance();
-	DateiInformationen data = schnittstelle.getDateiInformationen(verzeichnis);
+	DateiInformationen data;
 
 	public DateiGUI(String verzeichnis, String name) throws IOException {
 		this.verzeichnis = verzeichnis;
 		this.name = name;
+		data = schnittstelle.getDateiInformationen(verzeichnis);
 		setSize(350, 150);
 		setLayout(new BorderLayout());
 
