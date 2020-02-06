@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 import java.io.IOException;
 import java.util.List;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import de.verbund.sepp.gui.controller.DateiViewController;
@@ -32,8 +33,7 @@ public class FileInfoGUI extends JPanel {
 			try {
 				name = DateiInfoHelfer.nameMitUnterordner(f);
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				JOptionPane.showMessageDialog(this, "Fehler: Dateien können nicht dargestellt werden", "ERROR", JOptionPane.ERROR_MESSAGE);
 			}
 			try {
 				DateiGUI datei = new DateiGUI(f, name);
@@ -42,8 +42,7 @@ public class FileInfoGUI extends JPanel {
 				datei.setMaximumSize(dimension);
 				add(datei);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				JOptionPane.showMessageDialog(this, "Fehler: Dateien können nicht dargestellt werden", "ERROR", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 	}
