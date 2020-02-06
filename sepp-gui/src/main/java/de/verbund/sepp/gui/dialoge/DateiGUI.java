@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.attribute.FileTime;
@@ -32,8 +34,8 @@ import de.verbund.sepp.main.utils.HTMLHelfer;
 public class DateiGUI extends JPanel implements ActionListener {
 
 	Einstellungen einstellungen;
-	private JButton bOrdner;
-	private JButton bDatei;
+	private JLabel lOrdner;
+	private JLabel lDatei;
 	private JButton bInfo;
 	private String name;
 	private JFileChooser fc;
@@ -62,13 +64,42 @@ public class DateiGUI extends JPanel implements ActionListener {
 		File fileconv = new File(file);
 		Icon folderimg = fc.getUI().getFileView(fc).getIcon(fileconv);
 		JPanel p = new JPanel();
-		bOrdner = new JButton(folderimg);
-		bDatei = new JButton(fileimg);
+		JLabel lOrdner = new JLabel(folderimg);
+		JLabel lDatei = new JLabel(fileimg);
 		JLabel n = new JLabel("[" + DateiHelfer.dateiEndung(name) + "]");
-		bOrdner.addActionListener(this);
-		bDatei.addActionListener(this);
-		p.add(bOrdner);
-		p.add(bDatei);
+		lOrdner.addMouseListener(new MouseAdapter()
+		{
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String file;
+				try {
+					file = schnittstelle.getEinstellungen().getProjektPfad() + name;
+					File file_conv = new File(file);
+					controller.open(file_conv.getParentFile());
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		
+		lDatei.addMouseListener(new MouseAdapter() 
+		{
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					String file;
+					file = schnittstelle.getEinstellungen().getProjektPfad() + "/" + name;
+					File file_conv = new File(file);
+					controller.open(file_conv);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		p.add(lOrdner);
+		p.add(lDatei);
 		p.add(n);
 		return p;
 	}
@@ -110,30 +141,6 @@ public class DateiGUI extends JPanel implements ActionListener {
 
 			// TODO #61
 			System.out.println(data.getPfad());
-		}
-		
-		if (e.getSource() == bOrdner) {
-			String file;
-			try {
-				file = schnittstelle.getEinstellungen().getProjektPfad();
-				File file_conv = new File(file);
-				controller.open(file_conv);
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		}
-		
-		if (e.getSource() == bDatei) {
-			try {
-				String file;
-				file = schnittstelle.getEinstellungen().getProjektPfad() + "/" + name;
-				File file_conv = new File(file);
-				controller.open(file_conv);
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		}
+		}	
 	}
 }
