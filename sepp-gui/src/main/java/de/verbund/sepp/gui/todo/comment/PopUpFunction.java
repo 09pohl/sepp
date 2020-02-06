@@ -3,6 +3,7 @@ package de.verbund.sepp.gui.todo.comment;
 import java.io.IOException;
 
 import de.verbund.sepp.gui.SEPPMainDlg;
+import de.verbund.sepp.gui.controller.ActiveFileController;
 import de.verbund.sepp.main.daten.DateiInformationen;
 import de.verbund.sepp.main.daten.DatenSchnittstelleImpl;
 import de.verbund.sepp.main.utils.DateiInfoHelfer;
@@ -75,16 +76,16 @@ public class PopUpFunction {
 
 	private void commentSetter(String user, String comment, int index, int call) {
 
-		DateiInformationen dataComments = null;
+		DateiInformationen dataInformation = null;
 
 		try {
-			dataComments = dataSchnittstelle
-					.getDateiInformationen(dataSchnittstelle.getEinstellungen().getProjektDateiPfad());
+			dataInformation = dataSchnittstelle
+					.getDateiInformationen(ActiveFileController.getInstance().getAktiveDateiPfad());
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		String[][] userAndComments = DateiInfoHelfer.getZeilenArray(dataComments.getKommentare());
+		String[][] userAndComments = DateiInfoHelfer.getZeilenArray(dataInformation.getKommentare());
 		contentString = new StringBuffer();
 
 		if (call == ADD) {
@@ -103,8 +104,8 @@ public class PopUpFunction {
 				} else {
 					contentString.append(formatString(user, comment));
 				}
-				dataComments.setKommentare(contentString.toString());
-				dataSchnittstelle.speichereDateiInformationen(dataComments);
+				dataInformation.setKommentare(contentString.toString());
+				dataSchnittstelle.speichereDateiInformationen(dataInformation);
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -131,16 +132,16 @@ public class PopUpFunction {
 						}
 					}
 				}
-				dataComments.setKommentare(contentString.toString());
-				dataSchnittstelle.speichereDateiInformationen(dataComments);
+				dataInformation.setKommentare(contentString.toString());
+				dataSchnittstelle.speichereDateiInformationen(dataInformation);
 
 			} catch (Exception e) {
 				System.out.println("nicht funktioniert");
 			}
 		} else {
 			try {
-				dataComments = dataSchnittstelle
-						.getDateiInformationen(dataSchnittstelle.getEinstellungen().getProjektDateiPfad());
+				dataInformation = dataSchnittstelle
+						.getDateiInformationen(ActiveFileController.getInstance().getAktiveDateiPfad());
 				contentString = new StringBuffer();
 				for (int i = 0; i <= userAndComments.length - 1; i++) {
 					for (int j = 0; j <= 1; j++) {
@@ -153,8 +154,8 @@ public class PopUpFunction {
 						}
 					}
 				}
-				dataComments.setKommentare(contentString.toString());
-				dataSchnittstelle.speichereDateiInformationen(dataComments);
+				dataInformation.setKommentare(contentString.toString());
+				dataSchnittstelle.speichereDateiInformationen(dataInformation);
 
 			} catch (Exception e) {
 				System.out.println("nicht funktioniert");
@@ -170,16 +171,16 @@ public class PopUpFunction {
 
 	private void toDoSetter(String user, String comment, int index, int call) {
 
-		DateiInformationen dataToDos = null;
+		DateiInformationen dataInformation = null;
 
 		try {
-			dataToDos = dataSchnittstelle
-					.getDateiInformationen(dataSchnittstelle.getEinstellungen().getProjektDateiPfad());
+			dataInformation = dataSchnittstelle
+					.getDateiInformationen(ActiveFileController.getInstance().getAktiveDateiPfad());
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		String[][] userAndToDos = DateiInfoHelfer.getZeilenArray(dataToDos.getToDos());
+		String[][] userAndToDos = DateiInfoHelfer.getZeilenArray(dataInformation.getToDos());
 		contentString = new StringBuffer();
 
 		if (call == ADD) {
@@ -198,8 +199,8 @@ public class PopUpFunction {
 				} else {
 					contentString.append(formatString(user, comment));
 				}
-				dataToDos.setToDos(contentString.toString());
-				dataSchnittstelle.speichereDateiInformationen(dataToDos);
+				dataInformation.setToDos(contentString.toString());
+				dataSchnittstelle.speichereDateiInformationen(dataInformation);
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -226,8 +227,8 @@ public class PopUpFunction {
 						}
 					}
 				}
-				dataToDos.setToDos(contentString.toString());
-				dataSchnittstelle.speichereDateiInformationen(dataToDos);
+				dataInformation.setToDos(contentString.toString());
+				dataSchnittstelle.speichereDateiInformationen(dataInformation);
 
 			} catch (Exception e) {
 				System.out.println("nicht funktioniert");
@@ -245,8 +246,8 @@ public class PopUpFunction {
 						}
 					}
 				}
-				dataToDos.setToDos(contentString.toString());
-				dataSchnittstelle.speichereDateiInformationen(dataToDos);
+				dataInformation.setToDos(contentString.toString());
+				dataSchnittstelle.speichereDateiInformationen(dataInformation);
 
 			} catch (Exception e) {
 				System.out.println("nicht funktioniert");

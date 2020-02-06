@@ -8,6 +8,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import de.verbund.sepp.gui.SEPPMainDlg;
+import de.verbund.sepp.gui.controller.ActiveFileController;
 import de.verbund.sepp.main.daten.DateiInformationen;
 import de.verbund.sepp.main.daten.DatenSchnittstelleImpl;
 import de.verbund.sepp.main.utils.DateiInfoHelfer;
@@ -39,12 +40,12 @@ public class ToDoAndCommentBoxes {
 
 	private JTable createCommentTable() {
 		dataSchnittstelle = DatenSchnittstelleImpl.getInstance();
-		DateiInformationen dataComments;
+		DateiInformationen dataInformation;
 
 		try {
-			dataComments = dataSchnittstelle
-					.getDateiInformationen(dataSchnittstelle.getEinstellungen().getProjektDateiPfad());
-			String[][] userAndComments = DateiInfoHelfer.getZeilenArray(dataComments.getKommentare());
+			dataInformation = dataSchnittstelle
+					.getDateiInformationen(ActiveFileController.getInstance().getAktiveDateiPfad());
+			String[][] userAndComments = DateiInfoHelfer.getZeilenArray(dataInformation.getKommentare());
 			tableComment = gefuellteTabelle(userAndComments, spaltenKommentare, COMMENT);
 			return tableComment;
 		} catch (IOException e) {
@@ -55,12 +56,12 @@ public class ToDoAndCommentBoxes {
 
 	private JTable createToDoTable() {
 		dataSchnittstelle = DatenSchnittstelleImpl.getInstance();
-		DateiInformationen dataToDos;
+		DateiInformationen dataInformation;
 
 		try {
-			dataToDos = dataSchnittstelle
-					.getDateiInformationen(dataSchnittstelle.getEinstellungen().getProjektDateiPfad());
-			String[][] userAndToDos = DateiInfoHelfer.getZeilenArray(dataToDos.getToDos());
+			dataInformation = dataSchnittstelle
+					.getDateiInformationen(ActiveFileController.getInstance().getAktiveDateiPfad());
+			String[][] userAndToDos = DateiInfoHelfer.getZeilenArray(dataInformation.getToDos());
 			tableToDo = gefuellteTabelle(userAndToDos, spaltenTodos, TODO);
 			return tableToDo;
 		} catch (IOException e) {
