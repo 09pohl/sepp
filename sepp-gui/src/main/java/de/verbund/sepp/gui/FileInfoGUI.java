@@ -3,7 +3,6 @@ package de.verbund.sepp.gui;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JPanel;
@@ -11,14 +10,14 @@ import javax.swing.JPanel;
 import de.verbund.sepp.gui.dialoge.DateiGUI;
 import de.verbund.sepp.main.utils.DateiInfoHelfer;
 
-public class FileInfoGUI extends JPanel{
-	
-	private Dimension dimension = new Dimension(200, 100);
+public class FileInfoGUI extends JPanel {
+
+	private Dimension dimension = new Dimension(200, 135);
 	private DateiInfoHelfer helferlein = new DateiInfoHelfer();
 	private String name;
-	
+
 	public FileInfoGUI(List<String> files) {
-		setLayout(new GridLayout(0, 1, 30, 100));
+		setLayout(new GridLayout(0, 1, 30, 0));
 		for (String f : files) {
 			try {
 				name = helferlein.nameMitUnterordner(f);
