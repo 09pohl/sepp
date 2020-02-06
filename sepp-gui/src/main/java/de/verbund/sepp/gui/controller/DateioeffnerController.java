@@ -15,12 +15,11 @@ public class DateioeffnerController {
 	private String pfad;
 	static DateiInformationen data;
 	
-	public DateioeffnerController(String pfad) throws IOException {
-		this.pfad = pfad;
+	public DateioeffnerController() throws IOException {
 	}
 	
 	public void getOrdner() throws IOException {
-		
+		pfad = schnittstelle.getEinstellungen().getProjektPfad();
 //		Desktop desktop = Desktop.getDesktop();
 //		File dirToOpen = null;
 //		try {
@@ -30,12 +29,17 @@ public class DateioeffnerController {
 //			System.out.println("File Not Found");
 //		}
 	}
+	
+	public void getDatei() throws IOException {
+		pfad = schnittstelle.getEinstellungen().getProjektDateiPfad();
+	}
+		
 
-	public static boolean open(File pfad) {
+	public static boolean open(File pfad2) {
 
-        if (openSystemSpecific(pfad.toString())) return true;
+        if (openSystemSpecific(pfad2.toString())) return true;
 
-        if (openDESKTOP(pfad)) return true;
+        if (openDESKTOP(pfad2)) return true;
 
         return false;
     }
@@ -89,8 +93,8 @@ public class DateioeffnerController {
         }
 	}
 	
-	private static boolean openDESKTOP(File pfad) {
-		 logOut("Trying to use Desktop.getDesktop().open() with " + pfad.toString());
+	private static boolean openDESKTOP(File pfad2) {
+		 logOut("Trying to use Desktop.getDesktop().open() with " + pfad2.toString());
 	        try {
 	            if (!Desktop.isDesktopSupported()) {
 	                logErr("Platform is not supported.");
@@ -102,7 +106,7 @@ public class DateioeffnerController {
 	                return false;
 	            }
 
-	            Desktop.getDesktop().open(pfad);
+	            Desktop.getDesktop().open(pfad2);
 
 	            return true;
 	        } catch (Throwable t) {

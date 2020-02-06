@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.attribute.FileTime;
 
@@ -18,6 +19,7 @@ import javax.swing.border.EmptyBorder;
 
 import de.verbund.sepp.gui.SEPPMainDlg;
 import de.verbund.sepp.gui.controller.ActiveFileController;
+import de.verbund.sepp.gui.controller.TestDateioeffnerController;
 import de.verbund.sepp.main.daten.DateiInformationen;
 import de.verbund.sepp.main.daten.DatenSchnittstelle;
 import de.verbund.sepp.main.daten.DatenSchnittstelleImpl;
@@ -29,6 +31,8 @@ import de.verbund.sepp.main.utils.HTMLHelfer;
 public class DateiGUI extends JPanel implements ActionListener {
 
 	Einstellungen einstellungen;
+	private JButton bOrdner;
+	private JButton bDatei;
 	private JButton bInfo;
 	private String name;
 	DatenSchnittstelle schnittstelle = DatenSchnittstelleImpl.getInstance();
@@ -51,9 +55,11 @@ public class DateiGUI extends JPanel implements ActionListener {
 	private Component getNorden() {
 		Icon icon = data.getIcon();
 		JPanel p = new JPanel();
-		JLabel i = new JLabel(icon);
+		bDatei = new JButton(icon);
 		JLabel n = new JLabel("[" + DateiHelfer.dateiEndung(name) + "]");
-		p.add(i);
+		
+		bDatei.addActionListener(this);
+		p.add(bDatei);
 		p.add(n);
 		return p;
 	}
@@ -74,8 +80,11 @@ public class DateiGUI extends JPanel implements ActionListener {
 	// Laden von Button mit Verweis auf ToDo - und Kommentarliste
 	private Component getSueden() {
 		JPanel p = new JPanel();
+		bOrdner = new JButton();
 		bInfo = new JButton("To-Do & Kommentarliste");
+		bOrdner.addActionListener(this);
 		bInfo.addActionListener(this);
+		p.add(bOrdner);
 		p.add(bInfo);
 		return p;
 	}
@@ -95,6 +104,18 @@ public class DateiGUI extends JPanel implements ActionListener {
 			// TODO #61
 			System.out.println(data.getPfad());
 		}
+		
+		if (e.getSource() == bDatei) {
+			TestDateioeffnerController controller = new TestDateioeffnerController();
+			String file;
+			try {
+				file = schnittstelle.getEinstellungen().getProjektDateiPfad();
+				File file_conv = new File(file);
+				controller.open(file_conv);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
 	}
-
 }
