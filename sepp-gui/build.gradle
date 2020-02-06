@@ -4,6 +4,8 @@ apply plugin: 'eclipse'
 
 sourceCompatibility = 1.8
 
+compileJava.options.encoding = "UTF-8"
+
 repositories {
     mavenCentral()
 }
@@ -24,3 +26,6 @@ jar {
         configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }
+
+// bauen mit
+// gradle build -x test

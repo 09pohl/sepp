@@ -28,7 +28,10 @@ public class StartUpController {
 			Einstellungen settings = schnittstelle.getEinstellungen();
 			try {
 				settings.laden();
-			} catch (FileNotFoundException e) {
+				if (settings.isPropertyEmpty()) {
+					throw new NullPointerException("Ungültige .properties Datei.");
+				}
+			} catch (FileNotFoundException | NullPointerException e) {
 				startDlg = new StartUpDlg();
 				startDlg.getRootPane().setDefaultButton(startDlg.getSaveButton());
 				startDlg.getChooseButton().addActionListener(e2 -> chooseDirectory());
