@@ -7,16 +7,19 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.nio.file.attribute.FileTime;
 
+import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.EtchedBorder;
 
 import de.verbund.sepp.main.daten.DateiInformationen;
 import de.verbund.sepp.main.daten.DatenSchnittstelle;
 import de.verbund.sepp.main.daten.DatenSchnittstelleImpl;
 import de.verbund.sepp.main.daten.Einstellungen;
 import de.verbund.sepp.main.utils.DatumHelfer;
+import de.verbund.sepp.main.utils.HTMLHelfer;
 
 public class DateiGUI extends JPanel implements ActionListener {
 
@@ -35,6 +38,7 @@ public class DateiGUI extends JPanel implements ActionListener {
 		add(getNorden(), BorderLayout.NORTH);
 		add(getMitte(), BorderLayout.CENTER);
 		add(getSueden(), BorderLayout.SOUTH);
+		setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
 		setVisible(true);
 	}
 
@@ -55,11 +59,10 @@ public class DateiGUI extends JPanel implements ActionListener {
 		FileTime datum_1 = data.getErstellungsDatum();
 		FileTime datum_2 = data.getAenderungsDatum();
 		String s = DatumHelfer.fileTimeToString(datum_1);
-		JLabel label_1 = new JLabel("Erstellungsdatum: " + s);
 		String s1 = DatumHelfer.fileTimeToString(datum_2);
-		JLabel label_2 = new JLabel("Aenderungsdatum: " + s1);
+		JLabel label_1 = new JLabel(
+				HTMLHelfer.OPEN + "Erstellungsdatum: " + s + "<br/>Änderungsdatum: " + s1 + HTMLHelfer.CLOSE);
 		p.add(label_1);
-		p.add(label_2);
 		return p;
 	}
 
@@ -75,7 +78,7 @@ public class DateiGUI extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == bInfo) {
-			// TODO: Load TODO-List & Kommentarliste;
+			System.out.println(data.getPfad());
 		}
 	}
 
