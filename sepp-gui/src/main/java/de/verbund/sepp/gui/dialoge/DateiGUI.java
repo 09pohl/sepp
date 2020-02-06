@@ -2,7 +2,6 @@ package de.verbund.sepp.gui.dialoge;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
-import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -10,7 +9,6 @@ import java.nio.file.attribute.FileTime;
 
 import javax.swing.Icon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -24,13 +22,11 @@ public class DateiGUI extends JPanel implements ActionListener {
 
 	Einstellungen einstellungen;
 	private JButton bInfo;
-	private String verzeichnis; // TODO - Dateiaufruf
 	private String name;
 	DatenSchnittstelle schnittstelle = DatenSchnittstelleImpl.getInstance();
 	DateiInformationen data;
 
 	public DateiGUI(String verzeichnis, String name) throws IOException {
-		this.verzeichnis = verzeichnis;
 		this.name = name;
 		data = schnittstelle.getDateiInformationen(verzeichnis);
 		setSize(350, 150);
