@@ -3,6 +3,7 @@ package de.verbund.sepp.gui.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JScrollPane;
 
@@ -14,7 +15,7 @@ public class DateiViewController extends JScrollPane{
 	
 	private FileInfoGUI infoGUI;
 	private DatenSchnittstelle data = DatenSchnittstelleImpl.getInstance();
-	private ArrayList<String> files;
+	private List<String> files;
 	
 	public DateiViewController() {
 	}

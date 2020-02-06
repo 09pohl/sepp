@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JPanel;
 
@@ -16,7 +17,7 @@ public class FileInfoGUI extends JPanel{
 	private DateiInfoHelfer helferlein = new DateiInfoHelfer();
 	private String name;
 	
-	public FileInfoGUI(ArrayList<String> files) {
+	public FileInfoGUI(List<String> files) {
 		setLayout(new GridLayout(0, 1, 30, 100));
 		for (String f : files) {
 			try {
