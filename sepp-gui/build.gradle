@@ -24,3 +24,6 @@ jar {
         configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }
+
+// bauen mit
+// gradle build -x test
