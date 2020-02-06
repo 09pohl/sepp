@@ -26,7 +26,6 @@ import de.verbund.sepp.main.daten.DatenSchnittstelle;
 import de.verbund.sepp.main.daten.DatenSchnittstelleImpl;
 import de.verbund.sepp.main.daten.Einstellungen;
 import de.verbund.sepp.main.utils.DateiHelfer;
-import de.verbund.sepp.main.utils.DateiInfoHelfer;
 import de.verbund.sepp.main.utils.DatumHelfer;
 import de.verbund.sepp.main.utils.HTMLHelfer;
 
@@ -81,6 +80,7 @@ public class DateiGUI extends JPanel implements ActionListener {
 		FileTime datum_2 = data.getAenderungsDatum();
 		String s = DatumHelfer.fileTimeToString(datum_1);
 		String s1 = DatumHelfer.fileTimeToString(datum_2);
+		JLabel label_2 = new JLabel("Änderungsdatum: " + s1);
 		JLabel label_1 = new JLabel(
 				HTMLHelfer.OPEN + "Erstellungsdatum: " + s + "<br/>Änderungsdatum: " + s1 + HTMLHelfer.CLOSE);
 		p.add(label_1);

@@ -17,13 +17,12 @@ public class DummyFrame extends JFrame {
 	public DummyFrame() throws IOException {
 		Einstellungen einst = DatenSchnittstelleImpl.getInstance().getEinstellungen();
 		einst.setUsername("test");
-		einst.setProjektPfad("C:/Users/Administrator/it/sepp/TestOrdner");
+		einst.setProjektPfad("C:/Users/Administrator/git/sepp/TestOrdner");
 		System.out.println(einst.getProjektPfad());
 		einst.speichern();
 		setSize(1000, 1000);
 		setLocationRelativeTo(null);
 		setLayout(new GridLayout(0, 1));
-		boxes = new ToDoAndCommentBoxes();
 		add(boxes.getCommentBox());
 		add(boxes.getToDoBox());
 		setVisible(true);

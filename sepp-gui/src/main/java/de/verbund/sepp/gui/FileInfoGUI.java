@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
+import de.verbund.sepp.gui.controller.DateiViewController;
 import de.verbund.sepp.gui.dialoge.DateiGUI;
 import de.verbund.sepp.main.utils.DateiInfoHelfer;
 
@@ -15,6 +16,16 @@ public class FileInfoGUI extends JPanel {
 	private Dimension dimension = new Dimension(200, 145);
 	private DateiInfoHelfer helferlein = new DateiInfoHelfer();
 	private String name;
+
+	private static FileInfoGUI instance;
+
+	public static FileInfoGUI getInstance() {
+		DateiViewController dc = new DateiViewController();
+		if (instance == null) {
+			instance = new FileInfoGUI(dc.getFiles());
+		}
+		return instance;
+	}
 
 	public FileInfoGUI(List<String> files) {
 		setLayout(new GridLayout(0, 1, 30, 0));
