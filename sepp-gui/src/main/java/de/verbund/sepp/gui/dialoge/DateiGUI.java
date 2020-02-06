@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EtchedBorder;
 
+import de.verbund.sepp.gui.SEPPMainDlg;
 import de.verbund.sepp.gui.controller.ActiveFileController;
 import de.verbund.sepp.main.daten.DateiInformationen;
 import de.verbund.sepp.main.daten.DatenSchnittstelle;
@@ -82,6 +83,7 @@ public class DateiGUI extends JPanel implements ActionListener {
 
 			try {
 				ActiveFileController.getInstance().setAktiveDateiPfad(data.getPfad().toString());
+				SEPPMainDlg.getInstance().refreshMainTables();
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
