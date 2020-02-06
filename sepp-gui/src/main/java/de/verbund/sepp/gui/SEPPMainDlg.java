@@ -51,7 +51,7 @@ public class SEPPMainDlg {
 	private SEPPMainDlg() {
 		erzeugeSplitLayout();
 		erzeugeMenue();
-		seppMainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		seppMainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		seppMainFrame.setTitle("SuperEffectiveProjectPlanning (SEPP)");
 		seppMainFrame.setContentPane(panel);
 		seppMainFrame.setSize(1000, 800);
@@ -101,7 +101,6 @@ public class SEPPMainDlg {
 
 			try {
 				refreshMainTables();
-				refreshFileGUI();
 			} catch (IOException e1) {
 				// TODO #54 Fehlermeldungen überarbeiten
 				e1.printStackTrace();
