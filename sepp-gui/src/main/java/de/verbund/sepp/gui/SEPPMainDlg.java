@@ -39,7 +39,16 @@ public class SEPPMainDlg {
 	private DateiViewController dc = new DateiViewController();
 	private DatenSchnittstelle schnittstelle = DatenSchnittstelleImpl.getInstance();
 
-	public SEPPMainDlg() {
+	private static SEPPMainDlg instance;
+
+	public static SEPPMainDlg getInstance() throws IOException {
+		if (instance == null) {
+			instance = new SEPPMainDlg();
+		}
+		return instance;
+	}
+
+	private SEPPMainDlg() {
 		erzeugeSplitLayout();
 		erzeugeMenue();
 		seppMainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

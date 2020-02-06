@@ -7,7 +7,7 @@ import javax.swing.JLabel;
 
 import de.verbund.sepp.main.daten.DatenSchnittstelle;
 import de.verbund.sepp.main.daten.DatenSchnittstelleImpl;
-import de.verbund.sepp.main.utils.DateiHelfer;
+import de.verbund.sepp.main.utils.DateiInfoHelfer;
 
 public class ActiveFileController {
 
@@ -36,8 +36,7 @@ public class ActiveFileController {
 	public void setAktiveDateiPfad(String aktiveDateiPfad) throws IOException {
 		this.aktiveDateiPfad = aktiveDateiPfad;
 		if (lAktiveDatei != null) {
-			DateiHelfer datei = new DateiHelfer(aktiveDateiPfad);
-			lAktiveDatei.setText(datei.nameMitEndung());
+			lAktiveDatei.setText(DateiInfoHelfer.nameMitUnterordner(aktiveDateiPfad));
 			if (!schnittstelle.getEinstellungen().getProjektDateiPfad().equals(aktiveDateiPfad)
 					&& bZurHauptdatei != null) {
 				bZurHauptdatei.setVisible(true);
@@ -55,10 +54,9 @@ public class ActiveFileController {
 		this.lAktiveDatei = ativeDateiLabel;
 	}
 
-	public void refreshLabel() {
+	public void refreshLabel() throws IOException {
 		if (lAktiveDatei != null) {
-			DateiHelfer datei = new DateiHelfer(aktiveDateiPfad);
-			lAktiveDatei.setText(datei.nameMitEndung());
+			lAktiveDatei.setText(DateiInfoHelfer.nameMitUnterordner(aktiveDateiPfad));
 		}
 	}
 
