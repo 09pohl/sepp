@@ -130,7 +130,6 @@ public class DateiGUI extends JPanel implements ActionListener {
 			try {
 				ActiveFileController.getInstance().setAktiveDateiPfad(data.getPfad().toString());
 				SEPPMainDlg.getInstance().refreshMainTables();
-				System.out.println("test");
 
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
