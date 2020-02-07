@@ -9,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.nio.file.attribute.DosFileAttributes;
 import java.util.ArrayList;
 
 import javax.swing.Icon;
@@ -58,13 +59,21 @@ public class DateiHelfer {
 		for (File datei : ordner.listFiles()) {
 			if (datei.isDirectory()) {
 				dateienInOrdnerSepp(datei, pfadListe);
+
+				// Sicherheitshalber - SEPP Dateien sollten eigentlich immer versteckt sein
 			} else if (!DateiHelfer.dateiEndungMitPunkt(datei.getCanonicalPath())
 					.equals(DateiInformationen.DATEIENDUNG_KOMMENTARE)
 					&& !DateiHelfer.dateiEndungMitPunkt(datei.getCanonicalPath())
 							.equals(DateiInformationen.DATEIENDUNG_TODOS)
 					&& !DateiHelfer.dateiEndungMitPunkt(datei.getCanonicalPath())
 							.equals(DatenSchnittstelle.PRIMAER_DATEIENDUNG)) {
-				pfadListe.add(datei.getCanonicalPath());
+
+				Path filePath = Paths.get(datei.getCanonicalPath());
+				DosFileAttributes attr = Files.readAttributes(filePath, DosFileAttributes.class);
+				if (!attr.isHidden()) {
+					pfadListe.add(datei.getCanonicalPath());
+				}
+
 			}
 		}
 	}
@@ -100,6 +109,14 @@ public class DateiHelfer {
 		datei.createNewFile();
 	}
 
+	public void schreibeVersteckt(String text) throws IOException {
+		schreibeVersteckt(text, false);
+	}
+
+	public void schreibeVersteckt(String text, boolean append) throws IOException {
+		schreibe(text, append);
+	}
+
 	public void schreibe(String text) throws IOException {
 		schreibe(text, false);
 	}
@@ -132,5 +149,10 @@ public class DateiHelfer {
 			}
 		}
 		return inhalt.toString();
+	}
+
+	public void setHidden(boolean hidden) throws IOException {
+		Path datei = Paths.get(dateiName);
+		Files.setAttribute(datei, "dos:hidden", hidden);
 	}
 }

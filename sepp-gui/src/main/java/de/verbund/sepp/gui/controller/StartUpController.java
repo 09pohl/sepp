@@ -10,9 +10,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 import de.verbund.sepp.gui.dialoge.StartUpDlg;
-import de.verbund.sepp.main.daten.DatenSchnittstelle;
-import de.verbund.sepp.main.daten.DatenSchnittstelleImpl;
-import de.verbund.sepp.main.daten.Einstellungen;
+import de.verbund.sepp.main.daten.*;
 
 public class StartUpController {
 
@@ -70,10 +68,6 @@ public class StartUpController {
 		String user = startDlg.getUserNameTf().getText();
 		if (!("".equals(dir) || "".equals(user))) {
 			if (!(user.contains(":"))) {
-				// TODO #61 sysout entfernen
-				System.out.println("Projektverzeichnis: " + dir);
-				// TODO #61 sysout entfernen
-				System.out.println("Benutzername: " + user);
 				schnittstelle.getEinstellungen().setProjektPfad(dir);
 				schnittstelle.getEinstellungen().setUsername(user);
 				schnittstelle.getEinstellungen().speichern();

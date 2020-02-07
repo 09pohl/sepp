@@ -3,6 +3,7 @@ package de.verbund.sepp.gui.controller;
 import java.io.IOException;
 import java.util.List;
 
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 
 import de.verbund.sepp.gui.FileInfoGUI;
@@ -27,8 +28,8 @@ public class DateiViewController extends JScrollPane {
 		try {
 			files = data.getDateiPfade(data.getEinstellungen());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Dateien können nicht geladen werden!",
+					"FEHLER!", JOptionPane.ERROR_MESSAGE);
 		}
 		return files;
 	}

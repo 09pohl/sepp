@@ -1,12 +1,11 @@
 *.class
-**/bin/*
-.gradle/* 
+.gradle/*
 **/.settings/*
 
-**/build/*
+*/bin/*
+*/build/*
 */.classpath
 */.project
-
 */.idea/*
 */gradle/*
 */*.iml
@@ -14,3 +13,4 @@
 /gradle/*
 /gradlew
 /gradlew.bat
+/.gradle/

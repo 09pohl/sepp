@@ -51,8 +51,6 @@ public class Einstellungen {
 		einstellungen.store(output, null);
 		DateiHelfer projektDatei = new DateiHelfer(projektPfad + "/" + DatenSchnittstelle.PRIMAER_DATEINAME);
 
-		System.out.println(projektPfad + "/" + DatenSchnittstelle.PRIMAER_DATEINAME);
-
 		if (!projektDatei.existiert()) {
 			projektDatei.schreibe("");
 		}
@@ -66,6 +64,7 @@ public class Einstellungen {
 		username = einstellungen.getProperty(BENUTZER_PROPERTY);
 		projektPfad = einstellungen.getProperty(PROJEKT_PROPERTY);
 		input.close();
+		this.speichern(); // stellt sicher, dass die Projektdateien angelegt werden
 	}
 
 	public boolean isPropertyEmpty() {

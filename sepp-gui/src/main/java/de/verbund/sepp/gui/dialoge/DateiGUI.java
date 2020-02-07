@@ -16,6 +16,7 @@ import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
@@ -36,8 +37,10 @@ public class DateiGUI extends JPanel implements ActionListener {
 	private JButton bInfo;
 	private String name;
 	private JFileChooser fc;
+	DateioeffnerController controller;
 	DatenSchnittstelle schnittstelle = DatenSchnittstelleImpl.getInstance();
 	DateiInformationen data;
+	private int rahmenGroesse = 1;
 
 	public DateiGUI(String verzeichnis, String name) throws IOException {
 		this.name = name;
@@ -46,8 +49,11 @@ public class DateiGUI extends JPanel implements ActionListener {
 		add(getNorden(), BorderLayout.NORTH);
 		add(getMitte(), BorderLayout.CENTER);
 		add(getSueden(), BorderLayout.SOUTH);
+		if (data.getPfad().toString().equals(ActiveFileController.getInstance().getAktiveDateiPfad())) {
+			rahmenGroesse = 5;
+		}
 		setBorder(new CompoundBorder(new EmptyBorder(5, 5, 5, 5),
-				BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLACK), name)));
+				BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLACK, rahmenGroesse), name)));
 		setVisible(true);
 	}
 
@@ -62,8 +68,7 @@ public class DateiGUI extends JPanel implements ActionListener {
 		JLabel lOrdner = new JLabel(folderimg);
 		JLabel lDatei = new JLabel(fileimg);
 		
-		lOrdner.addMouseListener(new MouseAdapter()
-		{
+		lOrdner.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				String file;
@@ -72,14 +77,13 @@ public class DateiGUI extends JPanel implements ActionListener {
 					File file_conv = new File(file);
 					DateioeffnerController.open(file_conv.getParentFile());
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Dateipfad existiert nicht!",
+							"FEHLER!", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
-		
-		lDatei.addMouseListener(new MouseAdapter() 
-		{
+
+		lDatei.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				try {
@@ -88,8 +92,8 @@ public class DateiGUI extends JPanel implements ActionListener {
 					File file_conv = new File(file);
 					DateioeffnerController.open(file_conv);
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Datei konnte nicht geöffnet werden!",
+							"FEHLER!", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -123,16 +127,15 @@ public class DateiGUI extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == bInfo) {
+
 			try {
 				ActiveFileController.getInstance().setAktiveDateiPfad(data.getPfad().toString());
 				SEPPMainDlg.getInstance().refreshMainTables();
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
 
-			// TODO #61
-			System.out.println(data.getPfad());
-		}	
+			} catch (IOException e1) {
+				JOptionPane.showMessageDialog(null, "Tabelle konnte nicht neu geladen werden!",
+						"FEHLER!", JOptionPane.ERROR_MESSAGE);
+			}
+		}
 	}
 }
