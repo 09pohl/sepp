@@ -55,12 +55,7 @@ public class DatenSchnittstelleImpl implements DatenSchnittstelle {
 			dateiTodo.schreibe("");
 			try {
 				// TODO #61
-				Path filePath = Paths.get(dateiPfad + DateiInformationen.DATEIENDUNG_TODOS);
-				DosFileAttributes attr = Files.readAttributes(filePath, DosFileAttributes.class);
-				System.out.println(filePath.getFileName() + " Hidden attribute is " + attr.isHidden());
-				Files.setAttribute(filePath, "dos:hidden", true);
-				attr = Files.readAttributes(filePath, DosFileAttributes.class);
-				System.out.println(filePath.getFileName() + " Hidden attribute is " + attr.isHidden());
+				dateiTodo.setHidden(true);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
