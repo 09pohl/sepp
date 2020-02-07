@@ -37,6 +37,7 @@ public class FullTextAndEdit extends JDialog {
 		setSize(400, 200);
 		setLocationRelativeTo(null);
 		setResizable(false);
+		setModal(true);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setLayout(new BorderLayout());
 		add(northPanel(), BorderLayout.NORTH);
@@ -56,8 +57,8 @@ public class FullTextAndEdit extends JDialog {
 	private Component northPanel() {
 		JPanel northPanel = new JPanel();
 		northPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-		northPanel.add(new JLabel("Betreff:"));
-		northPanel.add(new JTextField(10));
+		northPanel.add(new JLabel("Bearbeiten:")); //statt Betreff:
+//		northPanel.add(new JTextField(10));
 		return northPanel;
 	}
 
@@ -89,14 +90,15 @@ public class FullTextAndEdit extends JDialog {
 		dispose();
 	}
 
-	private Object edit(int toDifferentTables) {
+	private void edit(int toDifferentTables) {
 		PopUpFunction refresh = new PopUpFunction();
+		String comment = editor.getText().replaceAll("\\r?\\n", " ");
 		try {
-			refresh.edit(toDifferentTables, table.getSelectedRow(), editor.getText(), seppMainDlg);
+			refresh.edit(toDifferentTables, table.getSelectedRow(), comment, seppMainDlg);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		dispose();
 	}
 }
