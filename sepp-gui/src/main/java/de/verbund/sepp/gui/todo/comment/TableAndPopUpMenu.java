@@ -1,12 +1,20 @@
 package de.verbund.sepp.gui.todo.comment;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 
+import javax.swing.AbstractAction;
+import javax.swing.ActionMap;
+import javax.swing.InputMap;
+import javax.swing.JComponent;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.JTable;
+import javax.swing.KeyStroke;
 import javax.swing.table.TableModel;
 
 import de.verbund.sepp.gui.SEPPMainDlg;
@@ -23,35 +31,7 @@ public class TableAndPopUpMenu {
 	}
 
 	private JTable createTable(int toDifferentTables) {
-
-		table.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				int r = table.rowAtPoint(e.getPoint());
-				if (r >= 0 && r < table.getRowCount()) {
-					table.setRowSelectionInterval(r, r);
-				} else {
-					table.clearSelection();
-				}
-				int rowindex = table.getSelectedRow();
-				if (rowindex < 0)
-					return;
-				if (e.isPopupTrigger() && e.getComponent() instanceof JTable) {
-					JPopupMenu popup = createPopUpMenu(new JPopupMenu(), rowindex);
-					popup.show(e.getComponent(), e.getX(), e.getY());
-				}
-			}
-
-			private JPopupMenu createPopUpMenu(JPopupMenu popup, int rowindex) {
-				popup.add("Hinzufügen")
-						.addActionListener(e -> addOrEditJOP(AddOrEdit.ADD, rowindex, toDifferentTables));
-				popup.add("Editieren")
-						.addActionListener(e -> addOrEditJOP(AddOrEdit.EDIT, rowindex, toDifferentTables));
-				popup.add("Löschen").addActionListener(e -> deleteJOP(rowindex, toDifferentTables));
-				popUpFunction = new PopUpFunction();
-				return popup;
-			}
-		});
+		mouseListener(toDifferentTables, table);
 		table.setEnabled(false);
 		return table;
 	}
@@ -120,4 +100,39 @@ public class TableAndPopUpMenu {
 		}
 	}
 
+	private void mouseListener(int toDifferentTables, JTable table) {
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				int r = table.rowAtPoint(e.getPoint());
+				if (r >= 0 && r < table.getRowCount()) {
+					table.setRowSelectionInterval(r, r);
+				} else {
+					table.clearSelection();
+				}
+				int rowindex = table.getSelectedRow();
+				if (rowindex < 0)
+					return;
+				if (e.isPopupTrigger() && e.getComponent() instanceof JTable) {
+					JPopupMenu popup = createPopUpMenu(new JPopupMenu(), rowindex);
+					popup.show(e.getComponent(), e.getX(), e.getY());
+				}
+				if (e.getClickCount() == 2 && !e.isConsumed()) {
+					new FullTextAndEdit(toDifferentTables, table);
+				    e.consume();
+				}
+			}
+
+			private JPopupMenu createPopUpMenu(JPopupMenu popup, int rowindex) {
+				popup.add("Hinzufügen")
+						.addActionListener(e -> addOrEditJOP(AddOrEdit.ADD, rowindex, toDifferentTables));
+				popup.add("Editieren")
+						.addActionListener(e -> addOrEditJOP(AddOrEdit.EDIT, rowindex, toDifferentTables));
+				popup.add("Löschen").addActionListener(e -> deleteJOP(rowindex, toDifferentTables));
+				popUpFunction = new PopUpFunction();
+				return popup;
+			}
+			
+		});
+	}
 }

@@ -125,7 +125,6 @@ public class PopUpFunction {
 						} else {
 							if (j == 0) {
 								contentString.append(user + ":");
-								// User muss noch geholt werden!
 							} else {
 								contentString.append(comment + "\n");
 							}
