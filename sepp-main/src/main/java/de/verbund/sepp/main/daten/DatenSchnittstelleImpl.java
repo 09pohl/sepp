@@ -2,10 +2,8 @@ package de.verbund.sepp.main.daten;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.attribute.DosFileAttributes;
 import java.util.ArrayList;
 
 import de.verbund.sepp.main.utils.DateiHelfer;
@@ -54,13 +52,7 @@ public class DatenSchnittstelleImpl implements DatenSchnittstelle {
 		} else {
 			dateiTodo.schreibe("");
 			try {
-				// TODO #61
-				Path filePath = Paths.get(dateiPfad + DateiInformationen.DATEIENDUNG_TODOS);
-				DosFileAttributes attr = Files.readAttributes(filePath, DosFileAttributes.class);
-				System.out.println(filePath.getFileName() + " Hidden attribute is " + attr.isHidden());
-				Files.setAttribute(filePath, "dos:hidden", true);
-				attr = Files.readAttributes(filePath, DosFileAttributes.class);
-				System.out.println(filePath.getFileName() + " Hidden attribute is " + attr.isHidden());
+				dateiTodo.setHidden(true);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -72,13 +64,7 @@ public class DatenSchnittstelleImpl implements DatenSchnittstelle {
 		} else {
 			dateiKommentare.schreibe("");
 			try {
-				// TODO #61
-				Path filePath = Paths.get(dateiPfad + DateiInformationen.DATEIENDUNG_KOMMENTARE);
-				DosFileAttributes attr = Files.readAttributes(filePath, DosFileAttributes.class);
-				System.out.println(filePath.getFileName() + " Hidden attribute is " + attr.isHidden());
-				Files.setAttribute(filePath, "dos:hidden", true);
-				attr = Files.readAttributes(filePath, DosFileAttributes.class);
-				System.out.println(filePath.getFileName() + " Hidden attribute is " + attr.isHidden());
+				dateiKommentare.setHidden(true);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -89,8 +75,12 @@ public class DatenSchnittstelleImpl implements DatenSchnittstelle {
 	@Override
 	public void speichereDateiInformationen(DateiInformationen dateiInfo) throws IOException {
 		DateiHelfer dateiTodo = new DateiHelfer(dateiInfo.getPfad() + DateiInformationen.DATEIENDUNG_TODOS);
+		dateiTodo.setHidden(false);
 		dateiTodo.schreibe(dateiInfo.getToDos());
+		dateiTodo.setHidden(true);
 		DateiHelfer dateiKommentare = new DateiHelfer(dateiInfo.getPfad() + DateiInformationen.DATEIENDUNG_KOMMENTARE);
+		dateiKommentare.setHidden(false);
 		dateiKommentare.schreibe(dateiInfo.getKommentare());
+		dateiTodo.setHidden(true);
 	}
 }
