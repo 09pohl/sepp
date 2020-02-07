@@ -69,11 +69,11 @@ public class FullTextAndEdit extends JDialog {
 	private Component northPanel(int toDifferentTables) {
 		JPanel northPanel = new JPanel();
 		northPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
-		JButton nextComment = new JButton("->");
-		JButton previousComment = new JButton("<-");
+		JButton nextComment = new JButton("🡆");
+		JButton previousComment = new JButton("🡄");
 		nextComment.addActionListener(e -> next(toDifferentTables, 1));
 		previousComment.addActionListener(e -> next(toDifferentTables, -1));
-		northPanel.add(new JLabel("Bearbeiten:")); // statt Betreff:
+//		northPanel.add(new JLabel("Bearbeiten:")); // statt Betreff:
 		northPanel.add(previousComment);
 		northPanel.add(nextComment);
 //		northPanel.add(new JTextField(10));
