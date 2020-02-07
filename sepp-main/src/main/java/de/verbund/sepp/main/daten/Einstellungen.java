@@ -51,8 +51,6 @@ public class Einstellungen {
 		einstellungen.store(output, null);
 		DateiHelfer projektDatei = new DateiHelfer(projektPfad + "/" + DatenSchnittstelle.PRIMAER_DATEINAME);
 
-		System.out.println(projektPfad + "/" + DatenSchnittstelle.PRIMAER_DATEINAME);
-
 		if (!projektDatei.existiert()) {
 			projektDatei.schreibe("");
 		}

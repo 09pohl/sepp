@@ -2,9 +2,12 @@ package de.verbund.sepp.main.daten;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
 
 import de.verbund.sepp.main.utils.DateiHelfer;
 
@@ -52,9 +55,10 @@ public class DatenSchnittstelleImpl implements DatenSchnittstelle {
 		} else {
 			dateiTodo.schreibe("");
 			try {
-				dateiTodo.setHidden(true);
+				Path filePath = Paths.get(dateiPfad + DateiInformationen.DATEIENDUNG_TODOS);
+				Files.setAttribute(filePath, "dos:hidden", true);
 			} catch (Exception e) {
-				e.printStackTrace();
+				getError();
 			}
 		}
 
@@ -64,9 +68,10 @@ public class DatenSchnittstelleImpl implements DatenSchnittstelle {
 		} else {
 			dateiKommentare.schreibe("");
 			try {
-				dateiKommentare.setHidden(true);
+				Path filePath = Paths.get(dateiPfad + DateiInformationen.DATEIENDUNG_KOMMENTARE);
+				Files.setAttribute(filePath, "dos:hidden", true);
 			} catch (Exception e) {
-				e.printStackTrace();
+				getError();
 			}
 		}
 		return dateiInfo;
@@ -75,12 +80,12 @@ public class DatenSchnittstelleImpl implements DatenSchnittstelle {
 	@Override
 	public void speichereDateiInformationen(DateiInformationen dateiInfo) throws IOException {
 		DateiHelfer dateiTodo = new DateiHelfer(dateiInfo.getPfad() + DateiInformationen.DATEIENDUNG_TODOS);
-		dateiTodo.setHidden(false);
 		dateiTodo.schreibe(dateiInfo.getToDos());
-		dateiTodo.setHidden(true);
 		DateiHelfer dateiKommentare = new DateiHelfer(dateiInfo.getPfad() + DateiInformationen.DATEIENDUNG_KOMMENTARE);
-		dateiKommentare.setHidden(false);
 		dateiKommentare.schreibe(dateiInfo.getKommentare());
-		dateiTodo.setHidden(true);
+	}
+	
+	private void getError() {
+		JOptionPane.showMessageDialog(null, "Datei konnte nicht erstellt werden!", "FEHLER!", JOptionPane.ERROR_MESSAGE);
 	}
 }

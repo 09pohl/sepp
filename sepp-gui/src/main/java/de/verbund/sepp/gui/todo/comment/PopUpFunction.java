@@ -2,6 +2,8 @@ package de.verbund.sepp.gui.todo.comment;
 
 import java.io.IOException;
 
+import javax.swing.JOptionPane;
+
 import de.verbund.sepp.gui.SEPPMainDlg;
 import de.verbund.sepp.gui.controller.ActiveFileController;
 import de.verbund.sepp.main.daten.DateiInformationen;
@@ -29,8 +31,7 @@ public class PopUpFunction {
 		try {
 			seppMainDlg.refreshMainTables();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Fehler beim Aktualisieren!", "FEHLER!", JOptionPane.ERROR_MESSAGE);
 		}
 
 	}
@@ -48,8 +49,7 @@ public class PopUpFunction {
 		try {
 			seppMainDlg.refreshMainTables();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Fehler beim Aktualisieren!", "FEHLER!", JOptionPane.ERROR_MESSAGE);
 		}
 
 	}
@@ -65,8 +65,7 @@ public class PopUpFunction {
 		try {
 			seppMainDlg.refreshMainTables();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Daten konnten nicht gelöscht werden!", "FEHLER!", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -82,8 +81,7 @@ public class PopUpFunction {
 			dataInformation = dataSchnittstelle
 					.getDateiInformationen(ActiveFileController.getInstance().getAktiveDateiPfad());
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Fehler beim Lesen des Dateipfades!", "FEHLER!", JOptionPane.ERROR_MESSAGE);
 		}
 		String[][] userAndComments = DateiInfoHelfer.getZeilenArray(dataInformation.getKommentare());
 		contentString = new StringBuffer();
@@ -108,7 +106,7 @@ public class PopUpFunction {
 				dataSchnittstelle.speichereDateiInformationen(dataInformation);
 
 			} catch (Exception e) {
-				e.printStackTrace();
+				getError();
 			}
 		} else if (call == EDIT) {
 			try {
@@ -135,7 +133,7 @@ public class PopUpFunction {
 				dataSchnittstelle.speichereDateiInformationen(dataInformation);
 
 			} catch (Exception e) {
-				System.out.println("nicht funktioniert");
+				getError();
 			}
 		} else {
 			try {
@@ -157,15 +155,13 @@ public class PopUpFunction {
 				dataSchnittstelle.speichereDateiInformationen(dataInformation);
 
 			} catch (Exception e) {
-				System.out.println("nicht funktioniert");
+				getError();
 			}
 		}
-
 	}
 
 	private void toDoSetter(int index, int call) {
 		toDoSetter(null, null, index, call);
-
 	}
 
 	private void toDoSetter(String user, String comment, int index, int call) {
@@ -176,8 +172,7 @@ public class PopUpFunction {
 			dataInformation = dataSchnittstelle
 					.getDateiInformationen(ActiveFileController.getInstance().getAktiveDateiPfad());
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Dateipfad existiert nicht!");
 		}
 		String[][] userAndToDos = DateiInfoHelfer.getZeilenArray(dataInformation.getToDos());
 		contentString = new StringBuffer();
@@ -202,7 +197,7 @@ public class PopUpFunction {
 				dataSchnittstelle.speichereDateiInformationen(dataInformation);
 
 			} catch (Exception e) {
-				e.printStackTrace();
+				getError();
 			}
 		} else if (call == EDIT) {
 			try {
@@ -230,7 +225,7 @@ public class PopUpFunction {
 				dataSchnittstelle.speichereDateiInformationen(dataInformation);
 
 			} catch (Exception e) {
-				System.out.println("nicht funktioniert");
+				getError();
 			}
 		} else {
 			try {
@@ -249,7 +244,7 @@ public class PopUpFunction {
 				dataSchnittstelle.speichereDateiInformationen(dataInformation);
 
 			} catch (Exception e) {
-				System.out.println("nicht funktioniert");
+				getError();
 			}
 		}
 
@@ -263,6 +258,10 @@ public class PopUpFunction {
 	private DatenSchnittstelleImpl getDatenSchnittstelle() {
 		return DatenSchnittstelleImpl.getInstance();
 
+	}
+	
+	private void getError() {
+		JOptionPane.showMessageDialog(null, "Daten konnten nicht gespeichert werden!", "FEHLER!", JOptionPane.ERROR_MESSAGE);
 	}
 
 }

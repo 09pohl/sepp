@@ -16,6 +16,7 @@ import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
@@ -76,8 +77,8 @@ public class DateiGUI extends JPanel implements ActionListener {
 					File file_conv = new File(file);
 					DateioeffnerController.open(file_conv.getParentFile());
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Dateipfad existiert nicht!",
+							"FEHLER!", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -91,8 +92,8 @@ public class DateiGUI extends JPanel implements ActionListener {
 					File file_conv = new File(file);
 					DateioeffnerController.open(file_conv);
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Datei konnte nicht geöffnet werden!",
+							"FEHLER!", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -132,12 +133,9 @@ public class DateiGUI extends JPanel implements ActionListener {
 				SEPPMainDlg.getInstance().refreshMainTables();
 
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				JOptionPane.showMessageDialog(null, "Tabelle konnte nicht neu geladen werden!",
+						"FEHLER!", JOptionPane.ERROR_MESSAGE);
 			}
-
-			// TODO #61
-			System.out.println(data.getPfad());
 		}
 	}
 }

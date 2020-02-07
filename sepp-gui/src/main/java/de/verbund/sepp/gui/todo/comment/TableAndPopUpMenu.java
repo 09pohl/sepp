@@ -1,20 +1,12 @@
 package de.verbund.sepp.gui.todo.comment;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 
-import javax.swing.AbstractAction;
-import javax.swing.ActionMap;
-import javax.swing.InputMap;
-import javax.swing.JComponent;
-import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.JTable;
-import javax.swing.KeyStroke;
 import javax.swing.table.TableModel;
 
 import de.verbund.sepp.gui.SEPPMainDlg;
@@ -54,15 +46,13 @@ public class TableAndPopUpMenu {
 						try {
 							popUpFunction.add(toDifferentTables, rowindex, comment, seppMainDlg);
 						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+							JOptionPane.showMessageDialog(null, "Fehler beim Hinzufügen!", "FEHLER!", JOptionPane.ERROR_MESSAGE);
 						}
 					} else {
 						try {
 							popUpFunction.edit(toDifferentTables, rowindex, comment, seppMainDlg);
 						} catch (IOException e) {
-							// TODO #54
-							e.printStackTrace();
+							JOptionPane.showMessageDialog(null, "Fehler beim Bearbeiten!", "FEHLER!", JOptionPane.ERROR_MESSAGE);
 						}
 					}
 					goOn = false;
@@ -94,7 +84,6 @@ public class TableAndPopUpMenu {
 				JOptionPane.YES_NO_OPTION);
 
 		if (doDelete == JOptionPane.YES_OPTION) {
-			System.out.println(rowindex + " " + toDifferentTables);
 			popUpFunction.delete(toDifferentTables, rowindex, seppMainDlg);
 		}
 	}

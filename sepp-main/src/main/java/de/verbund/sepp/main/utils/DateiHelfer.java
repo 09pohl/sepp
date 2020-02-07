@@ -68,10 +68,8 @@ public class DateiHelfer {
 					&& !DateiHelfer.dateiEndungMitPunkt(datei.getCanonicalPath())
 							.equals(DatenSchnittstelle.PRIMAER_DATEIENDUNG)) {
 
-				System.out.println(datei);
 				Path filePath = Paths.get(datei.getCanonicalPath());
 				DosFileAttributes attr = Files.readAttributes(filePath, DosFileAttributes.class);
-				System.out.println(attr.isHidden());
 				if (!attr.isHidden()) {
 					pfadListe.add(datei.getCanonicalPath());
 				}
@@ -154,12 +152,7 @@ public class DateiHelfer {
 	}
 
 	public void setHidden(boolean hidden) throws IOException {
-		// TODO #61
 		Path datei = Paths.get(dateiName);
-		DosFileAttributes attr = Files.readAttributes(datei, DosFileAttributes.class);
-		System.out.println(datei.getFileName() + " Hidden attribute is " + attr.isHidden());
 		Files.setAttribute(datei, "dos:hidden", hidden);
-		attr = Files.readAttributes(datei, DosFileAttributes.class);
-		System.out.println(datei.getFileName() + " Hidden attribute is " + attr.isHidden());
 	}
 }
