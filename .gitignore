@@ -6,7 +6,6 @@
 **/build/*
 */.classpath
 */.project
-
 */.idea/*
 */gradle/*
 */*.iml
