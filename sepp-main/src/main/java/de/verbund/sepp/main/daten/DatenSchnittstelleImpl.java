@@ -35,6 +35,11 @@ public class DatenSchnittstelleImpl implements DatenSchnittstelle {
 		ArrayList<String> pfadListe = new ArrayList<String>();
 		File projektOrdner = new File(einstellungen.projektPfad);
 		DateiHelfer.dateienInOrdnerSepp(projektOrdner, pfadListe);
+
+		DatenBeobatcher watcher = DatenBeobatcher.getInstance();
+
+		watcher.start();
+
 		return pfadListe;
 	}
 
@@ -84,8 +89,9 @@ public class DatenSchnittstelleImpl implements DatenSchnittstelle {
 		DateiHelfer dateiKommentare = new DateiHelfer(dateiInfo.getPfad() + DateiInformationen.DATEIENDUNG_KOMMENTARE);
 		dateiKommentare.schreibe(dateiInfo.getKommentare());
 	}
-	
+
 	private void getError() {
-		JOptionPane.showMessageDialog(null, "Datei konnte nicht erstellt werden!", "FEHLER!", JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(null, "Datei konnte nicht erstellt werden!", "FEHLER!",
+				JOptionPane.ERROR_MESSAGE);
 	}
 }
