@@ -5,6 +5,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -17,10 +18,17 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import de.verbund.sepp.gui.SEPPMainDlg;
+
 public class FullTextAndEdit extends JDialog {
 
+	private JTable table;
+	private JEditorPane editor;
+	private SEPPMainDlg seppMainDlg;
 	
-	public FullTextAndEdit(int toDifferentTables, JTable table) {
+	public FullTextAndEdit(int toDifferentTables, JTable table, SEPPMainDlg seppMainDlg) {
+		this.table = table;
+		this.seppMainDlg = seppMainDlg;
 		createJDialog(toDifferentTables, table);
 
 	}
@@ -29,10 +37,11 @@ public class FullTextAndEdit extends JDialog {
 		setSize(400, 200);
 		setLocationRelativeTo(null);
 		setResizable(false);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setLayout(new BorderLayout());
 		add(northPanel(), BorderLayout.NORTH);
 		add(centralPanel(table), BorderLayout.CENTER);
-		add(southPanel(), BorderLayout.SOUTH);
+		add(southPanel(toDifferentTables), BorderLayout.SOUTH);
 
 		if (toDifferentTables == 0) {
 			setTitle("Kommentar");
@@ -54,9 +63,9 @@ public class FullTextAndEdit extends JDialog {
 
 	private Component centralPanel(JTable table) {
 		JPanel centralPanel = new JPanel();
-		JEditorPane editor = new JEditorPane();
+		editor = new JEditorPane();
 		editor.setSize(300, 200);
-		editor.setPreferredSize(new Dimension(300,95));
+		editor.setPreferredSize(new Dimension(300, 95));
 		editor.setText((table.getValueAt(table.getSelectedRow(), 1).toString()));
 		JScrollPane scrollPane = new JScrollPane(editor);
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -64,11 +73,30 @@ public class FullTextAndEdit extends JDialog {
 		return centralPanel;
 	}
 
-	private Component southPanel() {
+	private Component southPanel(int toDifferentTables) {
 		JPanel southPanel = new JPanel();
 		southPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-		southPanel.add(new JButton("OK"));
-		southPanel.add(new JButton("Abbrechen"));
+		JButton okButton = new JButton("OK");
+		JButton cancelButton = new JButton("Abbrechen");
+		okButton.addActionListener(e -> edit(toDifferentTables));
+		cancelButton.addActionListener(e -> cancel());
+		southPanel.add(okButton);
+		southPanel.add(cancelButton);
 		return southPanel;
+	}
+
+	private void cancel() {
+		dispose();
+	}
+
+	private Object edit(int toDifferentTables) {
+		PopUpFunction refresh = new PopUpFunction();
+		try {
+			refresh.edit(toDifferentTables, table.getSelectedRow(), editor.getText(), seppMainDlg);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

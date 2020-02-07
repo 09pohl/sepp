@@ -117,7 +117,7 @@ public class TableAndPopUpMenu {
 					popup.show(e.getComponent(), e.getX(), e.getY());
 				}
 				if (e.getClickCount() == 2 && !e.isConsumed()) {
-					new FullTextAndEdit(toDifferentTables, table);
+					new FullTextAndEdit(toDifferentTables, table, seppMainDlg);
 					e.consume();
 				}
 			}
