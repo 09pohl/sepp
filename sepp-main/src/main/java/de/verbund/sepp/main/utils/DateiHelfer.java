@@ -70,7 +70,6 @@ public class DateiHelfer {
 
 				Path filePath = Paths.get(datei.getCanonicalPath());
 				DosFileAttributes attr = Files.readAttributes(filePath, DosFileAttributes.class);
-				System.out.println(attr.isHidden());
 				if (!attr.isHidden()) {
 					pfadListe.add(datei.getCanonicalPath());
 				}
