@@ -67,7 +67,7 @@ public class DateiGUI extends JPanel implements ActionListener {
 		JPanel p = new JPanel();
 		JLabel lOrdner = new JLabel(folderimg);
 		JLabel lDatei = new JLabel(fileimg);
-
+		
 		lOrdner.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
