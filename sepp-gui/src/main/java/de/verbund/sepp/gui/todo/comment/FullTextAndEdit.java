@@ -34,8 +34,6 @@ public class FullTextAndEdit extends JDialog {
 	public FullTextAndEdit(int toDifferentTables, JTable table, SEPPMainDlg seppMainDlg, int call) {
 		this.table = table;
 		checkCallSituation(call);
-
-		System.out.println(row);
 		this.seppMainDlg = seppMainDlg;
 		try {
 			createJDialog(toDifferentTables, table, call);
@@ -131,7 +129,6 @@ public class FullTextAndEdit extends JDialog {
 	private void checkCallSituation(int call) {
 		if (call == 0) {
 			row = table.getSelectedRow();
-			System.out.println("0");
 		} else {
 			if (row == table.getRowCount() - 1 && call == 1) {
 				row = 0;
