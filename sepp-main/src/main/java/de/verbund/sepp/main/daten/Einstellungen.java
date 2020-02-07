@@ -64,6 +64,7 @@ public class Einstellungen {
 		username = einstellungen.getProperty(BENUTZER_PROPERTY);
 		projektPfad = einstellungen.getProperty(PROJEKT_PROPERTY);
 		input.close();
+		this.speichern(); // stellt sicher, dass die Projektdateien angelegt werden
 	}
 
 	public boolean isPropertyEmpty() {
