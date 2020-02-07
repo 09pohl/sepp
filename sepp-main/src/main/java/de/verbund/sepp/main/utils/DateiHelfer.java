@@ -9,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.nio.file.attribute.DosFileAttributes;
 import java.util.ArrayList;
 
 import javax.swing.Icon;
@@ -58,13 +59,23 @@ public class DateiHelfer {
 		for (File datei : ordner.listFiles()) {
 			if (datei.isDirectory()) {
 				dateienInOrdnerSepp(datei, pfadListe);
+
+				// Sicherheitshalber - SEPP Dateien sollten eigentlich immer versteckt sein
 			} else if (!DateiHelfer.dateiEndungMitPunkt(datei.getCanonicalPath())
 					.equals(DateiInformationen.DATEIENDUNG_KOMMENTARE)
 					&& !DateiHelfer.dateiEndungMitPunkt(datei.getCanonicalPath())
 							.equals(DateiInformationen.DATEIENDUNG_TODOS)
 					&& !DateiHelfer.dateiEndungMitPunkt(datei.getCanonicalPath())
 							.equals(DatenSchnittstelle.PRIMAER_DATEIENDUNG)) {
-				pfadListe.add(datei.getCanonicalPath());
+
+				System.out.println(datei);
+				Path filePath = Paths.get(datei.getCanonicalPath());
+				DosFileAttributes attr = Files.readAttributes(filePath, DosFileAttributes.class);
+				System.out.println(attr.isHidden());
+				if (!attr.isHidden()) {
+					pfadListe.add(datei.getCanonicalPath());
+				}
+
 			}
 		}
 	}

@@ -33,7 +33,8 @@ public class FileInfoGUI extends JPanel {
 			try {
 				name = DateiInfoHelfer.nameMitUnterordner(f);
 			} catch (IOException e1) {
-				JOptionPane.showMessageDialog(this, "Fehler: Dateien können nicht dargestellt werden", "ERROR", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this, "Fehler: Dateien können nicht dargestellt werden", "ERROR",
+						JOptionPane.ERROR_MESSAGE);
 			}
 			try {
 				DateiGUI datei = new DateiGUI(f, name);
@@ -42,7 +43,8 @@ public class FileInfoGUI extends JPanel {
 				datei.setMaximumSize(dimension);
 				add(datei);
 			} catch (IOException e) {
-				JOptionPane.showMessageDialog(this, "Fehler: Dateien können nicht dargestellt werden", "ERROR", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this, "Fehler: Dateien können nicht dargestellt werden", "ERROR",
+						JOptionPane.ERROR_MESSAGE);
 			}
 		}
 	}
