@@ -27,7 +27,6 @@ import de.verbund.sepp.main.daten.DateiInformationen;
 import de.verbund.sepp.main.daten.DatenSchnittstelle;
 import de.verbund.sepp.main.daten.DatenSchnittstelleImpl;
 import de.verbund.sepp.main.daten.Einstellungen;
-import de.verbund.sepp.main.utils.DateiHelfer;
 import de.verbund.sepp.main.utils.DatumHelfer;
 import de.verbund.sepp.main.utils.HTMLHelfer;
 
@@ -37,7 +36,6 @@ public class DateiGUI extends JPanel implements ActionListener {
 	private JButton bInfo;
 	private String name;
 	private JFileChooser fc;
-	DateioeffnerController controller = new DateioeffnerController();
 	DatenSchnittstelle schnittstelle = DatenSchnittstelleImpl.getInstance();
 	DateiInformationen data;
 
@@ -50,7 +48,6 @@ public class DateiGUI extends JPanel implements ActionListener {
 		add(getSueden(), BorderLayout.SOUTH);
 		setBorder(new CompoundBorder(new EmptyBorder(5, 5, 5, 5),
 				BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLACK), name)));
-
 		setVisible(true);
 	}
 
@@ -73,7 +70,7 @@ public class DateiGUI extends JPanel implements ActionListener {
 				try {
 					file = schnittstelle.getEinstellungen().getProjektPfad() + name;
 					File file_conv = new File(file);
-					controller.open(file_conv.getParentFile());
+					DateioeffnerController.open(file_conv.getParentFile());
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -89,7 +86,7 @@ public class DateiGUI extends JPanel implements ActionListener {
 					String file;
 					file = schnittstelle.getEinstellungen().getProjektPfad() + "/" + name;
 					File file_conv = new File(file);
-					controller.open(file_conv);
+					DateioeffnerController.open(file_conv);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -108,7 +105,6 @@ public class DateiGUI extends JPanel implements ActionListener {
 		FileTime datum_2 = data.getAenderungsDatum();
 		String s = DatumHelfer.fileTimeToString(datum_1);
 		String s1 = DatumHelfer.fileTimeToString(datum_2);
-		JLabel label_2 = new JLabel("Änderungsdatum: " + s1);
 		JLabel label_1 = new JLabel(
 				HTMLHelfer.OPEN + "Erstellungsdatum: " + s + "<br/>Änderungsdatum: " + s1 + HTMLHelfer.CLOSE);
 		p.add(label_1);
@@ -127,7 +123,6 @@ public class DateiGUI extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == bInfo) {
-
 			try {
 				ActiveFileController.getInstance().setAktiveDateiPfad(data.getPfad().toString());
 				SEPPMainDlg.getInstance().refreshMainTables();
