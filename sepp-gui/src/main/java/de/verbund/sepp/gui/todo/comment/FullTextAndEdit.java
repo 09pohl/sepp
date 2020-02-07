@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JEditorPane;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
@@ -19,21 +20,28 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import de.verbund.sepp.gui.SEPPMainDlg;
+import de.verbund.sepp.main.daten.DatenSchnittstelle;
+import de.verbund.sepp.main.daten.DatenSchnittstelleImpl;
 
 public class FullTextAndEdit extends JDialog {
 
 	private JTable table;
 	private JEditorPane editor;
 	private SEPPMainDlg seppMainDlg;
+	private DatenSchnittstelle datenSchnittstelle = DatenSchnittstelleImpl.getInstance();
 	
 	public FullTextAndEdit(int toDifferentTables, JTable table, SEPPMainDlg seppMainDlg) {
 		this.table = table;
 		this.seppMainDlg = seppMainDlg;
-		createJDialog(toDifferentTables, table);
+		try {
+			createJDialog(toDifferentTables, table);
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(this, "Fehler: Editieren nicht möglich", "ERROR", JOptionPane.ERROR_MESSAGE);
+		}
 
 	}
 
-	private void createJDialog(int toDifferentTables, JTable table) {
+	private void createJDialog(int toDifferentTables, JTable table) throws IOException {
 		setSize(400, 200);
 		setLocationRelativeTo(null);
 		setResizable(false);
@@ -44,10 +52,12 @@ public class FullTextAndEdit extends JDialog {
 		add(centralPanel(table), BorderLayout.CENTER);
 		add(southPanel(toDifferentTables), BorderLayout.SOUTH);
 
+		String user = table.getValueAt(table.getSelectedRow(), 0).toString();
+		
 		if (toDifferentTables == 0) {
-			setTitle("Kommentar");
+			setTitle("Kommentar [Autor: " + user + "]");
 		} else {
-			setTitle("ToDo");
+			setTitle("To-do [Autor: " + user + "]");
 		}
 
 		setVisible(true);
