@@ -2,6 +2,7 @@ package de.verbund.sepp.gui.todo.comment;
 
 import java.io.IOException;
 
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -49,6 +50,7 @@ public class ToDoAndCommentBoxes {
 			tableComment = gefuellteTabelle(userAndComments, spaltenKommentare, COMMENT);
 			return tableComment;
 		} catch (IOException e) {
+			getError();
 			return null;
 		}
 	}
@@ -64,6 +66,7 @@ public class ToDoAndCommentBoxes {
 			tableToDo = gefuellteTabelle(userAndToDos, spaltenTodos, TODO);
 			return tableToDo;
 		} catch (IOException e) {
+			getError();
 			return null;
 		}
 	}
@@ -90,4 +93,7 @@ public class ToDoAndCommentBoxes {
 		return tableToDo;
 	}
 
+	private void getError() {
+		JOptionPane.showMessageDialog(null, "Tabelle konnte nicht geladen werden!", "FEHLER!", JOptionPane.ERROR_MESSAGE);
+	}
 }

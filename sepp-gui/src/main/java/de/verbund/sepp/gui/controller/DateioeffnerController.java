@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 public class DateioeffnerController {
 
     public static boolean open(File file) {
@@ -42,10 +44,14 @@ public class DateioeffnerController {
 
         try {
             if (!Desktop.isDesktopSupported()) {
+            	JOptionPane.showMessageDialog(null, "Plattform wird nicht unterstützt!",
+            			"FEHLER!", JOptionPane.ERROR_MESSAGE);
                 return false;
             }
 
             if (!Desktop.getDesktop().isSupported(Desktop.Action.OPEN)) {
+            	JOptionPane.showMessageDialog(null, "Öffen - Funktion wird nicht unterstützt!",
+            			"FEHLER!", JOptionPane.ERROR_MESSAGE);
                 return false;
             }
             
@@ -53,6 +59,8 @@ public class DateioeffnerController {
 
             return true;
         } catch (Throwable t) {
+        	JOptionPane.showMessageDialog(null, "Desktop kann nicht geöffnet werden!",
+        			"FEHLER!", JOptionPane.ERROR_MESSAGE);
             return false;
         }
     }
@@ -70,13 +78,15 @@ public class DateioeffnerController {
                 if (retval == 0) {
                     return false;
                 } else {
+                	JOptionPane.showMessageDialog(null, "Fehler beim Prozess!");
                     return false;
                 }
             } catch (IllegalThreadStateException itse) {
                 return true;
             }
         } catch (IOException e) {
-            return false;
+            JOptionPane.showMessageDialog(null, "Fehler in der Funktion!", "FEHLER!", JOptionPane.ERROR_MESSAGE);
+        	return false;
         }
     }
 

@@ -7,6 +7,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import de.verbund.sepp.main.utils.DateiHelfer;
 
 public class DatenSchnittstelleImpl implements DatenSchnittstelle {
@@ -56,7 +58,7 @@ public class DatenSchnittstelleImpl implements DatenSchnittstelle {
 				Path filePath = Paths.get(dateiPfad + DateiInformationen.DATEIENDUNG_TODOS);
 				Files.setAttribute(filePath, "dos:hidden", true);
 			} catch (Exception e) {
-				e.printStackTrace();
+				getError();
 			}
 		}
 
@@ -69,7 +71,7 @@ public class DatenSchnittstelleImpl implements DatenSchnittstelle {
 				Path filePath = Paths.get(dateiPfad + DateiInformationen.DATEIENDUNG_KOMMENTARE);
 				Files.setAttribute(filePath, "dos:hidden", true);
 			} catch (Exception e) {
-				e.printStackTrace();
+				getError();
 			}
 		}
 		return dateiInfo;
@@ -81,5 +83,9 @@ public class DatenSchnittstelleImpl implements DatenSchnittstelle {
 		dateiTodo.schreibe(dateiInfo.getToDos());
 		DateiHelfer dateiKommentare = new DateiHelfer(dateiInfo.getPfad() + DateiInformationen.DATEIENDUNG_KOMMENTARE);
 		dateiKommentare.schreibe(dateiInfo.getKommentare());
+	}
+	
+	private void getError() {
+		JOptionPane.showMessageDialog(null, "Datei konnte nicht erstellt werden!", "FEHLER!", JOptionPane.ERROR_MESSAGE);
 	}
 }

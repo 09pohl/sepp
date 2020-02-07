@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JEditorPane;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
@@ -49,9 +50,7 @@ public class FullTextAndEdit extends JDialog {
 		} else {
 			setTitle("ToDo");
 		}
-
 		setVisible(true);
-
 	}
 
 	private Component northPanel() {
@@ -96,8 +95,7 @@ public class FullTextAndEdit extends JDialog {
 		try {
 			refresh.edit(toDifferentTables, table.getSelectedRow(), comment, seppMainDlg);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Fehler beim Aktualisieren!", "FEHLER!", JOptionPane.ERROR_MESSAGE);
 		}
 		dispose();
 	}
