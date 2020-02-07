@@ -40,15 +40,12 @@ public class DateioeffnerController {
 
     private static boolean openDESKTOP(File file) {
 
-        logOut("Trying to use Desktop.getDesktop().open() with " + file.toString());
         try {
             if (!Desktop.isDesktopSupported()) {
-                logErr("Platform is not supported.");
                 return false;
             }
 
             if (!Desktop.getDesktop().isSupported(Desktop.Action.OPEN)) {
-                logErr("OPEN is not supported.");
                 return false;
             }
             
@@ -56,14 +53,11 @@ public class DateioeffnerController {
 
             return true;
         } catch (Throwable t) {
-            logErr("Error using desktop open.", t);
             return false;
         }
     }
 
     private static boolean runCommand(String command, String args, String file) {
-
-        logOut("Trying to exec:\n   cmd = " + command + "\n   args = " + args + "\n   %s = " + file);
 
         String[] parts = prepareCommand(command, args, file);
 
@@ -74,18 +68,14 @@ public class DateioeffnerController {
             try {
                 int retval = p.exitValue();
                 if (retval == 0) {
-                    logErr("Process ended immediately.");
                     return false;
                 } else {
-                    logErr("Process crashed.");
                     return false;
                 }
             } catch (IllegalThreadStateException itse) {
-                logErr("Process is running.");
                 return true;
             }
         } catch (IOException e) {
-            logErr("Error running command.", e);
             return false;
         }
     }
@@ -106,36 +96,18 @@ public class DateioeffnerController {
         return parts.toArray(new String[parts.size()]);
     }
 
-    private static void logErr(String msg, Throwable t) {
-        System.err.println(msg);
-        t.printStackTrace();
-    }
-
-    private static void logErr(String msg) {
-        System.err.println(msg);
-    }
-
-    private static void logOut(String msg) {
-        System.out.println(msg);
-    }
-
     public static enum EnumOS {
         linux, macos, solaris, unknown, windows;
 
         public boolean isLinux() {
-
             return this == linux || this == solaris;
         }
 
-
         public boolean isMac() {
-
             return this == macos;
         }
 
-
         public boolean isWindows() {
-
             return this == windows;
         }
     }
