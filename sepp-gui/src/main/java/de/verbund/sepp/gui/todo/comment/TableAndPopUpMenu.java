@@ -53,7 +53,6 @@ public class TableAndPopUpMenu {
 					if (text.getInfoText().equals("Hinzufügen")) {
 						try {
 							popUpFunction.add(toDifferentTables, rowindex, comment, seppMainDlg);
-							System.out.println("geht");
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -118,8 +117,8 @@ public class TableAndPopUpMenu {
 					popup.show(e.getComponent(), e.getX(), e.getY());
 				}
 				if (e.getClickCount() == 2 && !e.isConsumed()) {
-					new FullTextAndEdit(toDifferentTables, table);
-				    e.consume();
+					new FullTextAndEdit(toDifferentTables, table, seppMainDlg);
+					e.consume();
 				}
 			}
 
@@ -132,7 +131,7 @@ public class TableAndPopUpMenu {
 				popUpFunction = new PopUpFunction();
 				return popup;
 			}
-			
+
 		});
 	}
 }
