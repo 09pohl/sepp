@@ -56,7 +56,7 @@ public class FullTextAndEdit extends JDialog {
 		add(centralPanel(table, call), BorderLayout.CENTER);
 		add(southPanel(toDifferentTables), BorderLayout.SOUTH);
 
-		String user = table.getValueAt(table.getSelectedRow(), 0).toString();
+		String user = table.getValueAt(row, 0).toString();
 
 		if (toDifferentTables == 0) {
 			setTitle("Kommentar [Autor: " + user + "]");
