@@ -20,12 +20,15 @@ import javax.swing.JPanel;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 
-import de.verbund.sepp.gui.*;
+import de.verbund.sepp.gui.SEPPMainDlg;
 import de.verbund.sepp.gui.controller.ActiveFileController;
 import de.verbund.sepp.gui.controller.DateioeffnerController;
+import de.verbund.sepp.main.daten.DateiInformationen;
+import de.verbund.sepp.main.daten.DatenSchnittstelle;
+import de.verbund.sepp.main.daten.DatenSchnittstelleImpl;
+import de.verbund.sepp.main.daten.Einstellungen;
 import de.verbund.sepp.main.utils.DatumHelfer;
 import de.verbund.sepp.main.utils.HTMLHelfer;
-import de.verbund.sepp.main.daten.*;
 
 public class DateiGUI extends JPanel implements ActionListener {
 
@@ -36,6 +39,7 @@ public class DateiGUI extends JPanel implements ActionListener {
 	DateioeffnerController controller;
 	DatenSchnittstelle schnittstelle = DatenSchnittstelleImpl.getInstance();
 	DateiInformationen data;
+	private int rahmenGroesse = 1;
 
 	public DateiGUI(String verzeichnis, String name) throws IOException {
 		this.name = name;
@@ -44,9 +48,11 @@ public class DateiGUI extends JPanel implements ActionListener {
 		add(getNorden(), BorderLayout.NORTH);
 		add(getMitte(), BorderLayout.CENTER);
 		add(getSueden(), BorderLayout.SOUTH);
+		if (data.getPfad().toString().equals(ActiveFileController.getInstance().getAktiveDateiPfad())) {
+			rahmenGroesse = 5;
+		}
 		setBorder(new CompoundBorder(new EmptyBorder(5, 5, 5, 5),
-				BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLACK), name)));
-
+				BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLACK, rahmenGroesse), name)));
 		setVisible(true);
 	}
 
@@ -60,9 +66,8 @@ public class DateiGUI extends JPanel implements ActionListener {
 		JPanel p = new JPanel();
 		JLabel lOrdner = new JLabel(folderimg);
 		JLabel lDatei = new JLabel(fileimg);
-		
-		lOrdner.addMouseListener(new MouseAdapter()
-		{
+
+		lOrdner.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				String file;
@@ -76,9 +81,8 @@ public class DateiGUI extends JPanel implements ActionListener {
 				}
 			}
 		});
-		
-		lDatei.addMouseListener(new MouseAdapter() 
-		{
+
+		lDatei.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				try {
@@ -126,6 +130,7 @@ public class DateiGUI extends JPanel implements ActionListener {
 			try {
 				ActiveFileController.getInstance().setAktiveDateiPfad(data.getPfad().toString());
 				SEPPMainDlg.getInstance().refreshMainTables();
+
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -133,6 +138,6 @@ public class DateiGUI extends JPanel implements ActionListener {
 
 			// TODO #61
 			System.out.println(data.getPfad());
-		}	
+		}
 	}
 }
