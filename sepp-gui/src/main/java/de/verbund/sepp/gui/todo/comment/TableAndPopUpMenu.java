@@ -38,8 +38,12 @@ public class TableAndPopUpMenu {
 		boolean goOn = true;
 
 		while (goOn) {
-			comment = JOptionPane.showInputDialog(null, text.getInfoText() + ":", text.getInfoText(),
-					JOptionPane.OK_CANCEL_OPTION);
+//			comment = JOptionPane.showInputDialog(null, text.getInfoText() + ":", text.getInfoText(),
+//					JOptionPane.OK_CANCEL_OPTION);
+//			
+//			
+			FullTextAddOrEdit fullTextAddOrEdit = new FullTextAddOrEdit(toDifferentTables, table, seppMainDlg, 0);
+			comment = fullTextAddOrEdit.editor.getText();
 			try {
 				if (!comment.replaceAll("\\s+", "").isEmpty()) {
 					if (text.getInfoText().equals("Hinzufügen")) {
@@ -106,7 +110,7 @@ public class TableAndPopUpMenu {
 					popup.show(e.getComponent(), e.getX(), e.getY());
 				}
 				if (e.getClickCount() == 2 && !e.isConsumed()) {
-					new FullTextAndEdit(toDifferentTables, table, seppMainDlg, 0);
+					new FullTextAddOrEdit(toDifferentTables, table, seppMainDlg, 0);
 					e.consume();
 				}
 			}

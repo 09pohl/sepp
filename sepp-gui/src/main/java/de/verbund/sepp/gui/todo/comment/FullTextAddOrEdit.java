@@ -23,15 +23,14 @@ import de.verbund.sepp.gui.SEPPMainDlg;
 import de.verbund.sepp.main.daten.DatenSchnittstelle;
 import de.verbund.sepp.main.daten.DatenSchnittstelleImpl;
 
-public class FullTextAndEdit extends JDialog {
+public class FullTextAddOrEdit extends JDialog {
 
 	private JTable table;
-	private JEditorPane editor;
+	JEditorPane editor;
 	private SEPPMainDlg seppMainDlg;
-	private DatenSchnittstelle datenSchnittstelle = DatenSchnittstelleImpl.getInstance();
 	private static int row;
 
-	public FullTextAndEdit(int toDifferentTables, JTable table, SEPPMainDlg seppMainDlg, int call) {
+	public FullTextAddOrEdit(int toDifferentTables, JTable table, SEPPMainDlg seppMainDlg, int call) {
 		this.table = table;
 		checkCallSituation(call);
 		this.seppMainDlg = seppMainDlg;
@@ -80,7 +79,7 @@ public class FullTextAndEdit extends JDialog {
 
 	private void next(int toDifferentTables, int call) {
 		dispose();
-		new FullTextAndEdit(toDifferentTables, table, seppMainDlg, call);
+		new FullTextAddOrEdit(toDifferentTables, table, seppMainDlg, call);
 
 	}
 

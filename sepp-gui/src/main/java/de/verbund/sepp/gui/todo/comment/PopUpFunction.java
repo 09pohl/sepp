@@ -167,7 +167,7 @@ public class PopUpFunction {
 	private void toDoSetter(String user, String comment, int index, int call) {
 
 		DateiInformationen dataInformation = null;
-
+		
 		try {
 			dataInformation = dataSchnittstelle
 					.getDateiInformationen(ActiveFileController.getInstance().getAktiveDateiPfad());
@@ -176,7 +176,6 @@ public class PopUpFunction {
 		}
 		String[][] userAndToDos = DateiInfoHelfer.getZeilenArray(dataInformation.getToDos());
 		contentString = new StringBuffer();
-
 		if (call == ADD) {
 			try {
 				if (!userAndToDos[0][0].isEmpty()) {
@@ -225,6 +224,7 @@ public class PopUpFunction {
 				dataSchnittstelle.speichereDateiInformationen(dataInformation);
 
 			} catch (Exception e) {
+				e.printStackTrace();
 				getError();
 			}
 		} else {
@@ -244,6 +244,7 @@ public class PopUpFunction {
 				dataSchnittstelle.speichereDateiInformationen(dataInformation);
 
 			} catch (Exception e) {
+				e.printStackTrace();
 				getError();
 			}
 		}
@@ -261,7 +262,7 @@ public class PopUpFunction {
 	}
 	
 	private void getError() {
-		JOptionPane.showMessageDialog(null, "Daten konnten nicht gespeichert werden!", "FEHLER!", JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(null, "Fehler: Daten konnten nicht gespeichert werden!", "ERROR", JOptionPane.ERROR_MESSAGE);
 	}
 
 }

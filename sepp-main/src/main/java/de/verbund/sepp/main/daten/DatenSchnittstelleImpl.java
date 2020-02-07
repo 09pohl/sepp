@@ -55,8 +55,7 @@ public class DatenSchnittstelleImpl implements DatenSchnittstelle {
 		} else {
 			dateiTodo.schreibe("");
 			try {
-				Path filePath = Paths.get(dateiPfad + DateiInformationen.DATEIENDUNG_TODOS);
-				Files.setAttribute(filePath, "dos:hidden", true);
+				dateiTodo.setHidden(true);
 			} catch (Exception e) {
 				getError();
 			}
@@ -68,8 +67,7 @@ public class DatenSchnittstelleImpl implements DatenSchnittstelle {
 		} else {
 			dateiKommentare.schreibe("");
 			try {
-				Path filePath = Paths.get(dateiPfad + DateiInformationen.DATEIENDUNG_KOMMENTARE);
-				Files.setAttribute(filePath, "dos:hidden", true);
+				dateiKommentare.setHidden(true);
 			} catch (Exception e) {
 				getError();
 			}
@@ -80,9 +78,13 @@ public class DatenSchnittstelleImpl implements DatenSchnittstelle {
 	@Override
 	public void speichereDateiInformationen(DateiInformationen dateiInfo) throws IOException {
 		DateiHelfer dateiTodo = new DateiHelfer(dateiInfo.getPfad() + DateiInformationen.DATEIENDUNG_TODOS);
+		dateiTodo.setHidden(false);
 		dateiTodo.schreibe(dateiInfo.getToDos());
+		dateiTodo.setHidden(true);
 		DateiHelfer dateiKommentare = new DateiHelfer(dateiInfo.getPfad() + DateiInformationen.DATEIENDUNG_KOMMENTARE);
+		dateiKommentare.setHidden(false);
 		dateiKommentare.schreibe(dateiInfo.getKommentare());
+		dateiKommentare.setHidden(true);
 	}
 	
 	private void getError() {
