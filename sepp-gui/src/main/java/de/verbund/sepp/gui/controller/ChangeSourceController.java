@@ -17,8 +17,8 @@ import de.verbund.sepp.main.utils.StringHelfer;
 public class ChangeSourceController {
 
 	private ChangeSourceDlg changeDlg;
-	private DatenSchnittstelle schnittstelle = DatenSchnittstelleImpl.getInstance();
 	private SEPPMainDlg seppMainDlg;
+	private DatenSchnittstelle schnittstelle = DatenSchnittstelleImpl.getInstance();
 
 	public ChangeSourceController(JFrame frame, SEPPMainDlg seppMainDlg) {
 
@@ -28,6 +28,7 @@ public class ChangeSourceController {
 			public void run() {
 				try {
 					initDialog(frame);
+					seppMainDlg.refreshMainTables();
 				} catch (IOException e) {
 					JOptionPane.showMessageDialog(changeDlg, "Wechseln des Projektverzeichnisses nicht möglich",
 							"FEHLER", JOptionPane.ERROR_MESSAGE);
@@ -58,7 +59,7 @@ public class ChangeSourceController {
 				schnittstelle.getEinstellungen().setProjektPfad(change);
 				schnittstelle.getEinstellungen().speichern();
 				ActiveFileController.getInstance()
-					.setAktiveDateiPfad(schnittstelle.getEinstellungen().getProjektDateiPfad());
+						.setAktiveDateiPfad(schnittstelle.getEinstellungen().getProjektDateiPfad());
 				ActiveFileController.getInstance().refreshLabel();
 				seppMainDlg.refreshMainTables();
 			} catch (IOException e) {

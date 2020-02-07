@@ -42,7 +42,7 @@ public class SEPPMainDlg {
 
 	private static SEPPMainDlg instance;
 
-	public static SEPPMainDlg getInstance(){
+	public static SEPPMainDlg getInstance() {
 		if (instance == null) {
 			instance = new SEPPMainDlg();
 		}
@@ -179,7 +179,7 @@ public class SEPPMainDlg {
 	private void getIOException(String message) {
 		JOptionPane.showMessageDialog(seppMainFrame, message, "ERROR", JOptionPane.ERROR_MESSAGE);
 	}
-	
+
 	private void showUserDlg() {
 		new ChangeUserController(seppMainFrame);
 	}
@@ -190,6 +190,6 @@ public class SEPPMainDlg {
 
 	public static void main(String[] args) {
 		new StartUpController();
-			SEPPMainDlg.getInstance();
+		SEPPMainDlg.getInstance();
 	}
 }

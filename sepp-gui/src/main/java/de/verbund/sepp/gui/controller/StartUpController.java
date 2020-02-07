@@ -10,9 +10,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 import de.verbund.sepp.gui.dialoge.StartUpDlg;
-import de.verbund.sepp.main.daten.DatenSchnittstelle;
-import de.verbund.sepp.main.daten.DatenSchnittstelleImpl;
-import de.verbund.sepp.main.daten.Einstellungen;
+import de.verbund.sepp.main.daten.*;
 
 public class StartUpController {
 

@@ -51,6 +51,11 @@ public class DatenSchnittstelleImpl implements DatenSchnittstelle {
 			dateiInfo.setToDos(dateiTodo.lese());
 		} else {
 			dateiTodo.schreibe("");
+			try {
+				dateiTodo.setHidden(true);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 
 		DateiHelfer dateiKommentare = new DateiHelfer(dateiPfad + DateiInformationen.DATEIENDUNG_KOMMENTARE);
@@ -58,6 +63,11 @@ public class DatenSchnittstelleImpl implements DatenSchnittstelle {
 			dateiInfo.setKommentare(dateiKommentare.lese());
 		} else {
 			dateiKommentare.schreibe("");
+			try {
+				dateiKommentare.setHidden(true);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		return dateiInfo;
 	}
@@ -65,8 +75,12 @@ public class DatenSchnittstelleImpl implements DatenSchnittstelle {
 	@Override
 	public void speichereDateiInformationen(DateiInformationen dateiInfo) throws IOException {
 		DateiHelfer dateiTodo = new DateiHelfer(dateiInfo.getPfad() + DateiInformationen.DATEIENDUNG_TODOS);
+		dateiTodo.setHidden(false);
 		dateiTodo.schreibe(dateiInfo.getToDos());
+		dateiTodo.setHidden(true);
 		DateiHelfer dateiKommentare = new DateiHelfer(dateiInfo.getPfad() + DateiInformationen.DATEIENDUNG_KOMMENTARE);
+		dateiKommentare.setHidden(false);
 		dateiKommentare.schreibe(dateiInfo.getKommentare());
+		dateiTodo.setHidden(true);
 	}
 }
