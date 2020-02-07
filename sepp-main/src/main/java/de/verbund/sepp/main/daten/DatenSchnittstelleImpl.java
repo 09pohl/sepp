@@ -2,9 +2,9 @@ package de.verbund.sepp.main.daten;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.attribute.DosFileAttributes;
 import java.util.ArrayList;
 
 import de.verbund.sepp.main.utils.DateiHelfer;
