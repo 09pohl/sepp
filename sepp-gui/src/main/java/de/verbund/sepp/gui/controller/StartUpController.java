@@ -68,10 +68,6 @@ public class StartUpController {
 		String user = startDlg.getUserNameTf().getText();
 		if (!("".equals(dir) || "".equals(user))) {
 			if (!(user.contains(":"))) {
-				// TODO #61 sysout entfernen
-				System.out.println("Projektverzeichnis: " + dir);
-				// TODO #61 sysout entfernen
-				System.out.println("Benutzername: " + user);
 				schnittstelle.getEinstellungen().setProjektPfad(dir);
 				schnittstelle.getEinstellungen().setUsername(user);
 				schnittstelle.getEinstellungen().speichern();

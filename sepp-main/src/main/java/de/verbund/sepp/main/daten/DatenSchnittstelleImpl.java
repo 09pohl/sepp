@@ -54,13 +54,8 @@ public class DatenSchnittstelleImpl implements DatenSchnittstelle {
 		} else {
 			dateiTodo.schreibe("");
 			try {
-				// TODO #61
 				Path filePath = Paths.get(dateiPfad + DateiInformationen.DATEIENDUNG_TODOS);
-				DosFileAttributes attr = Files.readAttributes(filePath, DosFileAttributes.class);
-				System.out.println(filePath.getFileName() + " Hidden attribute is " + attr.isHidden());
 				Files.setAttribute(filePath, "dos:hidden", true);
-				attr = Files.readAttributes(filePath, DosFileAttributes.class);
-				System.out.println(filePath.getFileName() + " Hidden attribute is " + attr.isHidden());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -72,13 +67,8 @@ public class DatenSchnittstelleImpl implements DatenSchnittstelle {
 		} else {
 			dateiKommentare.schreibe("");
 			try {
-				// TODO #61
 				Path filePath = Paths.get(dateiPfad + DateiInformationen.DATEIENDUNG_KOMMENTARE);
-				DosFileAttributes attr = Files.readAttributes(filePath, DosFileAttributes.class);
-				System.out.println(filePath.getFileName() + " Hidden attribute is " + attr.isHidden());
 				Files.setAttribute(filePath, "dos:hidden", true);
-				attr = Files.readAttributes(filePath, DosFileAttributes.class);
-				System.out.println(filePath.getFileName() + " Hidden attribute is " + attr.isHidden());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

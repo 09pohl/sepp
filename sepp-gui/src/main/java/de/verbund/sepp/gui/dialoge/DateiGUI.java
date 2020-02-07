@@ -130,9 +130,6 @@ public class DateiGUI extends JPanel implements ActionListener {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-
-			// TODO #61
-			System.out.println(data.getPfad());
 		}	
 	}
 }

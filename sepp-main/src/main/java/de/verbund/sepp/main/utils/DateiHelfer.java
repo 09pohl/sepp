@@ -68,7 +68,6 @@ public class DateiHelfer {
 					&& !DateiHelfer.dateiEndungMitPunkt(datei.getCanonicalPath())
 							.equals(DatenSchnittstelle.PRIMAER_DATEIENDUNG)) {
 
-				System.out.println(datei);
 				Path filePath = Paths.get(datei.getCanonicalPath());
 				DosFileAttributes attr = Files.readAttributes(filePath, DosFileAttributes.class);
 				System.out.println(attr.isHidden());

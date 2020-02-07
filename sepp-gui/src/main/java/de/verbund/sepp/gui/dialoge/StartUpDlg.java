@@ -26,9 +26,6 @@ public class StartUpDlg extends JDialog {
 		getContentPane().add(getPanel(), BorderLayout.NORTH);
 		getContentPane().add(getPanel_1(), BorderLayout.SOUTH);
 		getContentPane().add(getPanel_2(), BorderLayout.CENTER);
-		// TODO #61 sysout entfernen
-		System.out.println("keine Einstellungen vorhanden");
-
 	}
 
 	private JPanel getPanel() {
