@@ -2,8 +2,10 @@ package de.verbund.sepp.main.daten;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.attribute.DosFileAttributes;
 import java.util.ArrayList;
 
 import de.verbund.sepp.main.utils.DateiHelfer;
@@ -51,6 +53,17 @@ public class DatenSchnittstelleImpl implements DatenSchnittstelle {
 			dateiInfo.setToDos(dateiTodo.lese());
 		} else {
 			dateiTodo.schreibe("");
+			try {
+				// TODO #61
+				Path filePath = Paths.get(dateiPfad + DateiInformationen.DATEIENDUNG_TODOS);
+				DosFileAttributes attr = Files.readAttributes(filePath, DosFileAttributes.class);
+				System.out.println(filePath.getFileName() + " Hidden attribute is " + attr.isHidden());
+				Files.setAttribute(filePath, "dos:hidden", true);
+				attr = Files.readAttributes(filePath, DosFileAttributes.class);
+				System.out.println(filePath.getFileName() + " Hidden attribute is " + attr.isHidden());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 
 		DateiHelfer dateiKommentare = new DateiHelfer(dateiPfad + DateiInformationen.DATEIENDUNG_KOMMENTARE);
@@ -58,6 +71,17 @@ public class DatenSchnittstelleImpl implements DatenSchnittstelle {
 			dateiInfo.setKommentare(dateiKommentare.lese());
 		} else {
 			dateiKommentare.schreibe("");
+			try {
+				// TODO #61
+				Path filePath = Paths.get(dateiPfad + DateiInformationen.DATEIENDUNG_KOMMENTARE);
+				DosFileAttributes attr = Files.readAttributes(filePath, DosFileAttributes.class);
+				System.out.println(filePath.getFileName() + " Hidden attribute is " + attr.isHidden());
+				Files.setAttribute(filePath, "dos:hidden", true);
+				attr = Files.readAttributes(filePath, DosFileAttributes.class);
+				System.out.println(filePath.getFileName() + " Hidden attribute is " + attr.isHidden());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		return dateiInfo;
 	}
