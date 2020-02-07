@@ -152,12 +152,7 @@ public class DateiHelfer {
 	}
 
 	public void setHidden(boolean hidden) throws IOException {
-		// TODO #61
 		Path datei = Paths.get(dateiName);
-		DosFileAttributes attr = Files.readAttributes(datei, DosFileAttributes.class);
-		System.out.println(datei.getFileName() + " Hidden attribute is " + attr.isHidden());
 		Files.setAttribute(datei, "dos:hidden", hidden);
-		attr = Files.readAttributes(datei, DosFileAttributes.class);
-		System.out.println(datei.getFileName() + " Hidden attribute is " + attr.isHidden());
 	}
 }

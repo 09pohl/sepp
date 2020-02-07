@@ -135,7 +135,7 @@ public class PopUpFunction {
 				dataSchnittstelle.speichereDateiInformationen(dataInformation);
 
 			} catch (Exception e) {
-				System.out.println("nicht funktioniert");
+				//TODO Catch - Block
 			}
 		} else {
 			try {
@@ -157,7 +157,7 @@ public class PopUpFunction {
 				dataSchnittstelle.speichereDateiInformationen(dataInformation);
 
 			} catch (Exception e) {
-				System.out.println("nicht funktioniert");
+				//TODO Catch Block
 			}
 		}
 
@@ -230,7 +230,7 @@ public class PopUpFunction {
 				dataSchnittstelle.speichereDateiInformationen(dataInformation);
 
 			} catch (Exception e) {
-				System.out.println("nicht funktioniert");
+				//TODO Catch Block
 			}
 		} else {
 			try {
@@ -249,7 +249,7 @@ public class PopUpFunction {
 				dataSchnittstelle.speichereDateiInformationen(dataInformation);
 
 			} catch (Exception e) {
-				System.out.println("nicht funktioniert");
+				//TODO Catch Block
 			}
 		}
 

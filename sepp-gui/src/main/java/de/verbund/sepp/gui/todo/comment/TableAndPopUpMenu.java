@@ -94,7 +94,6 @@ public class TableAndPopUpMenu {
 				JOptionPane.YES_NO_OPTION);
 
 		if (doDelete == JOptionPane.YES_OPTION) {
-			System.out.println(rowindex + " " + toDifferentTables);
 			popUpFunction.delete(toDifferentTables, rowindex, seppMainDlg);
 		}
 	}
